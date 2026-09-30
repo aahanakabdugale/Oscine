@@ -1,0 +1,350 @@
+[
+  {
+    "word": "It's",
+    "start": 4.82,
+    "end": 5.8,
+    "probability": 0.821
+  },
+  {
+    "word": "symbolic",
+    "start": 5.8,
+    "end": 6.78,
+    "probability": 0.945
+  },
+  {
+    "word": "of",
+    "start": 6.78,
+    "end": 7.14,
+    "probability": 0.996
+  },
+  {
+    "word": "the",
+    "start": 7.14,
+    "end": 7.36,
+    "probability": 0.944
+  },
+  {
+    "word": "change",
+    "start": 7.36,
+    "end": 9.16,
+    "probability": 0.906
+  },
+  {
+    "word": "in",
+    "start": 9.16,
+    "end": 9.64,
+    "probability": 0.991
+  },
+  {
+    "word": "our",
+    "start": 9.64,
+    "end": 9.9,
+    "probability": 0.996
+  },
+  {
+    "word": "lives",
+    "start": 9.9,
+    "end": 11.16,
+    "probability": 0.967
+  },
+  {
+    "word": "and",
+    "start": 11.16,
+    "end": 12.2,
+    "probability": 0.807
+  },
+  {
+    "word": "the",
+    "start": 12.2,
+    "end": 12.36,
+    "probability": 0.973
+  },
+  {
+    "word": "speed",
+    "start": 12.36,
+    "end": 12.7,
+    "probability": 0.995
+  },
+  {
+    "word": "of",
+    "start": 12.7,
+    "end": 12.94,
+    "probability": 0.999
+  },
+  {
+    "word": "change,",
+    "start": 12.94,
+    "end": 13.44,
+    "probability": 0.996
+  },
+  {
+    "word": "that",
+    "start": 13.94,
+    "end": 15.74,
+    "probability": 0.701
+  },
+  {
+    "word": "I",
+    "start": 15.74,
+    "end": 16.16,
+    "probability": 0.958
+  },
+  {
+    "word": "find",
+    "start": 16.16,
+    "end": 16.42,
+    "probability": 0.997
+  },
+  {
+    "word": "myself",
+    "start": 16.42,
+    "end": 16.94,
+    "probability": 0.991
+  },
+  {
+    "word": "in",
+    "start": 19.32,
+    "end": 20.2,
+    "probability": 0.345
+  },
+  {
+    "word": "the",
+    "start": 20.2,
+    "end": 20.34,
+    "probability": 0.879
+  },
+  {
+    "word": "conference",
+    "start": 20.34,
+    "end": 20.68,
+    "probability": 0.909
+  },
+  {
+    "word": "hall,",
+    "start": 20.68,
+    "end": 21.14,
+    "probability": 0.99
+  },
+  {
+    "word": "in",
+    "start": 21.36,
+    "end": 23.86,
+    "probability": 0.99
+  },
+  {
+    "word": "air",
+    "start": 23.86,
+    "end": 24.04,
+    "probability": 0.476
+  },
+  {
+    "word": "-condition",
+    "start": 24.04,
+    "end": 24.42,
+    "probability": 0.811
+  },
+  {
+    "word": "comfort.",
+    "start": 24.42,
+    "end": 25.02,
+    "probability": 0.035
+  },
+  {
+    "word": "This",
+    "start": 25.68,
+    "end": 26.56,
+    "probability": 0.249
+  },
+  {
+    "word": "is",
+    "start": 26.56,
+    "end": 27.16,
+    "probability": 0.593
+  },
+  {
+    "word": "an",
+    "start": 27.16,
+    "end": 27.72,
+    "probability": 0.261
+  },
+  {
+    "word": "effort",
+    "start": 27.72,
+    "end": 28.46,
+    "probability": 0.995
+  },
+  {
+    "word": "required.",
+    "start": 28.46,
+    "end": 28.98,
+    "probability": 0.972
+  },
+  {
+    "word": "But",
+    "start": 32.8,
+    "end": 33.68,
+    "probability": 0.967
+  },
+  {
+    "word": "of",
+    "start": 33.68,
+    "end": 33.88,
+    "probability": 0.803
+  },
+  {
+    "word": "course,",
+    "start": 33.88,
+    "end": 34.12,
+    "probability": 0.993
+  },
+  {
+    "word": "it",
+    "start": 34.36,
+    "end": 34.7,
+    "probability": 0.988
+  },
+  {
+    "word": "also",
+    "start": 34.7,
+    "end": 35.1,
+    "probability": 0.998
+  },
+  {
+    "word": "means",
+    "start": 35.1,
+    "end": 35.34,
+    "probability": 0.998
+  },
+  {
+    "word": "I've",
+    "start": 35.34,
+    "end": 35.78,
+    "probability": 0.81
+  },
+  {
+    "word": "lost",
+    "start": 35.78,
+    "end": 35.94,
+    "probability": 0.998
+  },
+  {
+    "word": "a",
+    "start": 35.94,
+    "end": 36.24,
+    "probability": 0.986
+  },
+  {
+    "word": "certain",
+    "start": 36.24,
+    "end": 36.58,
+    "probability": 1.0
+  },
+  {
+    "word": "atmosphere.",
+    "start": 36.58,
+    "end": 37.28,
+    "probability": 0.997
+  },
+  {
+    "word": "And",
+    "start": 39.5,
+    "end": 40.9,
+    "probability": 0.241
+  },
+  {
+    "word": "the",
+    "start": 40.9,
+    "end": 42.3,
+    "probability": 0.922
+  },
+  {
+    "word": "mood,",
+    "start": 42.3,
+    "end": 42.66,
+    "probability": 0.919
+  },
+  {
+    "word": "the",
+    "start": 44.22,
+    "end": 44.48,
+    "probability": 0.932
+  },
+  {
+    "word": "interaction",
+    "start": 44.48,
+    "end": 45.28,
+    "probability": 0.995
+  },
+  {
+    "word": "between",
+    "start": 45.28,
+    "end": 45.74,
+    "probability": 0.978
+  },
+  {
+    "word": "community",
+    "start": 45.74,
+    "end": 47.82,
+    "probability": 0.895
+  },
+  {
+    "word": "center",
+    "start": 47.82,
+    "end": 48.22,
+    "probability": 0.615
+  },
+  {
+    "word": "leaders,",
+    "start": 48.22,
+    "end": 48.66,
+    "probability": 0.998
+  },
+  {
+    "word": "consultative",
+    "start": 49.38,
+    "end": 51.72,
+    "probability": 0.909
+  },
+  {
+    "word": "committees,",
+    "start": 51.72,
+    "end": 52.2,
+    "probability": 0.781
+  },
+  {
+    "word": "residents",
+    "start": 52.2,
+    "end": 53.38,
+    "probability": 0.134
+  },
+  {
+    "word": "committees,",
+    "start": 53.38,
+    "end": 53.86,
+    "probability": 0.848
+  },
+  {
+    "word": "the",
+    "start": 54.26,
+    "end": 55.04,
+    "probability": 0.534
+  },
+  {
+    "word": "things",
+    "start": 55.04,
+    "end": 56.9,
+    "probability": 0.48
+  },
+  {
+    "word": "they",
+    "start": 56.9,
+    "end": 57.12,
+    "probability": 0.599
+  },
+  {
+    "word": "-",
+    "start": 57.12,
+    "end": 57.22,
+    "probability": 0.085
+  }
+]

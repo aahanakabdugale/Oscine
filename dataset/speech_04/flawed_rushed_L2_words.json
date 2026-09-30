@@ -1,0 +1,974 @@
+[
+  {
+    "word": "Standing",
+    "start": 0.62,
+    "end": 1.12,
+    "probability": 0.195
+  },
+  {
+    "word": "here",
+    "start": 1.12,
+    "end": 1.36,
+    "probability": 0.986
+  },
+  {
+    "word": "with",
+    "start": 1.36,
+    "end": 1.5,
+    "probability": 0.828
+  },
+  {
+    "word": "eight",
+    "start": 1.5,
+    "end": 1.66,
+    "probability": 0.748
+  },
+  {
+    "word": "minutes",
+    "start": 1.66,
+    "end": 1.92,
+    "probability": 0.989
+  },
+  {
+    "word": "in",
+    "start": 1.92,
+    "end": 2.7,
+    "probability": 0.922
+  },
+  {
+    "word": "my",
+    "start": 2.7,
+    "end": 2.88,
+    "probability": 0.995
+  },
+  {
+    "word": "hands",
+    "start": 2.88,
+    "end": 3.16,
+    "probability": 0.851
+  },
+  {
+    "word": "and",
+    "start": 3.16,
+    "end": 3.4,
+    "probability": 0.683
+  },
+  {
+    "word": "at",
+    "start": 3.4,
+    "end": 4.08,
+    "probability": 0.382
+  },
+  {
+    "word": "this",
+    "start": 4.08,
+    "end": 4.28,
+    "probability": 0.992
+  },
+  {
+    "word": "venerable",
+    "start": 4.28,
+    "end": 4.82,
+    "probability": 0.765
+  },
+  {
+    "word": "and",
+    "start": 4.82,
+    "end": 5.44,
+    "probability": 0.808
+  },
+  {
+    "word": "other",
+    "start": 5.44,
+    "end": 5.64,
+    "probability": 0.72
+  },
+  {
+    "word": "magnificent",
+    "start": 5.64,
+    "end": 6.04,
+    "probability": 0.968
+  },
+  {
+    "word": "institution",
+    "start": 6.04,
+    "end": 6.54,
+    "probability": 0.933
+  },
+  {
+    "word": "I",
+    "start": 6.54,
+    "end": 6.8,
+    "probability": 0.517
+  },
+  {
+    "word": "was",
+    "start": 6.8,
+    "end": 6.94,
+    "probability": 0.998
+  },
+  {
+    "word": "going",
+    "start": 6.94,
+    "end": 7.2,
+    "probability": 0.999
+  },
+  {
+    "word": "to",
+    "start": 7.2,
+    "end": 7.44,
+    "probability": 0.999
+  },
+  {
+    "word": "assure",
+    "start": 7.44,
+    "end": 7.68,
+    "probability": 0.948
+  },
+  {
+    "word": "you",
+    "start": 7.68,
+    "end": 8.02,
+    "probability": 0.986
+  },
+  {
+    "word": "that",
+    "start": 8.02,
+    "end": 8.62,
+    "probability": 0.916
+  },
+  {
+    "word": "I",
+    "start": 8.62,
+    "end": 8.88,
+    "probability": 0.982
+  },
+  {
+    "word": "belong",
+    "start": 8.88,
+    "end": 9.1,
+    "probability": 0.784
+  },
+  {
+    "word": "to",
+    "start": 9.1,
+    "end": 9.38,
+    "probability": 0.997
+  },
+  {
+    "word": "the",
+    "start": 9.38,
+    "end": 9.48,
+    "probability": 0.962
+  },
+  {
+    "word": "Henry",
+    "start": 9.48,
+    "end": 9.68,
+    "probability": 0.946
+  },
+  {
+    "word": "VIII",
+    "start": 9.68,
+    "end": 9.96,
+    "probability": 0.775
+  },
+  {
+    "word": "School",
+    "start": 9.96,
+    "end": 10.26,
+    "probability": 0.882
+  },
+  {
+    "word": "of",
+    "start": 10.26,
+    "end": 10.42,
+    "probability": 0.958
+  },
+  {
+    "word": "Public",
+    "start": 10.42,
+    "end": 10.66,
+    "probability": 0.802
+  },
+  {
+    "word": "Speaking.",
+    "start": 10.66,
+    "end": 11.08,
+    "probability": 0.478
+  },
+  {
+    "word": "That",
+    "start": 11.62,
+    "end": 11.74,
+    "probability": 0.834
+  },
+  {
+    "word": "as",
+    "start": 11.74,
+    "end": 11.94,
+    "probability": 0.901
+  },
+  {
+    "word": "Henry",
+    "start": 11.94,
+    "end": 12.14,
+    "probability": 0.997
+  },
+  {
+    "word": "VIII",
+    "start": 12.14,
+    "end": 12.44,
+    "probability": 0.945
+  },
+  {
+    "word": "said",
+    "start": 12.44,
+    "end": 12.68,
+    "probability": 0.987
+  },
+  {
+    "word": "to",
+    "start": 12.68,
+    "end": 12.88,
+    "probability": 0.992
+  },
+  {
+    "word": "his",
+    "start": 12.88,
+    "end": 13.04,
+    "probability": 0.997
+  },
+  {
+    "word": "wives,",
+    "start": 13.04,
+    "end": 13.4,
+    "probability": 0.987
+  },
+  {
+    "word": "I",
+    "start": 13.7,
+    "end": 13.8,
+    "probability": 0.395
+  },
+  {
+    "word": "shall",
+    "start": 13.8,
+    "end": 13.98,
+    "probability": 0.991
+  },
+  {
+    "word": "not",
+    "start": 13.98,
+    "end": 14.16,
+    "probability": 0.997
+  },
+  {
+    "word": "keep",
+    "start": 14.16,
+    "end": 14.42,
+    "probability": 0.994
+  },
+  {
+    "word": "you",
+    "start": 14.42,
+    "end": 14.58,
+    "probability": 0.998
+  },
+  {
+    "word": "long.",
+    "start": 14.58,
+    "end": 14.8,
+    "probability": 0.976
+  },
+  {
+    "word": "But",
+    "start": 16.06,
+    "end": 16.56,
+    "probability": 0.893
+  },
+  {
+    "word": "now",
+    "start": 16.56,
+    "end": 16.82,
+    "probability": 0.983
+  },
+  {
+    "word": "finding",
+    "start": 16.82,
+    "end": 17.22,
+    "probability": 0.859
+  },
+  {
+    "word": "myself,",
+    "start": 17.22,
+    "end": 17.76,
+    "probability": 0.993
+  },
+  {
+    "word": "but",
+    "start": 18.1,
+    "end": 20.52,
+    "probability": 0.322
+  },
+  {
+    "word": "now",
+    "start": 20.52,
+    "end": 20.68,
+    "probability": 0.987
+  },
+  {
+    "word": "finding",
+    "start": 20.68,
+    "end": 20.96,
+    "probability": 0.981
+  },
+  {
+    "word": "myself",
+    "start": 20.96,
+    "end": 21.36,
+    "probability": 0.998
+  },
+  {
+    "word": "the",
+    "start": 21.36,
+    "end": 21.66,
+    "probability": 0.796
+  },
+  {
+    "word": "seventh",
+    "start": 21.66,
+    "end": 22.08,
+    "probability": 0.937
+  },
+  {
+    "word": "speaker",
+    "start": 22.08,
+    "end": 22.76,
+    "probability": 0.943
+  },
+  {
+    "word": "out",
+    "start": 22.76,
+    "end": 23.62,
+    "probability": 0.747
+  },
+  {
+    "word": "of",
+    "start": 23.62,
+    "end": 23.78,
+    "probability": 0.989
+  },
+  {
+    "word": "eight",
+    "start": 23.78,
+    "end": 23.98,
+    "probability": 0.838
+  },
+  {
+    "word": "in",
+    "start": 23.98,
+    "end": 24.26,
+    "probability": 0.952
+  },
+  {
+    "word": "what",
+    "start": 24.26,
+    "end": 24.42,
+    "probability": 0.937
+  },
+  {
+    "word": "must",
+    "start": 24.42,
+    "end": 24.64,
+    "probability": 0.842
+  },
+  {
+    "word": "already",
+    "start": 24.64,
+    "end": 24.92,
+    "probability": 0.94
+  },
+  {
+    "word": "be",
+    "start": 24.92,
+    "end": 25.16,
+    "probability": 0.344
+  },
+  {
+    "word": "so",
+    "start": 25.16,
+    "end": 25.26,
+    "probability": 0.254
+  },
+  {
+    "word": "along",
+    "start": 25.26,
+    "end": 25.44,
+    "probability": 0.19
+  },
+  {
+    "word": "with",
+    "start": 25.44,
+    "end": 25.78,
+    "probability": 0.68
+  },
+  {
+    "word": "you,",
+    "start": 25.78,
+    "end": 25.96,
+    "probability": 0.996
+  },
+  {
+    "word": "I",
+    "start": 26.24,
+    "end": 26.36,
+    "probability": 0.919
+  },
+  {
+    "word": "don't",
+    "start": 26.36,
+    "end": 26.52,
+    "probability": 0.776
+  },
+  {
+    "word": "feel",
+    "start": 26.52,
+    "end": 26.68,
+    "probability": 0.969
+  },
+  {
+    "word": "like",
+    "start": 26.68,
+    "end": 26.86,
+    "probability": 0.871
+  },
+  {
+    "word": "any",
+    "start": 26.86,
+    "end": 27.02,
+    "probability": 0.211
+  },
+  {
+    "word": "of",
+    "start": 27.02,
+    "end": 27.02,
+    "probability": 0.74
+  },
+  {
+    "word": "these",
+    "start": 27.02,
+    "end": 27.26,
+    "probability": 0.924
+  },
+  {
+    "word": "are",
+    "start": 27.26,
+    "end": 27.38,
+    "probability": 0.795
+  },
+  {
+    "word": "right.",
+    "start": 27.38,
+    "end": 27.68,
+    "probability": 0.1
+  },
+  {
+    "word": "I'm",
+    "start": 27.68,
+    "end": 28.38,
+    "probability": 0.413
+  },
+  {
+    "word": "more",
+    "start": 28.38,
+    "end": 28.5,
+    "probability": 0.533
+  },
+  {
+    "word": "or",
+    "start": 28.5,
+    "end": 28.66,
+    "probability": 0.313
+  },
+  {
+    "word": "less",
+    "start": 28.66,
+    "end": 28.72,
+    "probability": 0.996
+  },
+  {
+    "word": "no,",
+    "start": 28.72,
+    "end": 29.02,
+    "probability": 0.079
+  },
+  {
+    "word": "what's",
+    "start": 29.24,
+    "end": 29.88,
+    "probability": 0.943
+  },
+  {
+    "word": "expected",
+    "start": 29.88,
+    "end": 30.2,
+    "probability": 0.995
+  },
+  {
+    "word": "of",
+    "start": 30.2,
+    "end": 30.5,
+    "probability": 0.977
+  },
+  {
+    "word": "me,",
+    "start": 30.5,
+    "end": 30.62,
+    "probability": 0.996
+  },
+  {
+    "word": "but",
+    "start": 30.68,
+    "end": 30.76,
+    "probability": 0.991
+  },
+  {
+    "word": "I'm",
+    "start": 30.76,
+    "end": 30.92,
+    "probability": 0.994
+  },
+  {
+    "word": "not",
+    "start": 30.92,
+    "end": 31.04,
+    "probability": 0.999
+  },
+  {
+    "word": "sure",
+    "start": 31.04,
+    "end": 31.22,
+    "probability": 0.986
+  },
+  {
+    "word": "how",
+    "start": 31.22,
+    "end": 31.32,
+    "probability": 0.984
+  },
+  {
+    "word": "to",
+    "start": 31.32,
+    "end": 31.42,
+    "probability": 0.993
+  },
+  {
+    "word": "do",
+    "start": 31.42,
+    "end": 31.58,
+    "probability": 0.997
+  },
+  {
+    "word": "it",
+    "start": 31.58,
+    "end": 31.7,
+    "probability": 0.979
+  },
+  {
+    "word": "any",
+    "start": 31.7,
+    "end": 31.86,
+    "probability": 0.991
+  },
+  {
+    "word": "differently.",
+    "start": 31.86,
+    "end": 32.58,
+    "probability": 0.95
+  },
+  {
+    "word": "Perhaps",
+    "start": 35.56,
+    "end": 36.04,
+    "probability": 0.444
+  },
+  {
+    "word": "what",
+    "start": 36.04,
+    "end": 36.38,
+    "probability": 0.904
+  },
+  {
+    "word": "I",
+    "start": 36.38,
+    "end": 36.54,
+    "probability": 0.997
+  },
+  {
+    "word": "should",
+    "start": 36.54,
+    "end": 36.7,
+    "probability": 0.998
+  },
+  {
+    "word": "do",
+    "start": 36.7,
+    "end": 36.88,
+    "probability": 0.998
+  },
+  {
+    "word": "is",
+    "start": 36.88,
+    "end": 37.08,
+    "probability": 0.982
+  },
+  {
+    "word": "really",
+    "start": 37.08,
+    "end": 37.28,
+    "probability": 0.568
+  },
+  {
+    "word": "try",
+    "start": 37.28,
+    "end": 37.62,
+    "probability": 0.969
+  },
+  {
+    "word": "and",
+    "start": 37.62,
+    "end": 37.8,
+    "probability": 0.966
+  },
+  {
+    "word": "pay",
+    "start": 37.8,
+    "end": 37.92,
+    "probability": 0.986
+  },
+  {
+    "word": "attention",
+    "start": 37.92,
+    "end": 38.38,
+    "probability": 0.999
+  },
+  {
+    "word": "to",
+    "start": 38.38,
+    "end": 38.94,
+    "probability": 0.997
+  },
+  {
+    "word": "the",
+    "start": 38.94,
+    "end": 39.08,
+    "probability": 0.997
+  },
+  {
+    "word": "arguments",
+    "start": 39.08,
+    "end": 39.44,
+    "probability": 0.989
+  },
+  {
+    "word": "that",
+    "start": 39.44,
+    "end": 39.68,
+    "probability": 0.992
+  },
+  {
+    "word": "were",
+    "start": 39.68,
+    "end": 39.8,
+    "probability": 0.853
+  },
+  {
+    "word": "advanced",
+    "start": 39.8,
+    "end": 40.36,
+    "probability": 0.925
+  },
+  {
+    "word": "by",
+    "start": 40.36,
+    "end": 41.02,
+    "probability": 0.989
+  },
+  {
+    "word": "the",
+    "start": 41.02,
+    "end": 41.18,
+    "probability": 0.995
+  },
+  {
+    "word": "opposition",
+    "start": 41.18,
+    "end": 41.68,
+    "probability": 0.983
+  },
+  {
+    "word": "today.",
+    "start": 41.68,
+    "end": 42.16,
+    "probability": 0.994
+  },
+  {
+    "word": "We",
+    "start": 42.72,
+    "end": 42.88,
+    "probability": 0.98
+  },
+  {
+    "word": "had",
+    "start": 42.88,
+    "end": 43.08,
+    "probability": 0.979
+  },
+  {
+    "word": "for",
+    "start": 43.08,
+    "end": 43.22,
+    "probability": 0.551
+  },
+  {
+    "word": "example",
+    "start": 43.22,
+    "end": 43.64,
+    "probability": 0.958
+  },
+  {
+    "word": "Sir",
+    "start": 43.64,
+    "end": 43.86,
+    "probability": 0.374
+  },
+  {
+    "word": "Richard",
+    "start": 43.86,
+    "end": 44.02,
+    "probability": 0.99
+  },
+  {
+    "word": "Othaway",
+    "start": 44.02,
+    "end": 44.3,
+    "probability": 0.368
+  },
+  {
+    "word": "suggesting",
+    "start": 44.3,
+    "end": 44.8,
+    "probability": 0.901
+  },
+  {
+    "word": "by",
+    "start": 44.8,
+    "end": 45.44,
+    "probability": 0.369
+  },
+  {
+    "word": "challenging",
+    "start": 45.44,
+    "end": 45.94,
+    "probability": 0.96
+  },
+  {
+    "word": "the",
+    "start": 45.94,
+    "end": 46.18,
+    "probability": 0.996
+  },
+  {
+    "word": "very",
+    "start": 46.18,
+    "end": 46.38,
+    "probability": 0.99
+  },
+  {
+    "word": "idea",
+    "start": 46.38,
+    "end": 46.76,
+    "probability": 0.999
+  },
+  {
+    "word": "that",
+    "start": 46.76,
+    "end": 47.62,
+    "probability": 0.948
+  },
+  {
+    "word": "it",
+    "start": 47.62,
+    "end": 48.06,
+    "probability": 0.955
+  },
+  {
+    "word": "could",
+    "start": 48.06,
+    "end": 48.24,
+    "probability": 0.997
+  },
+  {
+    "word": "be",
+    "start": 48.24,
+    "end": 48.42,
+    "probability": 0.998
+  },
+  {
+    "word": "argued",
+    "start": 48.42,
+    "end": 48.76,
+    "probability": 0.998
+  },
+  {
+    "word": "that",
+    "start": 48.76,
+    "end": 49.44,
+    "probability": 0.99
+  },
+  {
+    "word": "the",
+    "start": 49.44,
+    "end": 49.68,
+    "probability": 0.995
+  },
+  {
+    "word": "economic",
+    "start": 49.68,
+    "end": 50.14,
+    "probability": 0.997
+  },
+  {
+    "word": "situation",
+    "start": 50.14,
+    "end": 51.12,
+    "probability": 0.996
+  },
+  {
+    "word": "of",
+    "start": 51.12,
+    "end": 51.32,
+    "probability": 0.997
+  },
+  {
+    "word": "the",
+    "start": 51.32,
+    "end": 51.46,
+    "probability": 0.997
+  },
+  {
+    "word": "colonies",
+    "start": 51.46,
+    "end": 51.82,
+    "probability": 0.972
+  },
+  {
+    "word": "was",
+    "start": 51.82,
+    "end": 52.42,
+    "probability": 0.996
+  },
+  {
+    "word": "actually",
+    "start": 52.42,
+    "end": 52.86,
+    "probability": 0.997
+  },
+  {
+    "word": "worsened",
+    "start": 52.86,
+    "end": 53.52,
+    "probability": 0.982
+  },
+  {
+    "word": "by",
+    "start": 53.52,
+    "end": 53.98,
+    "probability": 0.995
+  },
+  {
+    "word": "the",
+    "start": 53.98,
+    "end": 54.14,
+    "probability": 0.994
+  },
+  {
+    "word": "experience",
+    "start": 54.14,
+    "end": 54.54,
+    "probability": 0.972
+  },
+  {
+    "word": "of",
+    "start": 54.54,
+    "end": 54.72,
+    "probability": 0.993
+  },
+  {
+    "word": "British",
+    "start": 54.72,
+    "end": 54.88,
+    "probability": 0.948
+  },
+  {
+    "word": "colonialism.",
+    "start": 54.88,
+    "end": 55.34,
+    "probability": 0.984
+  },
+  {
+    "word": "Well",
+    "start": 55.34,
+    "end": 55.98,
+    "probability": 0.268
+  },
+  {
+    "word": "I",
+    "start": 55.98,
+    "end": 56.16,
+    "probability": 0.477
+  },
+  {
+    "word": "stand",
+    "start": 56.16,
+    "end": 56.44,
+    "probability": 0.99
+  },
+  {
+    "word": "to",
+    "start": 56.44,
+    "end": 56.72,
+    "probability": 0.804
+  },
+  {
+    "word": "offer",
+    "start": 56.72,
+    "end": 56.88,
+    "probability": 0.995
+  },
+  {
+    "word": "you",
+    "start": 56.88,
+    "end": 57.06,
+    "probability": 0.988
+  },
+  {
+    "word": "the",
+    "start": 57.06,
+    "end": 57.2,
+    "probability": 0.918
+  },
+  {
+    "word": "Indian",
+    "start": 57.2,
+    "end": 57.4,
+    "probability": 0.988
+  },
+  {
+    "word": "example.",
+    "start": 57.4,
+    "end": 57.76,
+    "probability": 0.912
+  }
+]

@@ -1,0 +1,608 @@
+[
+  {
+    "word": "Thank",
+    "start": 0.0,
+    "end": 0.88,
+    "probability": 0.316
+  },
+  {
+    "word": "you",
+    "start": 0.88,
+    "end": 3.52,
+    "probability": 0.975
+  },
+  {
+    "word": "two",
+    "start": 3.52,
+    "end": 6.26,
+    "probability": 0.028
+  },
+  {
+    "word": "years",
+    "start": 6.26,
+    "end": 9.78,
+    "probability": 0.963
+  },
+  {
+    "word": "ago",
+    "start": 9.78,
+    "end": 10.18,
+    "probability": 0.992
+  },
+  {
+    "word": "I",
+    "start": 10.18,
+    "end": 11.3,
+    "probability": 0.638
+  },
+  {
+    "word": "launched",
+    "start": 11.3,
+    "end": 11.6,
+    "probability": 0.978
+  },
+  {
+    "word": "a",
+    "start": 11.6,
+    "end": 11.78,
+    "probability": 0.996
+  },
+  {
+    "word": "campaign",
+    "start": 11.78,
+    "end": 12.22,
+    "probability": 0.998
+  },
+  {
+    "word": "called",
+    "start": 12.22,
+    "end": 13.18,
+    "probability": 0.987
+  },
+  {
+    "word": "he",
+    "start": 13.18,
+    "end": 13.44,
+    "probability": 0.389
+  },
+  {
+    "word": "for",
+    "start": 13.44,
+    "end": 13.6,
+    "probability": 0.771
+  },
+  {
+    "word": "she",
+    "start": 13.6,
+    "end": 13.88,
+    "probability": 0.7
+  },
+  {
+    "word": "at",
+    "start": 13.88,
+    "end": 14.66,
+    "probability": 0.929
+  },
+  {
+    "word": "the",
+    "start": 14.66,
+    "end": 14.8,
+    "probability": 0.994
+  },
+  {
+    "word": "UN",
+    "start": 14.8,
+    "end": 15.12,
+    "probability": 0.488
+  },
+  {
+    "word": "in",
+    "start": 15.12,
+    "end": 15.52,
+    "probability": 0.986
+  },
+  {
+    "word": "New",
+    "start": 15.52,
+    "end": 15.68,
+    "probability": 0.978
+  },
+  {
+    "word": "York",
+    "start": 15.68,
+    "end": 16.04,
+    "probability": 0.995
+  },
+  {
+    "word": "I",
+    "start": 16.04,
+    "end": 17.8,
+    "probability": 0.368
+  },
+  {
+    "word": "was",
+    "start": 17.8,
+    "end": 17.98,
+    "probability": 0.818
+  },
+  {
+    "word": "very",
+    "start": 20.3,
+    "end": 21.1,
+    "probability": 0.807
+  },
+  {
+    "word": "nervous",
+    "start": 21.1,
+    "end": 21.42,
+    "probability": 1.0
+  },
+  {
+    "word": "before",
+    "start": 21.42,
+    "end": 21.86,
+    "probability": 0.981
+  },
+  {
+    "word": "that",
+    "start": 21.86,
+    "end": 22.08,
+    "probability": 0.997
+  },
+  {
+    "word": "speech",
+    "start": 22.08,
+    "end": 22.66,
+    "probability": 0.999
+  },
+  {
+    "word": "the",
+    "start": 22.66,
+    "end": 23.7,
+    "probability": 0.631
+  },
+  {
+    "word": "nerves",
+    "start": 23.7,
+    "end": 24.02,
+    "probability": 0.945
+  },
+  {
+    "word": "were",
+    "start": 24.02,
+    "end": 24.78,
+    "probability": 0.995
+  },
+  {
+    "word": "followed",
+    "start": 24.78,
+    "end": 25.06,
+    "probability": 0.996
+  },
+  {
+    "word": "by",
+    "start": 25.06,
+    "end": 25.38,
+    "probability": 0.998
+  },
+  {
+    "word": "a",
+    "start": 25.38,
+    "end": 25.66,
+    "probability": 0.998
+  },
+  {
+    "word": "tremendous",
+    "start": 25.66,
+    "end": 26.18,
+    "probability": 0.997
+  },
+  {
+    "word": "high",
+    "start": 26.18,
+    "end": 26.66,
+    "probability": 0.989
+  },
+  {
+    "word": "immediately",
+    "start": 26.66,
+    "end": 27.66,
+    "probability": 0.932
+  },
+  {
+    "word": "afterwards",
+    "start": 27.66,
+    "end": 28.24,
+    "probability": 0.035
+  },
+  {
+    "word": "and",
+    "start": 28.24,
+    "end": 29.3,
+    "probability": 0.604
+  },
+  {
+    "word": "a",
+    "start": 29.3,
+    "end": 29.4,
+    "probability": 0.964
+  },
+  {
+    "word": "crashing",
+    "start": 29.4,
+    "end": 29.88,
+    "probability": 0.497
+  },
+  {
+    "word": "low",
+    "start": 29.88,
+    "end": 30.2,
+    "probability": 0.825
+  },
+  {
+    "word": "a",
+    "start": 30.2,
+    "end": 30.68,
+    "probability": 0.951
+  },
+  {
+    "word": "few",
+    "start": 30.68,
+    "end": 30.82,
+    "probability": 0.999
+  },
+  {
+    "word": "days",
+    "start": 30.82,
+    "end": 31.02,
+    "probability": 0.999
+  },
+  {
+    "word": "after",
+    "start": 31.02,
+    "end": 31.46,
+    "probability": 0.998
+  },
+  {
+    "word": "that",
+    "start": 31.46,
+    "end": 31.74,
+    "probability": 0.997
+  },
+  {
+    "word": "my",
+    "start": 31.74,
+    "end": 33.52,
+    "probability": 0.065
+  },
+  {
+    "word": "best",
+    "start": 33.52,
+    "end": 33.98,
+    "probability": 0.998
+  },
+  {
+    "word": "hopes",
+    "start": 33.98,
+    "end": 34.3,
+    "probability": 0.995
+  },
+  {
+    "word": "and",
+    "start": 34.3,
+    "end": 35.06,
+    "probability": 0.978
+  },
+  {
+    "word": "my",
+    "start": 35.06,
+    "end": 35.26,
+    "probability": 0.986
+  },
+  {
+    "word": "worst",
+    "start": 35.26,
+    "end": 35.76,
+    "probability": 0.998
+  },
+  {
+    "word": "fears",
+    "start": 35.76,
+    "end": 36.66,
+    "probability": 0.995
+  },
+  {
+    "word": "were",
+    "start": 36.66,
+    "end": 37.58,
+    "probability": 0.927
+  },
+  {
+    "word": "confirmed",
+    "start": 37.58,
+    "end": 38.12,
+    "probability": 0.998
+  },
+  {
+    "word": "all",
+    "start": 38.12,
+    "end": 38.4,
+    "probability": 0.995
+  },
+  {
+    "word": "at",
+    "start": 38.4,
+    "end": 38.52,
+    "probability": 1.0
+  },
+  {
+    "word": "once",
+    "start": 38.52,
+    "end": 38.86,
+    "probability": 0.999
+  },
+  {
+    "word": "I",
+    "start": 38.86,
+    "end": 40.58,
+    "probability": 0.579
+  },
+  {
+    "word": "had",
+    "start": 40.58,
+    "end": 40.72,
+    "probability": 0.985
+  },
+  {
+    "word": "opened",
+    "start": 40.72,
+    "end": 41.16,
+    "probability": 0.991
+  },
+  {
+    "word": "Pandora's",
+    "start": 41.16,
+    "end": 41.8,
+    "probability": 0.989
+  },
+  {
+    "word": "Box",
+    "start": 41.8,
+    "end": 41.96,
+    "probability": 0.568
+  },
+  {
+    "word": "to",
+    "start": 41.96,
+    "end": 42.96,
+    "probability": 0.977
+  },
+  {
+    "word": "a",
+    "start": 42.96,
+    "end": 43.06,
+    "probability": 0.983
+  },
+  {
+    "word": "standing",
+    "start": 43.06,
+    "end": 43.38,
+    "probability": 0.941
+  },
+  {
+    "word": "ovation",
+    "start": 43.38,
+    "end": 43.9,
+    "probability": 0.973
+  },
+  {
+    "word": "and",
+    "start": 43.9,
+    "end": 44.96,
+    "probability": 0.957
+  },
+  {
+    "word": "almost",
+    "start": 44.96,
+    "end": 45.38,
+    "probability": 0.994
+  },
+  {
+    "word": "simultaneously",
+    "start": 45.38,
+    "end": 46.12,
+    "probability": 0.965
+  },
+  {
+    "word": "a",
+    "start": 46.94,
+    "end": 47.38,
+    "probability": 0.984
+  },
+  {
+    "word": "level",
+    "start": 47.38,
+    "end": 47.66,
+    "probability": 0.996
+  },
+  {
+    "word": "of",
+    "start": 47.66,
+    "end": 47.98,
+    "probability": 0.998
+  },
+  {
+    "word": "critique",
+    "start": 47.98,
+    "end": 48.32,
+    "probability": 0.996
+  },
+  {
+    "word": "I",
+    "start": 48.32,
+    "end": 49.08,
+    "probability": 0.967
+  },
+  {
+    "word": "had",
+    "start": 49.08,
+    "end": 49.34,
+    "probability": 0.998
+  },
+  {
+    "word": "never",
+    "start": 49.34,
+    "end": 49.86,
+    "probability": 0.996
+  },
+  {
+    "word": "experienced",
+    "start": 49.86,
+    "end": 51.12,
+    "probability": 0.991
+  },
+  {
+    "word": "in",
+    "start": 51.12,
+    "end": 51.4,
+    "probability": 0.998
+  },
+  {
+    "word": "my",
+    "start": 51.4,
+    "end": 51.54,
+    "probability": 1.0
+  },
+  {
+    "word": "life",
+    "start": 51.54,
+    "end": 51.98,
+    "probability": 0.999
+  },
+  {
+    "word": "and",
+    "start": 51.98,
+    "end": 52.64,
+    "probability": 0.968
+  },
+  {
+    "word": "the",
+    "start": 52.64,
+    "end": 52.76,
+    "probability": 0.99
+  },
+  {
+    "word": "beginning",
+    "start": 52.76,
+    "end": 53.12,
+    "probability": 0.998
+  },
+  {
+    "word": "of",
+    "start": 53.12,
+    "end": 54.0,
+    "probability": 0.996
+  },
+  {
+    "word": "what",
+    "start": 54.0,
+    "end": 54.2,
+    "probability": 0.996
+  },
+  {
+    "word": "would",
+    "start": 54.2,
+    "end": 54.32,
+    "probability": 0.988
+  },
+  {
+    "word": "become",
+    "start": 54.32,
+    "end": 54.58,
+    "probability": 0.579
+  },
+  {
+    "word": "a",
+    "start": 54.58,
+    "end": 54.8,
+    "probability": 0.996
+  },
+  {
+    "word": "series",
+    "start": 54.8,
+    "end": 55.2,
+    "probability": 0.997
+  },
+  {
+    "word": "of",
+    "start": 55.2,
+    "end": 55.74,
+    "probability": 0.996
+  },
+  {
+    "word": "threats",
+    "start": 55.74,
+    "end": 56.18,
+    "probability": 0.99
+  },
+  {
+    "word": "the",
+    "start": 56.18,
+    "end": 58.52,
+    "probability": 0.007
+  },
+  {
+    "word": "last",
+    "start": 58.52,
+    "end": 58.78,
+    "probability": 0.985
+  },
+  {
+    "word": "two",
+    "start": 58.78,
+    "end": 59.08,
+    "probability": 0.948
+  },
+  {
+    "word": "years",
+    "start": 59.08,
+    "end": 59.58,
+    "probability": 0.998
+  },
+  {
+    "word": "have",
+    "start": 59.58,
+    "end": 60.1,
+    "probability": 0.971
+  },
+  {
+    "word": "been",
+    "start": 60.1,
+    "end": 60.42,
+    "probability": 0.997
+  },
+  {
+    "word": "a",
+    "start": 60.42,
+    "end": 60.66,
+    "probability": 0.948
+  },
+  {
+    "word": "baptism",
+    "start": 60.66,
+    "end": 61.14,
+    "probability": 0.965
+  },
+  {
+    "word": "of",
+    "start": 61.14,
+    "end": 61.48,
+    "probability": 0.996
+  },
+  {
+    "word": "fire",
+    "start": 61.48,
+    "end": 61.9,
+    "probability": 0.988
+  }
+]
