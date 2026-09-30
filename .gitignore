@@ -1,0 +1,19 @@
+﻿.venv/
+__pycache__/
+*.pyc
+data/raw/
+.DS_Store
+
+# Temporary download & processing artifacts
+*.part
+*.ytdl
+*.mp4
+*.m4a
+*.webm
+*.temp.wav
+temp_cut.wav
+
+# Local configs & logs
+*.log
+.vscode/
+Thumbs.db
