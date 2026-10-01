@@ -1,0 +1,55 @@
+speaker,file,flaw_type,severity,gt_start,gt_end,det_start,det_end,iou,overall_score,explanation
+speech_01,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.1,41.18,0.26,7.98,39.10s - 41.18s: Pitch inflection flattened (+6.48 sigma deviation). Acoustic contour showed compressed dynamic range over a 2.08s window around 'they' 'would' 'become' 'and'.
+speech_01,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,39.1,40.92,0.228,8.69,39.10s - 40.92s: Pitch inflection flattened (+6.77 sigma deviation). Acoustic contour showed compressed dynamic range over a 1.82s window around 'they' 'would' 'become' 'and'.
+speech_01,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.12,39.86,0.093,8.26,39.12s - 39.86s: Pitch inflection flattened (+3.83 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.74s window around 'they' 'would' 'become'.
+speech_01,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.81,No anomaly detected.
+speech_01,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,,,0.0,8.02,No anomaly detected.
+speech_01,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,19.08,21.86,0.695,7.17,19.08s - 21.86s: Errant hesitation of 2.78s (+10.21 sigma). Dead air exceeded expected baseline pause gap before 'these'. Recommend continuous breath support.
+speech_01,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,8.88,No anomaly detected.
+speech_01,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,9.21,No anomaly detected.
+speech_01,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.04,No anomaly detected.
+speech_02,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.0,41.12,0.265,6.89,39.00s - 41.12s: Pitch inflection flattened (+6.15 sigma deviation). Acoustic contour showed compressed dynamic range over a 2.12s window around 'or' 'I'.
+speech_02,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,40.2,41.12,0.115,7.24,40.20s - 41.12s: Pitch inflection flattened (+5.93 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.92s window around 'For' 'I'.
+speech_02,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,38.4,39.08,0.085,7.1,"38.40s - 39.08s: Pitch inflection flattened (+2.18 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.68s window around 'how' 'to' 'walk,'."
+speech_02,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,9.33,No anomaly detected.
+speech_02,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,10.2,30.0,0.126,6.9,10.20s - 30.00s: Errant hesitation of 19.80s (+9.16 sigma). Dead air exceeded expected baseline pause gap before 'I'. Recommend continuous breath support.
+speech_02,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,10.24,31.1,0.192,6.99,10.24s - 31.10s: Errant hesitation of 20.86s (+9.66 sigma). Dead air exceeded expected baseline pause gap before 'I'. Recommend continuous breath support.
+speech_02,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,6.92,No anomaly detected.
+speech_02,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,6.78,No anomaly detected.
+speech_02,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,6.9,No anomaly detected.
+speech_03,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.48,40.46,0.123,7.34,39.48s - 40.46s: Pitch inflection flattened (+2.62 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.98s window around 'to'.
+speech_03,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.44,No anomaly detected.
+speech_03,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.5,40.5,0.125,7.41,39.50s - 40.50s: Pitch inflection flattened (+2.72 sigma deviation). Acoustic contour showed compressed dynamic range over a 1.0s window around 'to'.
+speech_03,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.56,No anomaly detected.
+speech_03,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.98,20.3,0.913,8.28,17.98s - 20.30s: Errant hesitation of 2.32s (+3.1 sigma). Dead air exceeded expected baseline pause gap before 'very'. Recommend continuous breath support.
+speech_03,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,,,0.0,7.35,No anomaly detected.
+speech_03,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.53,No anomaly detected.
+speech_03,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,7.82,No anomaly detected.
+speech_03,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.63,No anomaly detected.
+speech_04,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,37.86,38.38,0.065,8.24,37.86s - 38.38s: Pitch inflection flattened (+3.54 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.52s window around 'perhaps' 'what'.
+speech_04,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,39.88,40.14,0.032,8.38,39.88s - 40.14s: Pitch inflection flattened (+6.09 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.26s window around 'there's'.
+speech_04,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.64,40.16,0.065,8.28,39.64s - 40.16s: Pitch inflection flattened (+5.6 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.52s window around 'there's'.
+speech_04,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,8.02,No anomaly detected.
+speech_04,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.74,20.54,0.893,7.76,17.74s - 20.54s: Errant hesitation of 2.80s (+10.24 sigma). Dead air exceeded expected baseline pause gap before 'but'. Recommend continuous breath support.
+speech_04,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,17.74,23.76,0.664,6.73,17.74s - 23.76s: Errant hesitation of 6.02s (+22.23 sigma). Dead air exceeded expected baseline pause gap before 'but'. Recommend continuous breath support.
+speech_04,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,25.9,27.9,0.417,8.11,"25.90s - 27.90s: Pacing accelerated to 1.48x baseline (+1.98 sigma). Syllabic compression detected across 'you,' 'I' 'don't' 'feel'. Recommend easing tempo before transitions."
+speech_04,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,24.92,31.86,0.576,7.02,24.92s - 31.86s: Pacing accelerated to 1.52x baseline (+2.43 sigma). Syllabic compression detected across 'be' 'so' 'along' 'with'. Recommend easing tempo before transitions.
+speech_04,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.15,No anomaly detected.
+speech_05,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,,,0.0,6.77,No anomaly detected.
+speech_05,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.95,No anomaly detected.
+speech_05,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,,,0.0,7.02,No anomaly detected.
+speech_05,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,17.0,20.6,0.333,6.58,17.00s - 20.60s: Errant hesitation of 3.60s (+3.57 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
+speech_05,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.0,21.98,0.502,6.58,17.00s - 21.98s: Errant hesitation of 4.98s (+5.05 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
+speech_05,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,17.08,23.34,0.639,6.63,17.08s - 23.34s: Errant hesitation of 6.26s (+6.43 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
+speech_05,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.03,No anomaly detected.
+speech_05,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,7.79,No anomaly detected.
+speech_05,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,6.68,No anomaly detected.
+speech_06,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,,,0.0,7.39,No anomaly detected.
+speech_06,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.38,No anomaly detected.
+speech_06,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,,,0.0,7.19,No anomaly detected.
+speech_06,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.5,No anomaly detected.
+speech_06,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,,,0.0,7.39,No anomaly detected.
+speech_06,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,,,0.0,7.27,No anomaly detected.
+speech_06,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.2,No anomaly detected.
+speech_06,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,25.68,26.14,0.115,7.42,25.68s - 26.14s: Pacing accelerated to 1.51x baseline (+1.46 sigma). Syllabic compression detected across 'of' 'the' 'class'. Recommend easing tempo before transitions.
+speech_06,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,7.27,No anomaly detected.
