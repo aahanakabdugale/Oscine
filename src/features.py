@@ -1,139 +1,148 @@
 import os
 import json
-import librosa
 import numpy as np
 import pandas as pd
+import librosa
+from align import align_audio_file
 
-def extract_features_per_word(wav_path, words_json_path=None):
+def extract_features_per_word(audio_path: str, alignment_json_path: str = None) -> pd.DataFrame:
     """
-    Extracts acoustic DSP features aligned per word:
-      1. Pitch (F0) using librosa.pyin (fundamental frequency)
-      2. Energy (RMS)
-      3. Pause duration before the word
-      4. Local Speech Rate (words per second in a local 3-second context)
-      5. MFCCs (13 coefficients averaged over word duration)
-      6. Z-score normalized features for speaker-agnostic comparison
+    Extracts aligned word-level prosodic features:
+    - Pitch (F0 median, std, semitone delta, z-score)
+    - Pacing (speech rate in WPS)
+    - Silence (preceding pause duration)
+    - Volume / Energy (mean RMS energy & z-score)
+    - Timbre (13 MFCC coefficients)
     """
-    if words_json_path is None:
-        words_json_path = wav_path.replace(".wav", "_words.json")
+    if alignment_json_path is None:
+        transcript_alignment_path = os.path.splitext(audio_path)[0] + "_words.json"
+        alignment_json_path = os.path.splitext(audio_path)[0] + ".aligned.json"
+        audio_mtime = os.path.getmtime(audio_path)
+        has_transcript_alignment = os.path.exists(transcript_alignment_path)
+        transcript_alignment_is_current = (
+            has_transcript_alignment
+            and os.path.getmtime(transcript_alignment_path) >= audio_mtime
+        )
+        guided_alignment_is_current = (
+            os.path.exists(alignment_json_path)
+            and os.path.getmtime(alignment_json_path) >= audio_mtime
+        )
+        guided_alignment_is_raw = False
+        if guided_alignment_is_current:
+            with open(alignment_json_path, "r", encoding="utf-8") as f:
+                cached_alignment = json.load(f)
+            guided_alignment_is_raw = not cached_alignment.get(
+                "ground_truth_guided", False
+            )
 
-    if not os.path.exists(words_json_path):
-        raise FileNotFoundError(f"Missing words alignment JSON: {words_json_path}. Run src/align.py first.")
+        if guided_alignment_is_current and (
+            guided_alignment_is_raw or not has_transcript_alignment
+        ):
+            pass
+        elif transcript_alignment_is_current and not guided_alignment_is_current:
+            alignment_json_path = transcript_alignment_path
+        else:
+            reference_transcript = None
+            if not has_transcript_alignment:
+                transcript_path = os.path.join(
+                    os.path.dirname(audio_path), "transcript.txt"
+                )
+                if os.path.exists(transcript_path):
+                    with open(transcript_path, "r", encoding="utf-8") as tf:
+                        reference_transcript = tf.read().strip()
 
-    with open(words_json_path, "r", encoding="utf-8") as f:
-        words = json.load(f)
+            align_audio_file(
+                audio_path,
+                reference_transcript=reference_transcript,
+                force_recompute=True,
+            )
 
+    if not os.path.exists(alignment_json_path):
+        return pd.DataFrame()
+
+    with open(alignment_json_path, "r", encoding="utf-8") as f:
+        align_data = json.load(f)
+
+    words = align_data if isinstance(align_data, list) else align_data.get("words", [])
     if not words:
         return pd.DataFrame()
 
-    # 1. Load Audio
-    y, sr = librosa.load(wav_path, sr=16000, mono=True)
+    y, sr = librosa.load(audio_path, sr=16000, mono=True)
     hop_length = 512
 
-    # 2. Extract Frame-Level Pitch (F0) via Probabilistic YIN
-    # Human speech fundamental frequency typically spans 65 Hz (deep male) to 400 Hz (high female)
-    f0, voiced_flag, voiced_probs = librosa.pyin(
+    # 1. Pitch extraction via pYIN
+    f0, voiced_flag, _ = librosa.pyin(
         y,
-        fmin=librosa.note_to_hz('C2'),  # ~65 Hz
-        fmax=librosa.note_to_hz('G5'),  # ~392 Hz
+        fmin=librosa.note_to_hz('C2'),
+        fmax=librosa.note_to_hz('C7'),
         sr=sr,
         hop_length=hop_length
     )
-    # Convert frame indices to time
-    f0_times = librosa.frames_to_time(np.arange(len(f0)), sr=sr, hop_length=hop_length)
+    f0_times = librosa.times_like(f0, sr=sr, hop_length=hop_length)
 
-    # 3. Extract Frame-Level Energy (RMS)
+    # 2. Continuous RMS energy
     rms = librosa.feature.rms(y=y, hop_length=hop_length)[0]
-    rms_times = librosa.frames_to_time(np.arange(len(rms)), sr=sr, hop_length=hop_length)
+    rms_times = librosa.times_like(rms, sr=sr, hop_length=hop_length)
 
-    # 4. Extract Frame-Level MFCCs (13 coefficients)
+    # 3. MFCC extraction (13 coefficients)
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13, hop_length=hop_length)
 
-    rows = []
+    # Compute global file-level normalization baselines
+    valid_f0 = f0[voiced_flag > 0]
+    valid_f0 = valid_f0[~np.isnan(valid_f0)]
+    global_f0_mean = float(np.mean(valid_f0)) if len(valid_f0) > 0 else 150.0
+    global_f0_std = float(np.std(valid_f0)) if len(valid_f0) > 0 else 25.0
+
+    global_rms_mean = float(np.mean(rms)) if len(rms) > 0 else 0.05
+    global_rms_std = float(np.std(rms)) if len(rms) > 0 else 0.02
+
+    records = []
     prev_end = 0.0
 
     for idx, w in enumerate(words):
-        w_text = w["word"]
-        w_start = w["start"]
-        w_end = w["end"]
-        w_dur = max(w_end - w_start, 0.01)
+        w_start = float(w["start"])
+        w_end = float(w["end"])
+        w_dur = max(0.05, w_end - w_start)
 
-        # A. Pause duration before current word (gap between previous word end & this start)
         pause_before = max(0.0, w_start - prev_end)
         prev_end = w_end
 
-        # B. Slice frames corresponding to the word duration
-        f0_mask = (f0_times >= w_start) & (f0_times <= w_end)
+        # Local speech rate: 3-word moving window
+        win_start_idx = max(0, idx - 1)
+        win_end_idx = min(len(words), idx + 2)
+        span_dur = max(0.1, float(words[win_end_idx - 1]["end"]) - float(words[win_start_idx]["start"]))
+        speech_rate = (win_end_idx - win_start_idx) / span_dur
+
+        # Slice F0 in word interval
+        f0_mask = (f0_times >= w_start) & (f0_times <= w_end) & (voiced_flag > 0)
+        word_f0 = f0[f0_mask]
+        word_f0 = word_f0[~np.isnan(word_f0)]
+        f0_median = float(np.median(word_f0)) if len(word_f0) > 0 else global_f0_mean
+        f0_zscore = (f0_median - global_f0_mean) / max(global_f0_std, 1e-4)
+
+        # Slice RMS energy in word interval
         rms_mask = (rms_times >= w_start) & (rms_times <= w_end)
-        
-        # Word F0: median of voiced frames (ignoring unvoiced NaNs)
-        f0_word_frames = f0[f0_mask]
-        f0_voiced = f0_word_frames[~np.isnan(f0_word_frames)]
-        f0_val = float(np.median(f0_voiced)) if len(f0_voiced) > 0 else np.nan
+        word_rms = rms[rms_mask]
+        rms_mean = float(np.mean(word_rms)) if len(word_rms) > 0 else global_rms_mean
+        rms_zscore = (rms_mean - global_rms_mean) / max(global_rms_std, 1e-4)
 
-        # Word RMS Energy: mean power across word
-        rms_word_frames = rms[rms_mask]
-        rms_val = float(np.mean(rms_word_frames)) if len(rms_word_frames) > 0 else 0.0
-
-        # Word MFCCs: average vector across word frames
-        if np.any(f0_mask):
-            mfcc_val = np.mean(mfcc[:, f0_mask], axis=1)
-        else:
-            mfcc_val = np.zeros(13)
-
-        # C. Local Speech Rate (words per second in a rolling 3-second window)
-        win_start = max(0.0, w_start - 1.5)
-        win_end = w_start + 1.5
-        words_in_win = sum(1 for other_w in words if (other_w["start"] >= win_start and other_w["end"] <= win_end))
-        speech_rate = words_in_win / (win_end - win_start)
-
-        row = {
-            "word": w_text,
-            "start": w_start,
-            "end": w_end,
+        rec = {
+            "word": w["word"],
+            "start": round(w_start, 3),
+            "end": round(w_end, 3),
             "duration": round(w_dur, 3),
             "pause_before": round(pause_before, 3),
             "speech_rate": round(speech_rate, 2),
-            "f0_hz": round(f0_val, 2) if not np.isnan(f0_val) else np.nan,
-            "rms_energy": round(rms_val, 4),
+            "f0_median_hz": round(f0_median, 1),
+            "f0_hz_zscore": round(f0_zscore, 2),
+            "rms_energy": round(rms_mean, 4),
+            "rms_energy_zscore": round(rms_zscore, 2),
         }
-        
-        for m_i in range(13):
-            row[f"mfcc_{m_i+1}"] = round(float(mfcc_val[m_i]), 4)
 
-        rows.append(row)
+        # MFCC coefficients
+        for k in range(13):
+            rec[f"mfcc_{k+1}"] = round(float(np.mean(mfcc[k, rms_mask])) if np.any(rms_mask) else 0.0, 3)
 
-    df = pd.DataFrame(rows)
+        records.append(rec)
 
-    # 5. Apply Z-Score Normalization per file (Speaker-Agnostic Transformation)
-    # Allows comparing high-pitch vs low-pitch, fast vs slow speakers directly
-    for col in ["f0_hz", "rms_energy", "speech_rate", "pause_before"]:
-        valid_series = df[col].dropna()
-        std_val = valid_series.std()
-        mean_val = valid_series.mean()
-        
-        # Guard against zero division
-        if std_val > 1e-6:
-            df[f"{col}_zscore"] = (df[col] - mean_val) / std_val
-        else:
-            df[f"{col}_zscore"] = 0.0
-
-    return df
-
-if __name__ == "__main__":
-    flawed_wav = "dataset/speech_01/flawed_pause_L3.wav"
-    print(f"Extracting features for {flawed_wav}...")
-    df = extract_features_per_word(flawed_wav)
-
-    # 1. Filter rows where an unnatural pause occurs (e.g., > 1.0 second)
-    suspicious_pauses = df[df["pause_before"] > 1.0]
-
-    print("\n--- Detected Significant Pauses ---")
-    print(suspicious_pauses[["word", "start", "duration", "pause_before", "speech_rate"]])
-
-    # 2. Check the context: 2 words before and after the big pause
-    if not suspicious_pauses.empty:
-        pause_idx = suspicious_pauses.index[0]
-        context_slice = df.iloc[max(0, pause_idx - 2) : min(len(df), pause_idx + 3)]
-        print("\n--- Word Context Around the Injected Pause ---")
-        print(context_slice[["word", "start", "end", "pause_before"]])
+    return pd.DataFrame(records)

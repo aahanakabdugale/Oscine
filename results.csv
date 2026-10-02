@@ -1,55 +1,55 @@
-speaker,file,flaw_type,severity,gt_start,gt_end,det_start,det_end,iou,overall_score,explanation
-speech_01,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.1,41.18,0.26,7.98,39.10s - 41.18s: Pitch inflection flattened (+6.48 sigma deviation). Acoustic contour showed compressed dynamic range over a 2.08s window around 'they' 'would' 'become' 'and'.
-speech_01,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,39.1,40.92,0.228,8.69,39.10s - 40.92s: Pitch inflection flattened (+6.77 sigma deviation). Acoustic contour showed compressed dynamic range over a 1.82s window around 'they' 'would' 'become' 'and'.
-speech_01,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.12,39.86,0.093,8.26,39.12s - 39.86s: Pitch inflection flattened (+3.83 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.74s window around 'they' 'would' 'become'.
-speech_01,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.81,No anomaly detected.
-speech_01,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,,,0.0,8.02,No anomaly detected.
-speech_01,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,19.08,21.86,0.695,7.17,19.08s - 21.86s: Errant hesitation of 2.78s (+10.21 sigma). Dead air exceeded expected baseline pause gap before 'these'. Recommend continuous breath support.
-speech_01,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,8.88,No anomaly detected.
-speech_01,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,9.21,No anomaly detected.
-speech_01,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.04,No anomaly detected.
-speech_02,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.0,41.12,0.265,6.89,39.00s - 41.12s: Pitch inflection flattened (+6.15 sigma deviation). Acoustic contour showed compressed dynamic range over a 2.12s window around 'or' 'I'.
-speech_02,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,40.2,41.12,0.115,7.24,40.20s - 41.12s: Pitch inflection flattened (+5.93 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.92s window around 'For' 'I'.
-speech_02,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,38.4,39.08,0.085,7.1,"38.40s - 39.08s: Pitch inflection flattened (+2.18 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.68s window around 'how' 'to' 'walk,'."
-speech_02,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,9.33,No anomaly detected.
-speech_02,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,10.2,30.0,0.126,6.9,10.20s - 30.00s: Errant hesitation of 19.80s (+9.16 sigma). Dead air exceeded expected baseline pause gap before 'I'. Recommend continuous breath support.
-speech_02,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,10.24,31.1,0.192,6.99,10.24s - 31.10s: Errant hesitation of 20.86s (+9.66 sigma). Dead air exceeded expected baseline pause gap before 'I'. Recommend continuous breath support.
-speech_02,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,6.92,No anomaly detected.
-speech_02,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,6.78,No anomaly detected.
-speech_02,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,6.9,No anomaly detected.
-speech_03,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,39.48,40.46,0.123,7.34,39.48s - 40.46s: Pitch inflection flattened (+2.62 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.98s window around 'to'.
-speech_03,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.44,No anomaly detected.
-speech_03,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.5,40.5,0.125,7.41,39.50s - 40.50s: Pitch inflection flattened (+2.72 sigma deviation). Acoustic contour showed compressed dynamic range over a 1.0s window around 'to'.
-speech_03,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.56,No anomaly detected.
-speech_03,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.98,20.3,0.913,8.28,17.98s - 20.30s: Errant hesitation of 2.32s (+3.1 sigma). Dead air exceeded expected baseline pause gap before 'very'. Recommend continuous breath support.
-speech_03,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,,,0.0,7.35,No anomaly detected.
-speech_03,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.53,No anomaly detected.
-speech_03,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,7.82,No anomaly detected.
-speech_03,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.63,No anomaly detected.
-speech_04,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,37.86,38.38,0.065,8.24,37.86s - 38.38s: Pitch inflection flattened (+3.54 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.52s window around 'perhaps' 'what'.
-speech_04,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,39.88,40.14,0.032,8.38,39.88s - 40.14s: Pitch inflection flattened (+6.09 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.26s window around 'there's'.
-speech_04,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,39.64,40.16,0.065,8.28,39.64s - 40.16s: Pitch inflection flattened (+5.6 sigma deviation). Acoustic contour showed compressed dynamic range over a 0.52s window around 'there's'.
-speech_04,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,8.02,No anomaly detected.
-speech_04,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.74,20.54,0.893,7.76,17.74s - 20.54s: Errant hesitation of 2.80s (+10.24 sigma). Dead air exceeded expected baseline pause gap before 'but'. Recommend continuous breath support.
-speech_04,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,17.74,23.76,0.664,6.73,17.74s - 23.76s: Errant hesitation of 6.02s (+22.23 sigma). Dead air exceeded expected baseline pause gap before 'but'. Recommend continuous breath support.
-speech_04,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,25.9,27.9,0.417,8.11,"25.90s - 27.90s: Pacing accelerated to 1.48x baseline (+1.98 sigma). Syllabic compression detected across 'you,' 'I' 'don't' 'feel'. Recommend easing tempo before transitions."
-speech_04,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,24.92,31.86,0.576,7.02,24.92s - 31.86s: Pacing accelerated to 1.52x baseline (+2.43 sigma). Syllabic compression detected across 'be' 'so' 'along' 'with'. Recommend easing tempo before transitions.
-speech_04,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,8.15,No anomaly detected.
-speech_05,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,,,0.0,6.77,No anomaly detected.
-speech_05,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.95,No anomaly detected.
-speech_05,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,,,0.0,7.02,No anomaly detected.
-speech_05,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,17.0,20.6,0.333,6.58,17.00s - 20.60s: Errant hesitation of 3.60s (+3.57 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
-speech_05,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,17.0,21.98,0.502,6.58,17.00s - 21.98s: Errant hesitation of 4.98s (+5.05 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
-speech_05,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,17.08,23.34,0.639,6.63,17.08s - 23.34s: Errant hesitation of 6.26s (+6.43 sigma). Dead air exceeded expected baseline pause gap before 'in'. Recommend continuous breath support.
-speech_05,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.03,No anomaly detected.
-speech_05,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,,,0.0,7.79,No anomaly detected.
-speech_05,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,6.68,No anomaly detected.
-speech_06,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,43.0,,,0.0,7.39,No anomaly detected.
-speech_06,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,43.0,,,0.0,7.38,No anomaly detected.
-speech_06,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,43.0,,,0.0,7.19,No anomaly detected.
-speech_06,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,,,0.0,7.5,No anomaly detected.
-speech_06,flawed_pause_L2.wav,errant_pause,L2,18.0,20.5,,,0.0,7.39,No anomaly detected.
-speech_06,flawed_pause_L3.wav,errant_pause,L3,18.0,22.0,,,0.0,7.27,No anomaly detected.
-speech_06,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,29.8,,,0.0,7.2,No anomaly detected.
-speech_06,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,29.0,25.68,26.14,0.115,7.42,25.68s - 26.14s: Pacing accelerated to 1.51x baseline (+1.46 sigma). Syllabic compression detected across 'of' 'the' 'class'. Recommend easing tempo before transitions.
-speech_06,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,28.243,,,0.0,7.27,No anomaly detected.
+speaker,filename,flaw_type,severity,gt_start,gt_end,detected,iou,hit,score,target_score_dimension,target_score,duration_sec,duration_ratio,detection_count,matching_detection_count
+speech_01,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"27.3-27.9, 30.2-30.8, 57.2-58.4",0.0,False,8.32,pauses_score,8.5,63.2,1.0194,12,3
+speech_01,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"4.7-5.5, 31.5-32.1, 58.5-59.3",0.0,False,7.95,pauses_score,9.3,64.2,1.0355,24,3
+speech_01,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"4.7-5.5, 26.0-27.0, 60.0-60.9",0.0,False,7.79,pauses_score,8.8,65.8,1.0613,20,3
+speech_01,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"4.1-4.7, 5.4-5.9, 8.0-8.4, 9.3-9.9, 25.0-25.8, 26.4-26.8, 54.3-54.8, 55.7-56.6",0.176,False,8.38,pacing_score,7.2,60.846,0.9814,14,8
+speech_01,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"8.0-8.5, 21.0-21.6, 53.5-54.0, 55.2-55.8",0.0,False,8.09,pacing_score,6.9,60.226,0.9714,12,4
+speech_01,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"22.6-23.5, 52.7-53.3, 54.1-55.1",0.0,False,7.93,pacing_score,6.8,59.778,0.9642,14,3
+speech_01,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,wrong:rushed_delivery:30.5-30.8,0.0,False,9.41,expressiveness_score,10.0,62.0,1.0,3,0
+speech_01,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,41.2-41.5,0.033,False,9.77,expressiveness_score,9.5,62.0,1.0,2,1
+speech_01,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:rushed_delivery:30.5-30.8,0.0,False,9.4,expressiveness_score,10.0,62.0,1.0,3,0
+speech_02,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,wrong:monotone_pitch:31.8-32.6,0.0,False,9.14,pauses_score,10.0,61.2,1.02,5,0
+speech_02,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"41.6-42.8, 47.5-48.3",0.0,False,8.01,pauses_score,8.5,62.2,1.0367,21,2
+speech_02,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"43.1-44.3, 51.5-59.4",0.0,False,6.48,pauses_score,4.0,63.8,1.0633,13,2
+speech_02,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"45.3-45.8, 46.6-46.8, 51.6-51.8, 56.5-56.9, 57.6-58.0",0.0,False,7.0,pacing_score,8.0,58.846,0.9808,11,5
+speech_02,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"50.8-51.0, 55.7-56.1, 56.9-57.2",0.0,False,8.94,pacing_score,8.5,58.226,0.9704,14,3
+speech_02,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,50.0-50.3,0.0,False,6.88,pacing_score,8.2,57.778,0.963,8,1
+speech_02,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,wrong:rushed_delivery:57.7-58.1,0.0,False,9.75,expressiveness_score,10.0,60.0,1.0,2,0
+speech_02,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"35.0-35.3, 46.3-47.0, 48.0-48.2, 54.4-54.6",0.026,False,8.45,expressiveness_score,8.9,60.0,1.0,7,4
+speech_02,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,"46.3-47.0, 47.8-48.2",0.0,False,8.5,expressiveness_score,9.0,60.0,1.0,6,2
+speech_03,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,wrong:monotone_pitch:15.5-16.0,0.0,False,8.62,pauses_score,10.0,61.2,1.02,15,0
+speech_03,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,18.0-20.3,0.948,True,7.27,pauses_score,4.6,62.2,1.0367,8,1
+speech_03,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,16.9-17.7,0.0,False,7.64,pauses_score,9.3,63.8,1.0633,18,1
+speech_03,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"15.7-16.0, 17.3-18.0, 26.6-26.9, 34.8-35.0, 36.6-37.0, 39.7-40.2, 40.9-41.7, 52.0-52.3, 54.2-55.0",0.033,False,8.74,pacing_score,8.1,58.846,0.9808,16,9
+speech_03,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"15.7-16.0, 17.3-18.0",0.0,False,8.83,pacing_score,8.4,58.226,0.9704,8,2
+speech_03,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"15.5-15.7, 26.0-26.1, 33.3-33.5, 35.1-35.5",0.028,False,8.88,pacing_score,8.5,57.778,0.963,9,4
+speech_03,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,"35.8-35.9, 37.6-38.1",0.071,False,9.84,expressiveness_score,9.2,60.0,1.0,2,2
+speech_03,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,35.8-35.9,0.011,False,9.25,expressiveness_score,9.2,60.0,1.0,3,1
+speech_03,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,"35.4-36.5, 37.9-38.1",0.14,False,9.52,expressiveness_score,8.8,60.0,1.0,3,2
+speech_04,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"30.3-31.0, 35.6-38.7",0.0,False,6.62,pauses_score,4.0,61.2,1.02,14,2
+speech_04,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"18.1-20.5, 36.9-40.1, 59.8-60.4",0.331,True,6.12,pauses_score,4.0,62.2,1.0367,19,3
+speech_04,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"18.1-23.8, 33.1-33.8, 38.4-41.6, 61.3-61.9",0.361,True,5.75,pauses_score,4.0,63.8,1.0633,28,4
+speech_04,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"6.0-6.9, 27.7-27.9, 55.7-56.1, 56.7-56.9",0.033,False,6.97,pacing_score,7.8,58.846,0.9808,9,4
+speech_04,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"28.5-28.7, 29.9-30.2",0.0,False,6.63,pacing_score,7.2,58.226,0.9704,10,2
+speech_04,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"3.2-3.4, 6.0-6.6, 6.8-6.9, 10.3-10.4, 12.7-12.9, 21.0-21.4, 21.6-22.1, 54.1-54.6, 55.2-55.4",0.0,False,6.51,pacing_score,7.4,57.778,0.963,21,9
+speech_04,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,"37.9-38.2, 38.4-38.5",0.053,False,9.86,expressiveness_score,9.3,60.0,1.0,2,2
+speech_04,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,40.9-41.1,0.013,False,9.9,expressiveness_score,9.5,60.0,1.0,1,1
+speech_04,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,41.0-41.1,0.016,False,9.67,expressiveness_score,9.4,60.0,1.0,2,1
+speech_05,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,19.3-20.6,0.0,False,8.37,pauses_score,8.2,61.2,1.02,2,1
+speech_05,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,19.3-22.0,0.221,False,6.72,pauses_score,4.0,62.2,1.0367,7,1
+speech_05,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"19.4-23.3, 50.2-51.1, 58.9-59.8",0.339,True,6.22,pauses_score,4.0,63.8,1.0633,13,3
+speech_05,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"49.8-50.2, 52.1-53.8",0.0,False,8.05,pacing_score,7.4,58.846,0.9808,8,2
+speech_05,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"12.7-12.9, 44.9-46.0",0.0,False,8.72,pacing_score,7.6,58.226,0.9704,6,2
+speech_05,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,44.2-45.3,0.0,False,8.49,pacing_score,7.5,57.778,0.963,6,1
+speech_05,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,38.7-39.0,0.038,False,9.54,expressiveness_score,9.6,60.0,1.0,3,1
+speech_05,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,28.4-28.5,0.0,False,8.64,expressiveness_score,8.8,60.0,1.0,4,1
+speech_05,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,28.4-28.5,0.0,False,6.82,expressiveness_score,8.8,60.0,1.0,5,1
+speech_06,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,29.6-31.0,0.0,False,7.53,pauses_score,7.7,61.2,1.02,5,1
+speech_06,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"30.3-31.2, 31.9-32.7",0.0,False,8.1,pauses_score,9.1,62.2,1.0367,16,2
+speech_06,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"32.0-32.8, 33.4-34.1",0.0,False,8.19,pauses_score,9.2,63.8,1.0633,12,2
+speech_06,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"21.4-21.9, 24.4-24.7, 26.4-26.6, 29.1-29.8",0.052,False,6.76,pacing_score,5.1,58.846,0.9808,7,4
+speech_06,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"16.9-17.3, 18.5-18.9, 24.5-24.7, 26.0-26.5, 42.6-43.1, 43.7-44.6, 52.7-53.2, 53.7-53.9, 56.6-56.7",0.078,False,8.44,pacing_score,7.2,58.226,0.9704,13,9
+speech_06,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"21.3-21.9, 23.9-25.1, 55.8-55.9, 56.8-57.1",0.028,False,6.98,pacing_score,5.3,57.778,0.963,15,4
+speech_06,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,58.7-58.9,0.0,False,7.44,expressiveness_score,9.3,60.0,1.0,6,1
+speech_06,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"42.9-43.1, 58.7-58.9",0.026,False,7.48,expressiveness_score,9.3,60.0,1.0,7,2
+speech_06,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,58.7-58.9,0.0,False,7.48,expressiveness_score,9.3,60.0,1.0,8,1

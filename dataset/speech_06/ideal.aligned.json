@@ -1,0 +1,663 @@
+{
+  "audio_file": "ideal.wav",
+  "ground_truth_guided": true,
+  "total_words": 93,
+  "words": [
+    {
+      "word": "president",
+      "start": 7.66,
+      "end": 8.62,
+      "probability": 0.107,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "borwell",
+      "start": 8.62,
+      "end": 9.18,
+      "probability": 0.56,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "chairman",
+      "start": 10.0,
+      "end": 10.26,
+      "probability": 0.584,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "board",
+      "start": 10.26,
+      "end": 10.62,
+      "probability": 0.71,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "of",
+      "start": 10.62,
+      "end": 10.76,
+      "probability": 0.997,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "trustees",
+      "start": 10.76,
+      "end": 11.2,
+      "probability": 0.984,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "jack",
+      "start": 11.8,
+      "end": 11.92,
+      "probability": 0.841,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "purcell",
+      "start": 11.92,
+      "end": 12.38,
+      "probability": 0.55,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "members",
+      "start": 13.58,
+      "end": 13.76,
+      "probability": 0.584,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "of",
+      "start": 13.76,
+      "end": 14.04,
+      "probability": 0.992,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "the",
+      "start": 14.04,
+      "end": 14.14,
+      "probability": 0.096,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "board",
+      "start": 14.14,
+      "end": 14.42,
+      "probability": 0.97,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "of",
+      "start": 14.42,
+      "end": 14.6,
+      "probability": 0.996,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "trustees",
+      "start": 14.6,
+      "end": 15.04,
+      "probability": 0.998,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "deans",
+      "start": 15.8,
+      "end": 16.26,
+      "probability": 0.888,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "faculty",
+      "start": 16.94,
+      "end": 17.44,
+      "probability": 0.239,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "family",
+      "start": 18.46,
+      "end": 18.86,
+      "probability": 0.883,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "friends",
+      "start": 19.94,
+      "end": 20.44,
+      "probability": 0.988,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "eagles",
+      "start": 21.44,
+      "end": 21.92,
+      "probability": 0.871,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "and",
+      "start": 23.58,
+      "end": 24.54,
+      "probability": 0.753,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "most",
+      "start": 24.54,
+      "end": 24.72,
+      "probability": 0.954,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "importantly",
+      "start": 24.72,
+      "end": 25.42,
+      "probability": 0.991,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "graduating",
+      "start": 25.62,
+      "end": 26.06,
+      "probability": 0.697,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "class",
+      "start": 26.06,
+      "end": 26.58,
+      "probability": 0.948,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "of",
+      "start": 26.58,
+      "end": 27.02,
+      "probability": 0.988,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "2019",
+      "start": 27.02,
+      "end": 28.04,
+      "probability": 0.997,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "good",
+      "start": 28.86,
+      "end": 29.02,
+      "probability": 0.892,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "evening",
+      "start": 29.02,
+      "end": 30.6,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "many",
+      "start": 30.6,
+      "end": 30.6,
+      "probability": 0.008,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "many",
+      "start": 30.82,
+      "end": 30.98,
+      "probability": 0.967,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "congratulations",
+      "start": 33.2,
+      "end": 33.4,
+      "probability": 0.001,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "im",
+      "start": 33.4,
+      "end": 33.52,
+      "probability": 0.318,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "very",
+      "start": 33.52,
+      "end": 33.78,
+      "probability": 0.795,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "honored",
+      "start": 33.78,
+      "end": 34.08,
+      "probability": 0.68,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "to",
+      "start": 34.08,
+      "end": 34.22,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "be",
+      "start": 34.22,
+      "end": 34.36,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "your",
+      "start": 34.36,
+      "end": 34.56,
+      "probability": 0.697,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "commencement",
+      "start": 34.56,
+      "end": 35.0,
+      "probability": 0.76,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "speaker",
+      "start": 35.0,
+      "end": 35.64,
+      "probability": 0.862,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "today",
+      "start": 35.64,
+      "end": 36.36,
+      "probability": 0.49,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "this",
+      "start": 37.34,
+      "end": 38.02,
+      "probability": 0.698,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "is",
+      "start": 38.02,
+      "end": 38.14,
+      "probability": 0.882,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "a",
+      "start": 38.14,
+      "end": 38.26,
+      "probability": 0.933,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "platform",
+      "start": 38.26,
+      "end": 38.78,
+      "probability": 0.977,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "that",
+      "start": 38.78,
+      "end": 39.56,
+      "probability": 0.745,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "ive",
+      "start": 39.56,
+      "end": 39.82,
+      "probability": 0.687,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "been",
+      "start": 39.82,
+      "end": 39.94,
+      "probability": 0.935,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "given",
+      "start": 39.94,
+      "end": 40.34,
+      "probability": 0.773,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "because",
+      "start": 40.34,
+      "end": 41.4,
+      "probability": 0.832,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "of",
+      "start": 41.4,
+      "end": 41.64,
+      "probability": 0.974,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "my",
+      "start": 41.64,
+      "end": 41.78,
+      "probability": 0.98,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "writing",
+      "start": 41.78,
+      "end": 42.18,
+      "probability": 0.945,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "and",
+      "start": 42.18,
+      "end": 42.28,
+      "probability": 0.2,
+      "aligned_to_transcript": false,
+      "omitted_in_speech": true
+    },
+    {
+      "word": "years",
+      "start": 42.28,
+      "end": 42.38,
+      "probability": 0.2,
+      "aligned_to_transcript": false,
+      "omitted_in_speech": true
+    },
+    {
+      "word": "ago",
+      "start": 42.38,
+      "end": 42.48,
+      "probability": 0.2,
+      "aligned_to_transcript": false,
+      "omitted_in_speech": true
+    },
+    {
+      "word": "when",
+      "start": 43.02,
+      "end": 43.26,
+      "probability": 0.046,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 43.26,
+      "end": 44.26,
+      "probability": 0.977,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "started",
+      "start": 44.26,
+      "end": 44.6,
+      "probability": 0.921,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "writing",
+      "start": 44.6,
+      "end": 45.12,
+      "probability": 0.99,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "stories",
+      "start": 46.06,
+      "end": 46.42,
+      "probability": 0.359,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "in",
+      "start": 46.42,
+      "end": 46.853,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "little",
+      "start": 46.853,
+      "end": 47.287,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "notebooks",
+      "start": 47.287,
+      "end": 47.72,
+      "probability": 0.85,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "as",
+      "start": 47.72,
+      "end": 48.4,
+      "probability": 0.259,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "a",
+      "start": 48.4,
+      "end": 48.58,
+      "probability": 0.944,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "child",
+      "start": 48.58,
+      "end": 49.14,
+      "probability": 0.91,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 49.98,
+      "end": 50.12,
+      "probability": 0.918,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "was",
+      "start": 50.12,
+      "end": 50.28,
+      "probability": 0.927,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "doing",
+      "start": 50.28,
+      "end": 50.52,
+      "probability": 0.797,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "what",
+      "start": 50.52,
+      "end": 50.76,
+      "probability": 0.965,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 50.76,
+      "end": 50.96,
+      "probability": 0.972,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "loved",
+      "start": 50.96,
+      "end": 51.32,
+      "probability": 0.887,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 52.16,
+      "end": 52.24,
+      "probability": 0.701,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "was",
+      "start": 52.24,
+      "end": 52.42,
+      "probability": 0.967,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "escaping",
+      "start": 52.42,
+      "end": 53.0,
+      "probability": 0.946,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "into",
+      "start": 53.0,
+      "end": 53.84,
+      "probability": 0.955,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "an",
+      "start": 53.84,
+      "end": 54.0,
+      "probability": 0.934,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "imaginative",
+      "start": 54.0,
+      "end": 54.68,
+      "probability": 0.721,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "world",
+      "start": 54.68,
+      "end": 55.16,
+      "probability": 0.926,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "and",
+      "start": 55.16,
+      "end": 55.78,
+      "probability": 0.324,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 55.78,
+      "end": 55.9,
+      "probability": 0.984,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "could",
+      "start": 55.9,
+      "end": 56.06,
+      "probability": 0.995,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "not",
+      "start": 56.06,
+      "end": 56.38,
+      "probability": 0.998,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "have",
+      "start": 56.38,
+      "end": 56.68,
+      "probability": 0.994,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "possibly",
+      "start": 56.68,
+      "end": 57.46,
+      "probability": 0.977,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "imagined",
+      "start": 57.46,
+      "end": 58.26,
+      "probability": 0.983,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "that",
+      "start": 58.26,
+      "end": 58.56,
+      "probability": 0.961,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "i",
+      "start": 58.56,
+      "end": 58.7,
+      "probability": 0.97,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "would",
+      "start": 58.7,
+      "end": 58.86,
+      "probability": 0.993,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "one",
+      "start": 58.86,
+      "end": 59.14,
+      "probability": 0.983,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "day",
+      "start": 59.14,
+      "end": 59.36,
+      "probability": 0.985,
+      "aligned_to_transcript": true
+    },
+    {
+      "word": "be",
+      "start": 59.36,
+      "end": 59.46,
+      "probability": 0.2,
+      "aligned_to_transcript": false,
+      "omitted_in_speech": true
+    },
+    {
+      "word": "standing",
+      "start": 59.46,
+      "end": 59.56,
+      "probability": 0.2,
+      "aligned_to_transcript": false,
+      "omitted_in_speech": true
+    }
+  ]
+}

@@ -1,0 +1,619 @@
+{
+  "audio_file": "flawed_pause_L3.wav",
+  "ground_truth_guided": false,
+  "total_words": 102,
+  "words": [
+    {
+      "word": "to",
+      "start": 0.0,
+      "end": 0.18,
+      "probability": 0.888
+    },
+    {
+      "word": "the",
+      "start": 0.18,
+      "end": 0.32,
+      "probability": 0.992
+    },
+    {
+      "word": "forefront",
+      "start": 0.32,
+      "end": 0.7,
+      "probability": 0.994
+    },
+    {
+      "word": "from",
+      "start": 0.7,
+      "end": 1.18,
+      "probability": 0.804
+    },
+    {
+      "word": "cervical",
+      "start": 1.18,
+      "end": 1.6,
+      "probability": 0.922
+    },
+    {
+      "word": "cancer",
+      "start": 1.6,
+      "end": 2.0,
+      "probability": 0.999
+    },
+    {
+      "word": "prevention",
+      "start": 2.0,
+      "end": 2.36,
+      "probability": 0.997
+    },
+    {
+      "word": "to",
+      "start": 2.36,
+      "end": 2.88,
+      "probability": 0.951
+    },
+    {
+      "word": "indias",
+      "start": 2.88,
+      "end": 3.36,
+      "probability": 0.98
+    },
+    {
+      "word": "hidden",
+      "start": 3.36,
+      "end": 3.54,
+      "probability": 0.979
+    },
+    {
+      "word": "heritage",
+      "start": 3.54,
+      "end": 4.06,
+      "probability": 0.984
+    },
+    {
+      "word": "watch",
+      "start": 4.68,
+      "end": 5.06,
+      "probability": 0.986
+    },
+    {
+      "word": "until",
+      "start": 5.06,
+      "end": 5.44,
+      "probability": 0.98
+    },
+    {
+      "word": "the",
+      "start": 5.44,
+      "end": 5.64,
+      "probability": 0.998
+    },
+    {
+      "word": "end",
+      "start": 5.64,
+      "end": 5.92,
+      "probability": 0.998
+    },
+    {
+      "word": "to",
+      "start": 5.92,
+      "end": 6.26,
+      "probability": 0.922
+    },
+    {
+      "word": "hear",
+      "start": 6.26,
+      "end": 6.44,
+      "probability": 0.989
+    },
+    {
+      "word": "her",
+      "start": 6.44,
+      "end": 6.62,
+      "probability": 0.993
+    },
+    {
+      "word": "beautiful",
+      "start": 6.62,
+      "end": 6.96,
+      "probability": 0.996
+    },
+    {
+      "word": "final",
+      "start": 6.96,
+      "end": 7.48,
+      "probability": 0.847
+    },
+    {
+      "word": "words",
+      "start": 7.48,
+      "end": 7.8,
+      "probability": 0.993
+    },
+    {
+      "word": "and",
+      "start": 7.8,
+      "end": 8.42,
+      "probability": 0.712
+    },
+    {
+      "word": "the",
+      "start": 8.42,
+      "end": 8.58,
+      "probability": 0.988
+    },
+    {
+      "word": "ancient",
+      "start": 8.58,
+      "end": 8.86,
+      "probability": 0.99
+    },
+    {
+      "word": "wisdom",
+      "start": 8.86,
+      "end": 9.26,
+      "probability": 0.997
+    },
+    {
+      "word": "she",
+      "start": 9.26,
+      "end": 9.52,
+      "probability": 0.988
+    },
+    {
+      "word": "lives",
+      "start": 9.52,
+      "end": 9.74,
+      "probability": 0.989
+    },
+    {
+      "word": "by",
+      "start": 9.74,
+      "end": 10.22,
+      "probability": 0.995
+    },
+    {
+      "word": "i",
+      "start": 30.88,
+      "end": 31.42,
+      "probability": 0.291
+    },
+    {
+      "word": "how",
+      "start": 31.42,
+      "end": 31.68,
+      "probability": 0.081
+    },
+    {
+      "word": "much",
+      "start": 31.68,
+      "end": 31.86,
+      "probability": 0.981
+    },
+    {
+      "word": "time",
+      "start": 31.86,
+      "end": 32.1,
+      "probability": 0.938
+    },
+    {
+      "word": "do",
+      "start": 32.1,
+      "end": 32.38,
+      "probability": 0.919
+    },
+    {
+      "word": "i",
+      "start": 32.38,
+      "end": 32.56,
+      "probability": 0.978
+    },
+    {
+      "word": "have",
+      "start": 32.56,
+      "end": 32.78,
+      "probability": 0.996
+    },
+    {
+      "word": "sir",
+      "start": 32.78,
+      "end": 33.06,
+      "probability": 0.689
+    },
+    {
+      "word": "five",
+      "start": 34.36,
+      "end": 34.9,
+      "probability": 0.434
+    },
+    {
+      "word": "minutes",
+      "start": 34.9,
+      "end": 35.16,
+      "probability": 0.988
+    },
+    {
+      "word": "okay",
+      "start": 36.02,
+      "end": 36.16,
+      "probability": 0.221
+    },
+    {
+      "word": "five",
+      "start": 38.26,
+      "end": 38.8,
+      "probability": 0.487
+    },
+    {
+      "word": "minutes",
+      "start": 38.8,
+      "end": 39.04,
+      "probability": 0.941
+    },
+    {
+      "word": "of",
+      "start": 39.04,
+      "end": 39.26,
+      "probability": 0.749
+    },
+    {
+      "word": "tradition",
+      "start": 39.26,
+      "end": 39.7,
+      "probability": 0.193
+    },
+    {
+      "word": "and",
+      "start": 39.7,
+      "end": 41.48,
+      "probability": 0.159
+    },
+    {
+      "word": "i",
+      "start": 41.48,
+      "end": 41.64,
+      "probability": 0.99
+    },
+    {
+      "word": "do",
+      "start": 41.64,
+      "end": 41.8,
+      "probability": 0.918
+    },
+    {
+      "word": "not",
+      "start": 41.8,
+      "end": 42.0,
+      "probability": 0.976
+    },
+    {
+      "word": "know",
+      "start": 42.0,
+      "end": 42.18,
+      "probability": 0.996
+    },
+    {
+      "word": "how",
+      "start": 42.18,
+      "end": 42.32,
+      "probability": 0.996
+    },
+    {
+      "word": "to",
+      "start": 42.32,
+      "end": 42.5,
+      "probability": 0.998
+    },
+    {
+      "word": "talk",
+      "start": 42.5,
+      "end": 42.94,
+      "probability": 0.993
+    },
+    {
+      "word": "for",
+      "start": 42.94,
+      "end": 44.6,
+      "probability": 0.303
+    },
+    {
+      "word": "against",
+      "start": 44.6,
+      "end": 45.1,
+      "probability": 0.88
+    },
+    {
+      "word": "nothing",
+      "start": 45.1,
+      "end": 45.56,
+      "probability": 0.197
+    },
+    {
+      "word": "there",
+      "start": 45.56,
+      "end": 45.88,
+      "probability": 0.382
+    },
+    {
+      "word": "of",
+      "start": 45.88,
+      "end": 46.0,
+      "probability": 0.671
+    },
+    {
+      "word": "them",
+      "start": 46.0,
+      "end": 46.22,
+      "probability": 0.988
+    },
+    {
+      "word": "i",
+      "start": 46.32,
+      "end": 46.4,
+      "probability": 0.99
+    },
+    {
+      "word": "have",
+      "start": 46.4,
+      "end": 46.54,
+      "probability": 0.864
+    },
+    {
+      "word": "been",
+      "start": 46.54,
+      "end": 46.66,
+      "probability": 0.998
+    },
+    {
+      "word": "chosen",
+      "start": 46.66,
+      "end": 46.98,
+      "probability": 0.966
+    },
+    {
+      "word": "by",
+      "start": 46.98,
+      "end": 47.24,
+      "probability": 0.998
+    },
+    {
+      "word": "the",
+      "start": 47.24,
+      "end": 47.46,
+      "probability": 0.967
+    },
+    {
+      "word": "nominated",
+      "start": 47.46,
+      "end": 48.38,
+      "probability": 0.902
+    },
+    {
+      "word": "by",
+      "start": 48.38,
+      "end": 48.74,
+      "probability": 0.989
+    },
+    {
+      "word": "president",
+      "start": 48.74,
+      "end": 50.12,
+      "probability": 0.654
+    },
+    {
+      "word": "of",
+      "start": 50.12,
+      "end": 50.38,
+      "probability": 0.996
+    },
+    {
+      "word": "india",
+      "start": 50.38,
+      "end": 50.8,
+      "probability": 0.997
+    },
+    {
+      "word": "i",
+      "start": 51.3,
+      "end": 51.64,
+      "probability": 0.992
+    },
+    {
+      "word": "am",
+      "start": 51.64,
+      "end": 51.76,
+      "probability": 0.649
+    },
+    {
+      "word": "really",
+      "start": 51.76,
+      "end": 52.04,
+      "probability": 0.993
+    },
+    {
+      "word": "grateful",
+      "start": 52.04,
+      "end": 52.48,
+      "probability": 0.995
+    },
+    {
+      "word": "to",
+      "start": 52.48,
+      "end": 52.76,
+      "probability": 0.997
+    },
+    {
+      "word": "her",
+      "start": 52.76,
+      "end": 52.98,
+      "probability": 0.98
+    },
+    {
+      "word": "and",
+      "start": 52.98,
+      "end": 53.34,
+      "probability": 0.671
+    },
+    {
+      "word": "of",
+      "start": 53.34,
+      "end": 53.48,
+      "probability": 0.922
+    },
+    {
+      "word": "course",
+      "start": 53.48,
+      "end": 53.82,
+      "probability": 0.997
+    },
+    {
+      "word": "our",
+      "start": 53.82,
+      "end": 54.3,
+      "probability": 0.074
+    },
+    {
+      "word": "prime",
+      "start": 54.3,
+      "end": 54.58,
+      "probability": 0.835
+    },
+    {
+      "word": "minister",
+      "start": 54.58,
+      "end": 55.04,
+      "probability": 0.992
+    },
+    {
+      "word": "who",
+      "start": 55.04,
+      "end": 55.74,
+      "probability": 0.77
+    },
+    {
+      "word": "announced",
+      "start": 55.74,
+      "end": 56.26,
+      "probability": 0.974
+    },
+    {
+      "word": "my",
+      "start": 56.26,
+      "end": 56.58,
+      "probability": 0.987
+    },
+    {
+      "word": "name",
+      "start": 56.58,
+      "end": 56.84,
+      "probability": 0.987
+    },
+    {
+      "word": "on",
+      "start": 56.84,
+      "end": 57.64,
+      "probability": 0.975
+    },
+    {
+      "word": "8th",
+      "start": 57.64,
+      "end": 58.4,
+      "probability": 0.915
+    },
+    {
+      "word": "of",
+      "start": 58.4,
+      "end": 58.5,
+      "probability": 0.501
+    },
+    {
+      "word": "march",
+      "start": 58.5,
+      "end": 59.02,
+      "probability": 0.986
+    },
+    {
+      "word": "which",
+      "start": 59.28,
+      "end": 59.64,
+      "probability": 0.513
+    },
+    {
+      "word": "is",
+      "start": 59.64,
+      "end": 59.76,
+      "probability": 0.825
+    },
+    {
+      "word": "a",
+      "start": 59.76,
+      "end": 59.84,
+      "probability": 0.404
+    },
+    {
+      "word": "womans",
+      "start": 59.84,
+      "end": 60.42,
+      "probability": 0.615
+    },
+    {
+      "word": "day",
+      "start": 60.42,
+      "end": 60.52,
+      "probability": 0.63
+    },
+    {
+      "word": "at",
+      "start": 60.52,
+      "end": 61.18,
+      "probability": 0.408
+    },
+    {
+      "word": "the",
+      "start": 61.18,
+      "end": 61.28,
+      "probability": 0.799
+    },
+    {
+      "word": "nari",
+      "start": 61.28,
+      "end": 61.54,
+      "probability": 0.512
+    },
+    {
+      "word": "shetty",
+      "start": 61.54,
+      "end": 61.86,
+      "probability": 0.622
+    },
+    {
+      "word": "i",
+      "start": 62.62,
+      "end": 62.9,
+      "probability": 0.944
+    },
+    {
+      "word": "have",
+      "start": 62.9,
+      "end": 63.0,
+      "probability": 0.719
+    },
+    {
+      "word": "always",
+      "start": 63.0,
+      "end": 63.28,
+      "probability": 0.918
+    },
+    {
+      "word": "worked",
+      "start": 63.28,
+      "end": 63.56,
+      "probability": 0.581
+    },
+    {
+      "word": "for",
+      "start": 63.56,
+      "end": 63.78,
+      "probability": 0.844
+    }
+  ]
+}

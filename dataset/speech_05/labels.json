@@ -1,79 +1,110 @@
-{
-  "speaker_id": "speech_05",
-  "base_file": "ideal.wav",
-  "sample_rate": 16000,
-  "flaws": [
-    {
-      "file": "flawed_pause_L1.wav",
-      "flaw_type": "errant_pause",
-      "severity": "L1",
-      "t_start": 18.0,
-      "t_end": 19.2,
-      "duration_delta": 1.2
-    },
-    {
-      "file": "flawed_pause_L2.wav",
-      "flaw_type": "errant_pause",
-      "severity": "L2",
-      "t_start": 18.0,
-      "t_end": 20.5,
-      "duration_delta": 2.5
-    },
-    {
-      "file": "flawed_pause_L3.wav",
-      "flaw_type": "errant_pause",
-      "severity": "L3",
-      "t_start": 18.0,
-      "t_end": 22.0,
-      "duration_delta": 4.0
-    },
-    {
-      "file": "flawed_rushed_L1.wav",
-      "flaw_type": "rushed_delivery",
-      "severity": "L1",
-      "t_start": 25.0,
-      "t_end": 29.8,
-      "speed_multiplier": 1.25
-    },
-    {
-      "file": "flawed_rushed_L2.wav",
-      "flaw_type": "rushed_delivery",
-      "severity": "L2",
-      "t_start": 25.0,
-      "t_end": 29.0,
-      "speed_multiplier": 1.5
-    },
-    {
-      "file": "flawed_rushed_L3.wav",
-      "flaw_type": "rushed_delivery",
-      "severity": "L3",
-      "t_start": 25.0,
-      "t_end": 28.243,
-      "speed_multiplier": 1.85
-    },
-    {
-      "file": "flawed_monotone_L1.wav",
-      "flaw_type": "monotone_pitch",
-      "severity": "L1",
-      "t_start": 35.0,
-      "t_end": 43.0,
-      "compression_ratio": 0.65
-    },
-    {
-      "file": "flawed_monotone_L2.wav",
-      "flaw_type": "monotone_pitch",
-      "severity": "L2",
-      "t_start": 35.0,
-      "t_end": 43.0,
-      "compression_ratio": 0.4
-    },
-    {
-      "file": "flawed_monotone_L3.wav",
-      "flaw_type": "monotone_pitch",
-      "severity": "L3",
-      "t_start": 35.0,
-      "t_end": 43.0,
-      "compression_ratio": 0.15
-    }
-  ]
-}
+[
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_pause_L1.wav",
+    "flaw_type": "errant_pause",
+    "severity": "L1",
+    "start": 18.0,
+    "end": 19.2,
+    "ideal_timeline_start": 18.0,
+    "ideal_timeline_end": 18.0,
+    "test_duration": 61.2,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_pause_L2.wav",
+    "flaw_type": "errant_pause",
+    "severity": "L2",
+    "start": 18.0,
+    "end": 20.2,
+    "ideal_timeline_start": 18.0,
+    "ideal_timeline_end": 18.0,
+    "test_duration": 62.2,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_pause_L3.wav",
+    "flaw_type": "errant_pause",
+    "severity": "L3",
+    "start": 18.0,
+    "end": 21.8,
+    "ideal_timeline_start": 18.0,
+    "ideal_timeline_end": 18.0,
+    "test_duration": 63.8,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_rushed_L1.wav",
+    "flaw_type": "rushed_delivery",
+    "severity": "L1",
+    "start": 25.0,
+    "end": 28.85,
+    "ideal_timeline_start": 25.0,
+    "ideal_timeline_end": 30.0,
+    "test_duration": 58.846,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_rushed_L2.wav",
+    "flaw_type": "rushed_delivery",
+    "severity": "L2",
+    "start": 25.0,
+    "end": 28.23,
+    "ideal_timeline_start": 25.0,
+    "ideal_timeline_end": 30.0,
+    "test_duration": 58.226,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_rushed_L3.wav",
+    "flaw_type": "rushed_delivery",
+    "severity": "L3",
+    "start": 25.0,
+    "end": 27.78,
+    "ideal_timeline_start": 25.0,
+    "ideal_timeline_end": 30.0,
+    "test_duration": 57.778,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_monotone_L1.wav",
+    "flaw_type": "monotone_pitch",
+    "severity": "L1",
+    "start": 35.0,
+    "end": 44.0,
+    "ideal_timeline_start": 35.0,
+    "ideal_timeline_end": 44.0,
+    "test_duration": 60.0,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_monotone_L2.wav",
+    "flaw_type": "monotone_pitch",
+    "severity": "L2",
+    "start": 35.0,
+    "end": 44.0,
+    "ideal_timeline_start": 35.0,
+    "ideal_timeline_end": 44.0,
+    "test_duration": 60.0,
+    "ideal_duration": 60.0
+  },
+  {
+    "speaker": "speech_05",
+    "filename": "flawed_monotone_L3.wav",
+    "flaw_type": "monotone_pitch",
+    "severity": "L3",
+    "start": 35.0,
+    "end": 44.0,
+    "ideal_timeline_start": 35.0,
+    "ideal_timeline_end": 44.0,
+    "test_duration": 60.0,
+    "ideal_duration": 60.0
+  }
+]
