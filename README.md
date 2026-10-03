@@ -27,8 +27,8 @@ We curated high-fidelity keynote recordings from 6 prominent speakers across div
 | `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address |
 | `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Campaign |
 | `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate Address |
-| `speech_05` | Andrew Ng | Male | US English | Stanford Keynote & AI Opportunities Address |
-| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Commonwealth Lecture Address |
+| `speech_05` | Andrew Ng | Male | US English | Ted Talk |
+| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Lecture Address |
 
 ### 2.2 The "Flawed" Gradient Spectrum (54 Clips)
 Using anchor-based signal synthesis (`src/inject.py`), each speaker's baseline was perturbed along 3 flaw axes across a 3-tier severity ladder:
