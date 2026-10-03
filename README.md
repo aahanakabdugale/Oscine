@@ -39,7 +39,7 @@ Using anchor-based signal synthesis (`src/inject.py`), each speaker's baseline w
 | **Rushed Delivery** | Anchor $t=25.0\text{s}-30.0\text{s}$ | 1.30× speedup | 1.55× speedup | 1.80× compression |
 | **Monotone Pitch** | Anchor $t=35.0\text{s}-44.0\text{s}$ | 55% variance cut | 80% variance cut | 95% variance cut |
 
-All 54 clips have exact millisecond ground-truth annotations stored in both individual `dataset/speech_0X/labels.json` and unified `dataset/labels.json`.
+All 54 clips have exact millisecond ground-truth annotations stored in both individual `dataset/speech_0X/labels.json` and unified `dataset/labels.json`. The master dataset index is published as a tabular manifest in [`dataset/metadata.csv`](./dataset/metadata.csv), accompanied by comprehensive dataset documentation in [`dataset/README.md`](./dataset/README.md).
 
 ---
 
