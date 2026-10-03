@@ -213,7 +213,7 @@ In full compliance with hackathon submission guidelines, the following AI coding
 ## 8. Scope & Academic Disclaimer
 
 > **Note on Project Scope & Intended Use:**  
-> **Oscine** was engineered, researched, and packaged exclusively as an exploratory prototype for the **Multimodal AI Hackathon 2026 (Track C: Contrastive Speech Analytics & Temporal Flaw Grounding)**. The code may contain incomplete features, experimental logic, or unoptimized implementations, as is natural for a hackathon build
-No guarantees are made regarding security, stability, or long-term maintenance. It is **not intended for external use** redistribution
-- The code may contain incomplete features, experimental logic, or unoptimized implementations, as is natural for a hackathon build.
-- No guarantees are made regarding security, stability, or long-term maintenance.It is developed strictly for academic evaluation, hackathon judging, and educational demonstration, and is not intended or certified for commercial deployment, production software integration, or clinical speech pathology assessment.
+> **Oscine** was engineered, researched, and packaged exclusively as an exploratory prototype for the **Multimodal AI Hackathon 2026 (Track C: Contrastive Speech Analytics & Temporal Flaw Grounding)**.
+> * The code may contain incomplete features, experimental logic, or unoptimized implementations, as is natural for a hackathon build.
+> * No guarantees are made regarding security, stability, or long-term maintenance.
+> * It is developed strictly for academic evaluation, hackathon judging, and educational demonstration, and is not intended or certified for commercial deployment, production software integration, or clinical speech pathology assessment.
