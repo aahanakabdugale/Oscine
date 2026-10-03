@@ -11,7 +11,7 @@ import {
   Mic, Zap, Brain, Activity, TrendingDown, Clock, Radio, Timer, Gauge
 } from 'lucide-react';
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const DIMENSION_CONFIG = {
   errant_pause: {

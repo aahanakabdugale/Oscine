@@ -11,7 +11,8 @@ _MODEL = None
 def get_whisper_model():
     global _MODEL
     if _MODEL is None:
-        _MODEL = WhisperModel("base", device="cpu", compute_type="int8", cpu_threads=4)
+        model_size = os.getenv("WHISPER_MODEL", "tiny")
+        _MODEL = WhisperModel(model_size, device="cpu", compute_type="int8", cpu_threads=2)
     return _MODEL
 
 
