@@ -6,8 +6,8 @@
 | `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address | ~60s | Gating + EBU R128 (-20 LUFS) |
 | `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Campaign | ~60s | Gating + EBU R128 (-20 LUFS) |
 | `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate Address | ~60s | Gating + EBU R128 (-20 LUFS) |
-| `speech_05` | Andrew Ng | Male | US English | Stanford Keynote & AI Opportunities Address | ~60s | Gating + EBU R128 (-20 LUFS) |
-| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Commonwealth Lecture Address | ~60s | Gating + EBU R128 (-20 LUFS) |
+| `speech_05` | Andrew Ng | Male | US English | Ted Talk | ~60s | Gating + EBU R128 (-20 LUFS) |
+| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English |  Lecture Address | ~60s | Gating + EBU R128 (-20 LUFS) |
 
 ### Standards:
 * **Audio Format:** 16,000 Hz, 16-bit PCM Mono (`.wav`)
