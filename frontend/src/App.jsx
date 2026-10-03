@@ -355,7 +355,11 @@ export default function App() {
         }
       }, 300);
     } catch (err) {
-      alert("Analysis error: " + err.message);
+      const isFetchErr = err.message === "Failed to fetch";
+      const userMsg = isFetchErr
+        ? "Network / Cloud Timeout: The server took longer than Render's 100-second free tier limit. Tip: For instant demonstration, pick any 'Benchmark Preset' (sub-second evaluation), or upload a shorter audio sample (< 30s)."
+        : err.message;
+      alert("Analysis error: " + userMsg);
     } finally {
       setIsAnalyzing(false);
     }
