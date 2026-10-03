@@ -22,6 +22,16 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
     if not force_recompute and cache_key in _FEATURES_CACHE:
         return _FEATURES_CACHE[cache_key].copy()
 
+    feat_json_path = os.path.splitext(audio_path)[0] + ".features.json"
+    if not force_recompute and os.path.exists(feat_json_path):
+        try:
+            cached_df = pd.read_json(feat_json_path)
+            if not cached_df.empty:
+                _FEATURES_CACHE[cache_key] = cached_df.copy()
+                return cached_df
+        except Exception:
+            pass
+
     if alignment_json_path is None:
         aligned_path = os.path.splitext(audio_path)[0] + ".aligned.json"
         words_path = os.path.splitext(audio_path)[0] + "_words.json"
@@ -139,4 +149,8 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
 
     res_df = pd.DataFrame(records)
     _FEATURES_CACHE[cache_key] = res_df.copy()
+    try:
+        res_df.to_json(feat_json_path, orient="records", indent=2)
+    except Exception:
+        pass
     return res_df
