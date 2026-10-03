@@ -188,3 +188,29 @@ Oscine/
 ├── SOURCES.md                  # Baseline speaker attributions
 └── README.md                   # System documentation
 ```
+
+---
+
+## 7. Built With & AI Assistance Disclosure
+
+### 7.1 Technologies & Libraries
+* **Backend:** Python 3.11, FastAPI, Uvicorn, Librosa, Faster-Whisper, SoundFile, NumPy, Pandas, SciPy, NoiseReduce
+* **Frontend:** React 18, Vite, Tailwind CSS, Lucide React, Framer Motion, WaveSurfer.js, Apache ECharts (`echarts-for-react`)
+* **Audio Engineering:** FFmpeg, EBU R128 loudness normalization, pYIN pitch tracking, WSOLA time-stretching
+
+### 7.2 AI Tools & Assistance Disclosure
+In full compliance with hackathon submission guidelines, the following AI coding assistants were utilized during the development of this project:
+* **Tools Used:** Antigravity IDE (powered by Google Gemini & Anthropic Claude models).
+
+**Areas of AI Assistance:**
+1. **Frontend Scaffolding & Visualization:** Assistance in generating initial React component layouts, ECharts multi-track crosshair synchronization logic, and Tailwind aesthetic styling.
+2. **Signal Synthesis Algorithms:** Co-developing the mathematical crossfade splicing in `src/inject.py` for artifact-free audio insertion, time-stretching, and pitch dampening.
+3. **Causal Explanation Structuring:** Drafting dynamic text templating functions to translate numeric $\sigma$-deviations into structured coaching recommendations in `src/explain.py`.
+4. **Harness & Debugging:** Writing regression and calibration verification scripts (`verify_labels.py` and `evaluate.py`).
+
+---
+
+## 8. Scope & Academic Disclaimer
+
+> **Note on Project Scope & Intended Use:**  
+> **Oscine** was engineered, researched, and packaged exclusively as an exploratory prototype for the **Multimodal AI Hackathon 2026 (Track C: Contrastive Speech Analytics & Temporal Flaw Grounding)**. This system serves as a competitive proof-of-concept demonstrating contrastive acoustic time-series analysis, temporal flaw grounding, and reproducible rubric scoring against elite orator baselines. It is developed strictly for academic evaluation, hackathon judging, and educational demonstration, and is not intended or certified for commercial deployment, production software integration, or clinical speech pathology assessment.
