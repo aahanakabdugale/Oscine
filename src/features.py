@@ -72,6 +72,10 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13, hop_length=hop_length)
     mfcc_times = librosa.times_like(mfcc, sr=sr, hop_length=hop_length)
 
+    # 4. Direct FFT-based Spectral Metrics (Vocal Clarity & Frequency Centroid)
+    spec_cent = librosa.feature.spectral_centroid(y=y, sr=sr, hop_length=hop_length)[0]
+    spec_flat = librosa.feature.spectral_flatness(y=y, hop_length=hop_length)[0]
+
     # Compute global file-level normalization baselines
     valid_f0 = f0[voiced_flag > 0]
     valid_f0 = valid_f0[~np.isnan(valid_f0)]
@@ -122,6 +126,8 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
             "f0_hz_zscore": round(f0_zscore, 2),
             "rms_energy": round(rms_mean, 4),
             "rms_energy_zscore": round(rms_zscore, 2),
+            "spectral_centroid_hz": round(float(np.mean(spec_cent[rms_mask])) if np.any(rms_mask) else 0.0, 1),
+            "vocal_clarity_flatness": round(float(np.mean(spec_flat[rms_mask])) if np.any(rms_mask) else 0.0, 4),
         }
 
         # MFCC coefficients (use dedicated mfcc_mask — frame count may differ from rms)

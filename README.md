@@ -78,33 +78,39 @@ All 54 clips have exact millisecond ground-truth annotations stored in both indi
 ```
 
 ### 3.1 Feature Extraction (`src/features.py`)
-- **Pitch Tracking ($F_0$)**: Uses probabilistic YIN (`librosa.pyin`) over $50\text{ Hz} - 450\text{ Hz}$ with hop size 256. Voiced frames are segmented per word to compute median $F_0$ and semitone standard deviation.
-- **Energy Dynamics**: Root-Mean-Square (RMS) frame energy normalized via cross-utterance $z$-score to ensure speaker-agnostic volume comparisons.
-- **Pause & Rate Computation**: Audio below $3\times$ the 15th energy percentile is marked as silence. Speech rate is computed per word-window in syllables per second.
+- **Pitch Tracking ($F_0$)**: Uses probabilistic YIN (`librosa.pyin`) over $65\text{ Hz} - 450\text{ Hz}$. Voiced frames are segmented per word to compute median $F_0$, semitone deviation relative to reference median, and cross-utterance $z$-score.
+- **Direct FFT Spectral Features & Vocal Clarity**: Evaluates STFT magnitude to compute:
+  - **Spectral Centroid (Hz)**: Measures the center-of-mass frequency distribution of the voice.
+  - **Vocal Clarity (Spectral Flatness)**: Quantifies harmonic purity vs. noisy breathiness.
+- **Energy Dynamics**: Root-Mean-Square (RMS) frame energy normalized via cross-utterance $z$-score for speaker-agnostic volume comparisons.
+- **Pause & Cadence Computation**: Audio below $3\times$ the 15th energy percentile is flagged as silence. Speech rate is computed via a 3-word moving window in Words Per Second (WPS).
+- **Timbre Representation**: 13 Mel-Frequency Cepstral Coefficients (MFCCs) extracted per aligned word segment.
 
 ### 3.2 Contrastive Detection (`src/detect.py`)
-- Aligns test words to reference words using fuzzy Levenshtein token alignment.
+- Aligns test words to reference words using fuzzy Levenshtein / SequenceMatcher token alignment.
 - Computes local moving-window rate ratios $\frac{\text{duration}_{\text{ref}}}{\text{duration}_{\text{test}}}$.
 - Flags:
-  - **Errant Pause**: Silence interval $> 0.95\text{s}$ at non-syntactic boundaries.
+  - **Errant Pause**: Silence interval $> 0.45\text{s}$ exceeding reference baseline silences.
   - **Rushed Delivery**: Local rate ratio $\ge 1.15\times$ baseline.
-  - **Monotone Pitch**: Pitch variance drops $\le 65\%$ of baseline pitch variance.
-  - **Volume Instability**: Cross-speaker normalized $|z_{\text{rms}} - z_{\text{ref}}| \ge 2.0\sigma$.
+  - **Monotone Pitch**: Pitch variance drops $\le 70\%$ of reference baseline pitch variance.
+  - **Volume Instability**: Normalized $|z_{\text{rms}} - z_{\text{ref}}| \ge 2.0\sigma$.
 
 ### 3.3 Causal Explainability (`src/explain.py`)
 Each flaw region provides:
-- Exact temporal boundary $[t_{\text{start}}, t_{\text{end}}]$ and word sequence.
-- Precise metric deviation (e.g., *"+1.8s silence vs. 0.1s baseline"*, *"1.42× acceleration over 8 words"*).
+- Exact temporal boundary $[t_{\text{start}}, t_{\text{end}}]$ and affected words.
+- Precise numeric delta (e.g., *"+1.8s hesitation vs baseline"*, *"1.42× acceleration (+2.1 sigma)"*).
 - Pedagogical coaching recommendation for competitive speech improvement.
 
 ---
 
-## 4. Evaluative Rubric Scoring
-The engine outputs an objective **100-point composite rubric score** partitioned into 4 pillars:
-1. **Cadence & Pacing (25 pts)**: Penalties for rushed bursts and tempo volatility.
-2. **Pitch Modulation & Dynamic Range (25 pts)**: Penalties for monotone flatlines.
-3. **Volume Consistency & Projection (25 pts)**: Penalties for erratic loudness drops.
-4. **Pause Placement & Articulation (25 pts)**: Penalties for unnatural hesitations.
+## 4. Evaluative Rubric Scoring & Export
+The engine outputs an objective **10.0-point composite rubric score** partitioned into 4 core delivery dimensions:
+1. **Cadence & Pacing (10 pts)**: Penalties for rushed acceleration and tempo compression.
+2. **Pitch Modulation & Dynamic Range (10 pts)**: Penalties for flatline intonation.
+3. **Volume Consistency & Projection (10 pts)**: Penalties for erratic loudness drops.
+4. **Pause Placement & Continuity (10 pts)**: Penalties for unnatural dead air.
+
+* **Diagnostic Export**: Full evaluative data (composite score, sub-scores, millisecond timestamps, and causal explanations) can be exported directly from the dashboard via the **Export Diagnostic Report (JSON)** button.
 
 ---
 
@@ -113,6 +119,7 @@ The engine outputs an objective **100-point composite rubric score** partitioned
 ### 5.1 Prerequisites
 - Python 3.10+
 - Node.js 18+
+- FFmpeg (added to system PATH)
 
 ### 5.2 Backend Setup
 ```bash
@@ -128,25 +135,27 @@ cd Oscine
 pip install -r requirements.txt
 
 # Start FastAPI server (runs on http://localhost:8000)
-cd src
-uvicorn api:app --host 127.0.0.1 --port 8000 --reload
+uvicorn src.api:app --reload --port 8000
 ```
 
 ### 5.3 Frontend Setup
 ```bash
-# In a new terminal window:
+# In a second terminal window:
 cd frontend
 npm install
 npm run dev
 # Open http://localhost:5173 in browser
 ```
 
-### 5.4 Running Tests & Calibration
+### 5.4 Running Benchmark Evaluation & Calibration
 ```bash
-# Run unit tests
+# Run full contrastive benchmark (IoU hit-rate & monotonicity test)
+python src/evaluate.py
+
+# Run unit & alignment test suite
 $env:PYTHONPATH="."; python tests/test_detection_alignment.py
 
-# Regenerate / verify flaw dataset
+# (Optional) Re-synthesize & calibrate flaw dataset
 python src/inject.py
 python src/verify_labels.py
 ```

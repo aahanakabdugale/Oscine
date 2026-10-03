@@ -138,12 +138,14 @@ async def analyze_speech(
     # 4. Extract time series for synchronized charts
     def to_series(df):
         if df.empty:
-            return {"t": [], "f0": [], "rate": [], "pause": []}
+            return {"t": [], "f0": [], "rate": [], "pause": [], "energy": [], "clarity": []}
         t = [round(float((s + e) / 2), 2) for s, e in zip(df["start"], df["end"])]
         f0 = [round(float(v), 2) if not np.isnan(v) else 0.0 for v in df["f0_hz_zscore"]]
         rate = [round(float(v), 2) for v in df["speech_rate"]]
         pause = [round(float(v), 2) for v in df["pause_before"]]
-        return {"t": t, "f0": f0, "rate": rate, "pause": pause}
+        energy = [round(float(v), 2) for v in df.get("rms_energy_zscore", [0.0] * len(df))]
+        clarity = [round(float(v), 4) for v in df.get("vocal_clarity_flatness", [0.0] * len(df))]
+        return {"t": t, "f0": f0, "rate": rate, "pause": pause, "energy": energy, "clarity": clarity}
 
     return {
         "reference_id": reference_id,
