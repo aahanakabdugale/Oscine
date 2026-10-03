@@ -86,11 +86,7 @@ def align_audio_file(audio_path: str, reference_transcript: str = None, force_re
     """
     json_path = os.path.splitext(audio_path)[0] + ".aligned.json"
     if os.path.exists(json_path) and not force_recompute:
-        # If cache exists, verify if ground truth alignment was requested
-        with open(json_path, "r", encoding="utf-8") as f:
-            cache = json.load(f)
-            if not reference_transcript or cache.get("ground_truth_guided"):
-                return json_path
+        return json_path
 
     model = get_whisper_model()
     y, sr = librosa.load(audio_path, sr=16000, mono=True)
