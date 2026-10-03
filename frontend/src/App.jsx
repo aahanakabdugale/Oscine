@@ -11,7 +11,8 @@ import {
   Mic, Zap, Brain, Activity, TrendingDown, Clock, Radio, Timer, Gauge
 } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const rawApiBase = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API_BASE = rawApiBase.replace(/\/+$/, "");
 
 const DIMENSION_CONFIG = {
   errant_pause: {
@@ -187,14 +188,32 @@ export default function App() {
     else document.documentElement.classList.remove('dark');
   }, [darkMode]);
 
+  const [backendStatus, setBackendStatus] = useState("loading"); // "loading" | "connected" | "error"
+  const [backendErrorMsg, setBackendErrorMsg] = useState("");
+
   useEffect(() => {
     fetch(`${API_BASE}/api/references`)
-      .then(res => res.json())
-      .then(data => {
-        setReferences(data);
-        // No default — user must choose
+      .then(res => {
+        if (!res.ok) throw new Error(`Server returned HTTP ${res.status}`);
+        return res.json();
       })
-      .catch(err => console.error("Error fetching baseline models:", err));
+      .then(data => {
+        if (Array.isArray(data)) {
+          setReferences(data);
+          setBackendStatus("connected");
+        } else {
+          console.warn("Expected array from /api/references, got:", data);
+          setReferences([]);
+          setBackendStatus("error");
+          setBackendErrorMsg("Server response was not an array");
+        }
+      })
+      .catch(err => {
+        console.warn("Backend connection notice:", err.message);
+        setReferences([]);
+        setBackendStatus("error");
+        setBackendErrorMsg(err.message);
+      });
   }, []);
 
   // Simulated progress during analysis
@@ -213,7 +232,8 @@ export default function App() {
 
   const handleRefChange = (refId) => {
     setSelectedRef(refId);
-    const chosen = references.find(r => r.id === refId);
+    const list = Array.isArray(references) ? references : [];
+    const chosen = list.find(r => r.id === refId);
     if (chosen && chosen.transcript && !transcriptFile) {
       setActiveTranscriptText(chosen.transcript);
     }
@@ -280,7 +300,8 @@ export default function App() {
       const file = new File([blob], `${flawName}.wav`, { type: 'audio/wav' });
       setAudioFile(file);
       setTranscriptFile(null);
-      const chosen = references.find(r => r.id === selectedRef);
+      const list = Array.isArray(references) ? references : [];
+      const chosen = list.find(r => r.id === selectedRef);
       if (chosen && chosen.transcript) setActiveTranscriptText(chosen.transcript);
     } catch (err) {
       alert("Failed to load preset: " + err.message);
@@ -490,12 +511,22 @@ export default function App() {
             >
               {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <div className="hidden sm:flex items-center gap-2 text-sm font-medium text-emerald-400 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
+            <div className={`hidden sm:flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full border ${
+              backendStatus === "connected"
+                ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
+                : backendStatus === "loading"
+                ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
+                : "text-rose-400 bg-rose-500/10 border-rose-500/20"
+            }`}>
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                  backendStatus === "connected" ? "bg-emerald-400" : backendStatus === "loading" ? "bg-amber-400" : "bg-rose-400"
+                }`}></span>
+                <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+                  backendStatus === "connected" ? "bg-emerald-500" : backendStatus === "loading" ? "bg-amber-500" : "bg-rose-500"
+                }`}></span>
               </span>
-              FastAPI Core Online
+              {backendStatus === "connected" ? "FastAPI Core Online" : backendStatus === "loading" ? "Connecting to Engine..." : "Backend Waking Up..."}
             </div>
           </div>
         </div>
@@ -591,7 +622,7 @@ export default function App() {
                     }`}
                 >
                   <option value="" disabled>— Select Speaker —</option>
-                  {references.map(r => (
+                  {(Array.isArray(references) ? references : []).map(r => (
                     <option key={r.id} value={r.id}>{r.title} ({r.duration}s)</option>
                   ))}
                 </select>
