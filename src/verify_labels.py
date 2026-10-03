@@ -78,10 +78,14 @@ def verify_and_calibrate_labels():
                 calibrated_end = round(raw_start + added_silence, 2)
 
             elif flaw_type == "rushed_delivery":
-                orig_span = raw_end - raw_start
-                compressed_span = orig_span - max(0.2, (ideal_dur - test_dur))
-                calibrated_start = round(raw_start, 2)
-                calibrated_end = round(raw_start + max(0.5, compressed_span), 2)
+                ideal_s = float(item.get("ideal_timeline_start", raw_start))
+                ideal_e = float(item.get("ideal_timeline_end", raw_end))
+                if ideal_e <= ideal_s:
+                    ideal_e = ideal_s + 5.0
+                time_compression = max(0.0, ideal_dur - test_dur)
+                compressed_span = (ideal_e - ideal_s) - time_compression
+                calibrated_start = round(ideal_s, 2)
+                calibrated_end = round(ideal_s + max(1.5, compressed_span), 2)
 
             elif flaw_type == "monotone_pitch":
                 calibrated_start = round(raw_start, 2)
@@ -91,8 +95,8 @@ def verify_and_calibrate_labels():
             updated_item["speaker"] = spk
             updated_item["test_timeline_start"] = calibrated_start
             updated_item["test_timeline_end"] = calibrated_end
-            updated_item["ideal_timeline_start"] = raw_start
-            updated_item["ideal_timeline_end"] = raw_end
+            updated_item["ideal_timeline_start"] = float(item.get("ideal_timeline_start", raw_start))
+            updated_item["ideal_timeline_end"] = float(item.get("ideal_timeline_end", raw_end))
             updated_item["start"] = calibrated_start
             updated_item["end"] = calibrated_end
             updated_item["test_duration"] = test_dur
@@ -121,8 +125,8 @@ def verify_and_calibrate_labels():
         json.dump(all_consolidated_records, f, indent=2)
 
     print("--------------------------------------------------------")
-    print(f"✓ Audited and calibrated {total_calibrated} labels across {len(speaker_dirs)} speakers.")
-    print(f"✓ Saved unified dataset ground-truth to: {root_labels_path}")
+    print(f"[OK] Audited and calibrated {total_calibrated} labels across {len(speaker_dirs)} speakers.")
+    print(f"[OK] Saved unified dataset ground-truth to: {root_labels_path}")
     print("========================================================")
 
 

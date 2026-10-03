@@ -5,7 +5,10 @@ import pandas as pd
 import librosa
 from align import align_audio_file
 
-def extract_features_per_word(audio_path: str, alignment_json_path: str = None) -> pd.DataFrame:
+_FEATURES_CACHE = {}
+
+
+def extract_features_per_word(audio_path: str, alignment_json_path: str = None, force_recompute: bool = False) -> pd.DataFrame:
     """
     Extracts aligned word-level prosodic features:
     - Pitch (F0 median, std, semitone delta, z-score)
@@ -14,47 +17,28 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None) 
     - Volume / Energy (mean RMS energy & z-score)
     - Timbre (13 MFCC coefficients)
     """
-    if alignment_json_path is None:
-        transcript_alignment_path = os.path.splitext(audio_path)[0] + "_words.json"
-        alignment_json_path = os.path.splitext(audio_path)[0] + ".aligned.json"
-        audio_mtime = os.path.getmtime(audio_path)
-        has_transcript_alignment = os.path.exists(transcript_alignment_path)
-        transcript_alignment_is_current = (
-            has_transcript_alignment
-            and os.path.getmtime(transcript_alignment_path) >= audio_mtime
-        )
-        guided_alignment_is_current = (
-            os.path.exists(alignment_json_path)
-            and os.path.getmtime(alignment_json_path) >= audio_mtime
-        )
-        guided_alignment_is_raw = False
-        if guided_alignment_is_current:
-            with open(alignment_json_path, "r", encoding="utf-8") as f:
-                cached_alignment = json.load(f)
-            guided_alignment_is_raw = not cached_alignment.get(
-                "ground_truth_guided", False
-            )
+    audio_mtime = os.path.getmtime(audio_path) if os.path.exists(audio_path) else 0.0
+    cache_key = (os.path.abspath(audio_path), audio_mtime)
+    if not force_recompute and cache_key in _FEATURES_CACHE:
+        return _FEATURES_CACHE[cache_key].copy()
 
-        if guided_alignment_is_current and (
-            guided_alignment_is_raw or not has_transcript_alignment
-        ):
-            pass
-        elif transcript_alignment_is_current and not guided_alignment_is_current:
-            alignment_json_path = transcript_alignment_path
+    if alignment_json_path is None:
+        aligned_path = os.path.splitext(audio_path)[0] + ".aligned.json"
+        words_path = os.path.splitext(audio_path)[0] + "_words.json"
+        if os.path.exists(aligned_path):
+            alignment_json_path = aligned_path
+        elif os.path.exists(words_path):
+            alignment_json_path = words_path
         else:
             reference_transcript = None
-            if not has_transcript_alignment:
-                transcript_path = os.path.join(
-                    os.path.dirname(audio_path), "transcript.txt"
-                )
-                if os.path.exists(transcript_path):
-                    with open(transcript_path, "r", encoding="utf-8") as tf:
-                        reference_transcript = tf.read().strip()
-
-            align_audio_file(
+            transcript_path = os.path.join(os.path.dirname(audio_path), "transcript.txt")
+            if os.path.exists(transcript_path):
+                with open(transcript_path, "r", encoding="utf-8") as tf:
+                    reference_transcript = tf.read().strip()
+            alignment_json_path = align_audio_file(
                 audio_path,
                 reference_transcript=reference_transcript,
-                force_recompute=True,
+                force_recompute=False
             )
 
     if not os.path.exists(alignment_json_path):
@@ -70,11 +54,11 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None) 
     y, sr = librosa.load(audio_path, sr=16000, mono=True)
     hop_length = 512
 
-    # 1. Pitch extraction via pYIN
+    # 1. Pitch extraction via pYIN (bounded to natural human conversational range: 65Hz - 450Hz)
     f0, voiced_flag, _ = librosa.pyin(
         y,
-        fmin=librosa.note_to_hz('C2'),
-        fmax=librosa.note_to_hz('C7'),
+        fmin=65.0,
+        fmax=450.0,
         sr=sr,
         hop_length=hop_length
     )
@@ -86,6 +70,7 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None) 
 
     # 3. MFCC extraction (13 coefficients)
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13, hop_length=hop_length)
+    mfcc_times = librosa.times_like(mfcc, sr=sr, hop_length=hop_length)
 
     # Compute global file-level normalization baselines
     valid_f0 = f0[voiced_flag > 0]
@@ -139,10 +124,13 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None) 
             "rms_energy_zscore": round(rms_zscore, 2),
         }
 
-        # MFCC coefficients
+        # MFCC coefficients (use dedicated mfcc_mask — frame count may differ from rms)
+        mfcc_mask = (mfcc_times >= w_start) & (mfcc_times <= w_end)
         for k in range(13):
-            rec[f"mfcc_{k+1}"] = round(float(np.mean(mfcc[k, rms_mask])) if np.any(rms_mask) else 0.0, 3)
+            rec[f"mfcc_{k+1}"] = round(float(np.mean(mfcc[k, mfcc_mask])) if np.any(mfcc_mask) else 0.0, 3)
 
         records.append(rec)
 
-    return pd.DataFrame(records)
+    res_df = pd.DataFrame(records)
+    _FEATURES_CACHE[cache_key] = res_df.copy()
+    return res_df

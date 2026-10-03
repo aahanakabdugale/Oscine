@@ -1,7 +1,7 @@
 {
   "audio_file": "flawed_monotone_L3.wav",
   "ground_truth_guided": false,
-  "total_words": 150,
+  "total_words": 151,
   "words": [
     {
       "word": "a",
@@ -391,19 +391,19 @@
       "word": "and",
       "start": 26.68,
       "end": 27.24,
-      "probability": 0.083
+      "probability": 0.095
     },
     {
       "word": "the",
       "start": 27.24,
       "end": 27.36,
-      "probability": 0.941
+      "probability": 0.919
     },
     {
       "word": "only",
       "start": 27.36,
       "end": 27.68,
-      "probability": 0.997
+      "probability": 0.996
     },
     {
       "word": "thing",
@@ -415,7 +415,7 @@
       "word": "i",
       "start": 27.9,
       "end": 28.08,
-      "probability": 0.973
+      "probability": 0.967
     },
     {
       "word": "could",
@@ -426,26 +426,26 @@
     {
       "word": "think",
       "start": 28.24,
-      "end": 28.54,
-      "probability": 0.998
+      "end": 28.56,
+      "probability": 0.997
     },
     {
       "word": "was",
-      "start": 28.54,
-      "end": 29.0,
-      "probability": 0.994
+      "start": 28.56,
+      "end": 28.98,
+      "probability": 0.993
     },
     {
       "word": "what",
-      "start": 29.8,
+      "start": 28.98,
       "end": 30.14,
-      "probability": 0.66
+      "probability": 0.47
     },
     {
       "word": "have",
       "start": 30.14,
       "end": 30.3,
-      "probability": 0.994
+      "probability": 0.971
     },
     {
       "word": "we",
@@ -456,32 +456,32 @@
     {
       "word": "done",
       "start": 30.5,
-      "end": 30.76,
-      "probability": 0.997
+      "end": 30.8,
+      "probability": 0.991
     },
     {
       "word": "see",
       "start": 33.18,
       "end": 33.74,
-      "probability": 0.571
+      "probability": 0.759
     },
     {
       "word": "because",
       "start": 33.82,
       "end": 33.96,
-      "probability": 0.995
+      "probability": 0.994
     },
     {
       "word": "at",
       "start": 33.96,
       "end": 34.18,
-      "probability": 0.968
+      "probability": 0.975
     },
     {
       "word": "that",
       "start": 34.18,
       "end": 34.34,
-      "probability": 0.993
+      "probability": 0.996
     },
     {
       "word": "moment",
@@ -491,187 +491,193 @@
     },
     {
       "word": "i",
-      "start": 34.92,
+      "start": 34.96,
       "end": 35.02,
-      "probability": 0.998
+      "probability": 0.993
     },
     {
       "word": "realized",
       "start": 35.02,
-      "end": 35.66,
-      "probability": 0.798
+      "end": 35.6,
+      "probability": 0.771
     },
     {
       "word": "that",
-      "start": 35.66,
-      "end": 36.04,
-      "probability": 0.913
+      "start": 35.6,
+      "end": 36.06,
+      "probability": 0.65
     },
     {
       "word": "our",
-      "start": 36.04,
-      "end": 36.22,
-      "probability": 0.948
+      "start": 36.06,
+      "end": 36.2,
+      "probability": 0.989
     },
     {
       "word": "time",
-      "start": 36.22,
-      "end": 36.44,
-      "probability": 0.735
+      "start": 36.2,
+      "end": 36.54,
+      "probability": 0.994
     },
     {
       "word": "in",
-      "start": 36.44,
-      "end": 36.68,
-      "probability": 0.887
+      "start": 36.54,
+      "end": 36.66,
+      "probability": 0.988
     },
     {
       "word": "the",
-      "start": 36.68,
-      "end": 36.8,
-      "probability": 0.959
+      "start": 36.66,
+      "end": 36.78,
+      "probability": 0.99
     },
     {
       "word": "white",
-      "start": 36.8,
+      "start": 36.78,
       "end": 36.96,
-      "probability": 0.945
+      "probability": 0.97
     },
     {
       "word": "house",
       "start": 36.96,
       "end": 37.22,
-      "probability": 0.997
+      "probability": 0.994
     },
     {
-      "word": "performed",
+      "word": "would",
       "start": 37.22,
-      "end": 37.8,
-      "probability": 0.345
+      "end": 37.5,
+      "probability": 0.244
+    },
+    {
+      "word": "form",
+      "start": 37.5,
+      "end": 37.9,
+      "probability": 0.954
     },
     {
       "word": "the",
-      "start": 37.8,
-      "end": 38.1,
-      "probability": 0.573
+      "start": 37.9,
+      "end": 38.08,
+      "probability": 0.885
     },
     {
       "word": "foundation",
-      "start": 38.1,
+      "start": 38.08,
       "end": 38.64,
-      "probability": 0.972
+      "probability": 0.988
     },
     {
       "word": "for",
       "start": 38.64,
-      "end": 38.94,
-      "probability": 0.983
+      "end": 38.92,
+      "probability": 0.987
     },
     {
       "word": "who",
-      "start": 38.94,
+      "start": 38.92,
       "end": 39.1,
-      "probability": 0.939
+      "probability": 0.985
     },
     {
       "word": "they",
       "start": 39.1,
       "end": 39.28,
-      "probability": 0.982
+      "probability": 0.911
     },
     {
       "word": "would",
       "start": 39.28,
       "end": 39.44,
-      "probability": 0.886
+      "probability": 0.964
     },
     {
       "word": "become",
       "start": 39.44,
-      "end": 39.84,
-      "probability": 0.763
+      "end": 39.86,
+      "probability": 0.949
     },
     {
       "word": "and",
-      "start": 40.7,
-      "end": 40.92,
-      "probability": 0.997
+      "start": 40.86,
+      "end": 40.96,
+      "probability": 0.647
     },
     {
       "word": "how",
-      "start": 40.92,
-      "end": 41.2,
+      "start": 40.96,
+      "end": 41.22,
+      "probability": 0.988
+    },
+    {
+      "word": "will",
+      "start": 41.22,
+      "end": 41.52,
+      "probability": 0.954
+    },
+    {
+      "word": "you",
+      "start": 41.52,
+      "end": 41.74,
+      "probability": 0.684
+    },
+    {
+      "word": "manage",
+      "start": 41.74,
+      "end": 42.16,
       "probability": 0.996
     },
     {
-      "word": "well",
-      "start": 41.2,
-      "end": 41.46,
-      "probability": 0.623
-    },
-    {
-      "word": "he",
-      "start": 41.46,
-      "end": 41.7,
-      "probability": 0.613
-    },
-    {
-      "word": "managed",
-      "start": 41.7,
-      "end": 42.14,
-      "probability": 0.906
-    },
-    {
       "word": "this",
-      "start": 42.14,
+      "start": 42.16,
       "end": 42.54,
-      "probability": 0.826
+      "probability": 0.882
     },
     {
       "word": "experience",
       "start": 42.54,
-      "end": 43.2,
-      "probability": 0.993
+      "end": 43.18,
+      "probability": 0.943
     },
     {
       "word": "to",
-      "start": 43.2,
-      "end": 43.5,
-      "probability": 0.172
+      "start": 43.18,
+      "end": 43.48,
+      "probability": 0.309
     },
     {
       "word": "truly",
-      "start": 43.5,
-      "end": 43.96,
-      "probability": 0.851
+      "start": 43.48,
+      "end": 43.92,
+      "probability": 0.932
     },
     {
       "word": "make",
-      "start": 43.96,
+      "start": 43.92,
       "end": 44.28,
-      "probability": 0.986
+      "probability": 0.976
     },
     {
       "word": "or",
       "start": 44.28,
       "end": 44.44,
-      "probability": 0.956
+      "probability": 0.947
     },
     {
       "word": "break",
       "start": 44.44,
       "end": 44.68,
-      "probability": 0.998
+      "probability": 0.997
     },
     {
       "word": "them",
       "start": 44.68,
-      "end": 44.9,
-      "probability": 0.998
+      "end": 44.88,
+      "probability": 0.997
     },
     {
       "word": "that",
-      "start": 45.84,
+      "start": 45.86,
       "end": 46.16,
       "probability": 0.996
     },
@@ -685,23 +691,23 @@
       "word": "what",
       "start": 46.36,
       "end": 46.62,
-      "probability": 0.995
+      "probability": 0.996
     },
     {
       "word": "barack",
       "start": 46.62,
-      "end": 46.9,
-      "probability": 0.866
+      "end": 46.92,
+      "probability": 0.839
     },
     {
       "word": "and",
-      "start": 46.9,
-      "end": 47.18,
-      "probability": 0.996
+      "start": 46.92,
+      "end": 47.2,
+      "probability": 0.995
     },
     {
       "word": "i",
-      "start": 47.18,
+      "start": 47.2,
       "end": 47.46,
       "probability": 1.0
     },
@@ -709,23 +715,23 @@
       "word": "think",
       "start": 47.46,
       "end": 48.06,
-      "probability": 0.994
+      "probability": 0.995
     },
     {
       "word": "about",
       "start": 48.06,
       "end": 48.36,
-      "probability": 0.998
+      "probability": 0.996
     },
     {
       "word": "every",
       "start": 48.36,
-      "end": 48.74,
-      "probability": 0.932
+      "end": 48.76,
+      "probability": 0.948
     },
     {
       "word": "day",
-      "start": 48.74,
+      "start": 48.76,
       "end": 49.06,
       "probability": 1.0
     },
@@ -733,43 +739,43 @@
       "word": "as",
       "start": 49.06,
       "end": 49.46,
-      "probability": 0.841
+      "probability": 0.787
     },
     {
       "word": "we",
       "start": 49.46,
       "end": 49.94,
-      "probability": 0.996
+      "probability": 0.997
     },
     {
       "word": "try",
       "start": 49.94,
       "end": 50.14,
-      "probability": 0.995
+      "probability": 0.996
     },
     {
       "word": "to",
       "start": 50.14,
       "end": 50.3,
-      "probability": 0.999
+      "probability": 0.998
     },
     {
       "word": "guide",
       "start": 50.3,
-      "end": 50.64,
-      "probability": 0.997
+      "end": 50.62,
+      "probability": 0.998
     },
     {
       "word": "and",
-      "start": 50.64,
+      "start": 50.62,
       "end": 50.9,
-      "probability": 0.996
+      "probability": 0.998
     },
     {
       "word": "protect",
       "start": 50.9,
       "end": 51.26,
-      "probability": 0.999
+      "probability": 0.998
     },
     {
       "word": "our",
@@ -780,20 +786,20 @@
     {
       "word": "girls",
       "start": 51.52,
-      "end": 51.86,
-      "probability": 0.989
+      "end": 51.84,
+      "probability": 0.983
     },
     {
       "word": "through",
-      "start": 51.86,
+      "start": 51.84,
       "end": 52.12,
-      "probability": 0.969
+      "probability": 0.97
     },
     {
       "word": "the",
       "start": 52.12,
       "end": 52.26,
-      "probability": 0.997
+      "probability": 0.999
     },
     {
       "word": "challenges",

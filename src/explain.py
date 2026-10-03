@@ -58,24 +58,6 @@ def generate_causal_explanation(region):
 # ----------------------------------------------------------------------
 # 2. RUBRIC SCORING
 # ----------------------------------------------------------------------
-# Saturation constant per flaw type: smaller k = harsher penalty.
-_K = {
-    "errant_pause": 0.05,
-    "rushed_delivery": 0.05,
-    "monotone_pitch": 0.08,
-    "vocal_clarity_drift": 0.10,
-}
-_MAX_PEN = 9.0   # one dimension never drops below 1.0
-
-
-def _region_burden(reg):
-    """Flaw burden of one region, in 'flawed seconds'.
-    Uses the 'burden' field written by detect.py when present,
-    otherwise falls back to a duration * sigma estimate."""
-    if "burden" in reg:
-        return float(reg["burden"])
-    dur = max(0.0, reg.get("t_end", 0.0) - reg.get("t_start", 0.0))
-    return 0.25 * float(reg.get("max_sigma", 1.0)) * dur
 
 
 def compute_rubric_scores(regions: list, total_duration_sec: float = 60.0, duration_ratio: float = 1.0) -> dict:
@@ -112,7 +94,7 @@ def compute_rubric_scores(regions: list, total_duration_sec: float = 60.0, durat
             if impact > dim_max_impact[flaw]:
                 dim_max_impact[flaw] = impact
 
-    compression_penalty = max(0.0, (1.0 - duration_ratio) * 10.0) if duration_ratio < 0.95 else 0.0
+    compression_penalty = max(0.0, (1.0 - duration_ratio) * 15.0) if duration_ratio < 0.99 else 0.0
 
     pause_pen = min(dim_max_impact["errant_pause"] * 0.95, 6.0)
     pace_pen = (

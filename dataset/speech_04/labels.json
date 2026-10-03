@@ -9,7 +9,9 @@
     "ideal_timeline_start": 18.0,
     "ideal_timeline_end": 18.0,
     "test_duration": 61.2,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 18.0,
+    "test_timeline_end": 19.2
   },
   {
     "speaker": "speech_04",
@@ -21,7 +23,9 @@
     "ideal_timeline_start": 18.0,
     "ideal_timeline_end": 18.0,
     "test_duration": 62.2,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 18.0,
+    "test_timeline_end": 20.2
   },
   {
     "speaker": "speech_04",
@@ -33,7 +37,9 @@
     "ideal_timeline_start": 18.0,
     "ideal_timeline_end": 18.0,
     "test_duration": 63.8,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 18.0,
+    "test_timeline_end": 21.8
   },
   {
     "speaker": "speech_04",
@@ -45,7 +51,9 @@
     "ideal_timeline_start": 25.0,
     "ideal_timeline_end": 30.0,
     "test_duration": 58.846,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 25.0,
+    "test_timeline_end": 28.85
   },
   {
     "speaker": "speech_04",
@@ -57,7 +65,9 @@
     "ideal_timeline_start": 25.0,
     "ideal_timeline_end": 30.0,
     "test_duration": 58.226,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 25.0,
+    "test_timeline_end": 28.23
   },
   {
     "speaker": "speech_04",
@@ -69,7 +79,9 @@
     "ideal_timeline_start": 25.0,
     "ideal_timeline_end": 30.0,
     "test_duration": 57.778,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 25.0,
+    "test_timeline_end": 27.78
   },
   {
     "speaker": "speech_04",
@@ -81,7 +93,9 @@
     "ideal_timeline_start": 35.0,
     "ideal_timeline_end": 44.0,
     "test_duration": 60.0,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 35.0,
+    "test_timeline_end": 44.0
   },
   {
     "speaker": "speech_04",
@@ -93,7 +107,9 @@
     "ideal_timeline_start": 35.0,
     "ideal_timeline_end": 44.0,
     "test_duration": 60.0,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 35.0,
+    "test_timeline_end": 44.0
   },
   {
     "speaker": "speech_04",
@@ -105,6 +121,8 @@
     "ideal_timeline_start": 35.0,
     "ideal_timeline_end": 44.0,
     "test_duration": 60.0,
-    "ideal_duration": 60.0
+    "ideal_duration": 60.0,
+    "test_timeline_start": 35.0,
+    "test_timeline_end": 44.0
   }
 ]

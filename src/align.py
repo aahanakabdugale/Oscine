@@ -11,7 +11,7 @@ _MODEL = None
 def get_whisper_model():
     global _MODEL
     if _MODEL is None:
-        _MODEL = WhisperModel("base", device="cpu", compute_type="int8")
+        _MODEL = WhisperModel("base", device="cpu", compute_type="int8", cpu_threads=4)
     return _MODEL
 
 
@@ -99,7 +99,7 @@ def align_audio_file(audio_path: str, reference_transcript: str = None, force_re
     segments, _ = model.transcribe(
         y,
         word_timestamps=True,
-        beam_size=5,
+        beam_size=1,
         initial_prompt=prompt
     )
 

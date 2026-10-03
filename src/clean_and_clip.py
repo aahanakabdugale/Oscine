@@ -12,27 +12,30 @@ print("Loading Whisper model...")
 whisper_model = WhisperModel("base", device="cpu", compute_type="int8")
 
 SPEECHES = [
-    {
+       {
         "id": "speech_01",
         "name": "Michelle Obama",
         "raw_file": "data/raw/michelle_obama.mp3",
-        "exact_start": 74.0,
-        "exact_end": 136.0
+        "exact_start": 525.0,   # 8 min 45 sec
+        "exact_end": 585.0      # 9 min 45 sec (60s duration)
     },
-    {
+
+       {
         "id": "speech_02",
         "name": "Sudha Murty",
         "raw_file": "data/raw/sudha_murty.mp3",
-        "exact_start": 10.0,
-        "exact_end": 70.0
+        "exact_start": 354.0,   # 5 min 54 sec
+        "exact_end": 414.0      # 6 min 54 sec (60s duration — ensures 44s anchor fits)
     },
-    {
+
+        {
         "id": "speech_03",
         "name": "Emma Watson",
         "raw_file": "data/raw/emma_watson.mp3",
-        "exact_start": 8.0,
-        "exact_end": 68.0
+        "exact_start": 338.0,   # 5 min 38 sec
+        "exact_end": 390.0      # 6 min 30 sec (52s duration)
     },
+
     {
         "id": "speech_04",
         "name": "Dr. Shashi Tharoor",
@@ -40,13 +43,14 @@ SPEECHES = [
         "exact_start": 21.0,
         "exact_end": 81.0
     },
-    {
+        {
         "id": "speech_05",
-        "name": "Lee Kuan Yew",
-        "raw_file": "data/raw/lee_kuan_yew.mp3",
-        "exact_start": 15.0,
-        "exact_end": 75.0
+        "name": "Andrew Ng",
+        "raw_file": "data/raw/andrew_ng.mp3",
+        "exact_start": 65.0,    # 1 min 05 sec
+        "exact_end": 120.0      # 2 min 00 sec (55s duration)
     },
+
     {
         "id": "speech_06",
         "name": "Chimamanda Ngozi Adichie",

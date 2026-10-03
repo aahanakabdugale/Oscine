@@ -1,9 +1,16 @@
 import os
+import sys
 import shutil
 import tempfile
+import wave
+import numpy as np
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 from align import align_audio_file
 from detect import detect_anomalies
@@ -22,7 +29,7 @@ app.add_middleware(
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATASET_DIR = os.path.join(PROJECT_ROOT, "dataset")
-STATIC_UPLOADS = os.path.join(PROJECT_ROOT, "uploads")
+STATIC_UPLOADS = os.path.join(tempfile.gettempdir(), "oscine_uploads")
 os.makedirs(STATIC_UPLOADS, exist_ok=True)
 
 app.mount("/static/uploads", StaticFiles(directory=STATIC_UPLOADS), name="uploads")
@@ -42,10 +49,16 @@ def get_references():
                 if os.path.exists(trans_path):
                     with open(trans_path, "r", encoding="utf-8") as f:
                         transcript_text = f.read().strip()
+                duration = 60.0
+                try:
+                    with wave.open(ideal_wav, "rb") as wf:
+                        duration = round(wf.getnframes() / float(wf.getframerate()), 2)
+                except Exception:
+                    pass
                 refs.append({
                     "id": spk,
                     "title": f"Reference Baseline ({spk})",
-                    "duration": 60.0,
+                    "duration": duration,
                     "transcript": transcript_text
                 })
     return refs
@@ -64,29 +77,44 @@ async def analyze_speech(
     if not os.path.exists(ideal_wav):
         raise HTTPException(status_code=404, detail=f"Reference baseline '{reference_id}' not found.")
 
-    # Prioritize user-provided transcript, fall back to baseline's transcript
+    # Check if this is an existing benchmark preset in the dataset
+    preset_wav = os.path.join(ref_dir, audio.filename)
+    is_dataset_preset = os.path.exists(preset_wav)
+
+    # Ground-truth transcript resolution
+    baseline_ideal_transcript = None
+    if os.path.exists(ref_transcript_file):
+        with open(ref_transcript_file, "r", encoding="utf-8") as f:
+            baseline_ideal_transcript = f.read().strip()
+
     active_transcript = None
     if transcript and transcript.strip():
         active_transcript = transcript.strip()
-    elif os.path.exists(ref_transcript_file):
-        with open(ref_transcript_file, "r", encoding="utf-8") as f:
-            active_transcript = f.read().strip()
+    elif is_dataset_preset or audio.filename.startswith("flawed_") or audio.filename.startswith("ideal_") or audio.filename == "ideal.wav":
+        active_transcript = baseline_ideal_transcript
 
-    # Save uploaded audio file locally
-    saved_filename = f"user_{audio.filename}"
-    saved_audio_path = os.path.join(STATIC_UPLOADS, saved_filename)
-    with open(saved_audio_path, "wb") as buffer:
-        shutil.copyfileobj(audio.file, buffer)
+    # Determine audio location & stream URL
+    if is_dataset_preset:
+        audio_to_analyze = preset_wav
+        audio_url = f"/static/dataset/{reference_id}/{audio.filename}"
+    else:
+        # Save to external temp folder (prevents Uvicorn watchfiles reload loops)
+        saved_filename = f"user_{audio.filename}"
+        saved_audio_path = os.path.join(STATIC_UPLOADS, saved_filename)
+        with open(saved_audio_path, "wb") as buffer:
+            shutil.copyfileobj(audio.file, buffer)
+        audio_to_analyze = saved_audio_path
+        audio_url = f"/static/uploads/{saved_filename}"
 
-    # 1. Run real text-grounded alignment with the active transcript
-    align_audio_file(saved_audio_path, reference_transcript=active_transcript, force_recompute=True)
-    align_audio_file(ideal_wav, reference_transcript=active_transcript, force_recompute=False)
+    # 1. Run real text-grounded alignment (presets reuse their pre-computed alignment)
+    align_audio_file(audio_to_analyze, reference_transcript=active_transcript, force_recompute=not is_dataset_preset)
+    align_audio_file(ideal_wav, reference_transcript=baseline_ideal_transcript, force_recompute=False)
 
-    # 2. Extract features and detect anomalies
-    df_ideal = extract_features_per_word(ideal_wav)
-    df_part = extract_features_per_word(saved_audio_path)
+    # 2. Extract features and detect anomalies (ideal is instant via memory cache)
+    df_ideal = extract_features_per_word(ideal_wav, force_recompute=False)
+    df_part = extract_features_per_word(audio_to_analyze, force_recompute=not is_dataset_preset)
 
-    regions = detect_anomalies(ideal_wav, saved_audio_path)
+    regions = detect_anomalies(ideal_wav, audio_to_analyze, df_ideal=df_ideal, df_test=df_part)
 
     # Compute duration ratio
     ref_dur = float(df_ideal["end"].max()) if not df_ideal.empty else 60.0
@@ -119,7 +147,7 @@ async def analyze_speech(
 
     return {
         "reference_id": reference_id,
-        "audio_url": f"/static/uploads/{saved_filename}",
+        "audio_url": audio_url,
         "duration": round(part_dur, 2),
         "ground_truth_aligned": bool(active_transcript),
         "scores": scores,
@@ -129,3 +157,8 @@ async def analyze_speech(
             "part": to_series(df_part)
         }
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True, reload_dirs=["src"])

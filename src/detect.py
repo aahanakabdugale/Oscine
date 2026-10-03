@@ -32,14 +32,23 @@ def compute_rms_energy(audio_path: str):
     return times, rms
 
 
+_SILENCE_CACHE = {}
+
+
 def _silence_intervals(audio_path, minimum_duration=0.45):
+    mtime = os.path.getmtime(audio_path) if os.path.exists(audio_path) else 0.0
+    cache_key = (os.path.abspath(audio_path), mtime, minimum_duration)
+    if cache_key in _SILENCE_CACHE:
+        return _SILENCE_CACHE[cache_key]
+
     times, rms = compute_rms_energy(audio_path)
     times = np.asarray(times, dtype=float)
     rms = np.asarray(rms, dtype=float)
     if not len(rms):
         return []
 
-    threshold = max(1e-4, float(np.percentile(rms, 75)) * 0.01)
+    noise_floor = float(np.percentile(rms, 15))
+    threshold = max(1e-4, noise_floor * 3.0)
     quiet = rms <= threshold
     frame_step = float(times[1] - times[0]) if len(times) > 1 else 0.032
     intervals = []
@@ -59,6 +68,7 @@ def _silence_intervals(audio_path, minimum_duration=0.45):
         interval_end = float(times[-1]) + frame_step / 2
         if interval_end - interval_start >= minimum_duration:
             intervals.append((interval_start, interval_end))
+    _SILENCE_CACHE[cache_key] = intervals
     return intervals
 
 
@@ -113,13 +123,15 @@ def _merge_records_by_type(records, merge_gap_sec):
     merged = []
     flaw_types = dict.fromkeys(record["flaw_type"] for record in records)
     for flaw_type in flaw_types:
+        # Flaws spanning rhetorical clauses (monotone pitch) contain natural micro-pauses
+        gap = max(merge_gap_sec, 1.2) if flaw_type == "monotone_pitch" else merge_gap_sec
         typed_records = sorted(
             (record for record in records if record["flaw_type"] == flaw_type),
             key=lambda record: record["start"],
         )
         regions = []
         for record in typed_records:
-            if regions and record["start"] - regions[-1]["t_end"] <= merge_gap_sec:
+            if regions and record["start"] - regions[-1]["t_end"] <= gap:
                 region = regions[-1]
                 region["t_end"] = max(region["t_end"], record["end"])
                 region["max_sigma"] = max(region["max_sigma"], record["sigma_dev"])
@@ -142,12 +154,15 @@ def _merge_records_by_type(records, merge_gap_sec):
     return sorted(merged, key=lambda region: region["t_start"])
 
 
-def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2):
+def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_test=None):
     """
     Evaluates contrastive acoustic deviations against the reference speaker baseline.
+    Pass df_ideal / df_test to skip redundant feature extraction when already computed.
     """
-    df_ideal = extract_features_per_word(ideal_wav)
-    df_test = extract_features_per_word(test_wav)
+    if df_ideal is None:
+        df_ideal = extract_features_per_word(ideal_wav)
+    if df_test is None:
+        df_test = extract_features_per_word(test_wav)
 
     if df_ideal.empty or df_test.empty:
         return []
@@ -282,11 +297,12 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2):
             window_word_count = int(matched_window)
             ref_rate = window_word_count / max(float(ref_window), 1e-6)
             tgt_rate = window_word_count / max(float(test_window), 1e-6)
+            sigma_val = min(round(rate_ratio - 1.0, 3), 5.0)
             flagged_records.append({
                 "flaw_type": "rushed_delivery",
                 "start": float(w_tgt["start"]),
                 "end": float(w_tgt["end"]),
-                "sigma_dev": round(rate_ratio - 1.0, 3),
+                "sigma_dev": sigma_val,
                 "word": w_tgt["word"],
                 "tgt_rate": tgt_rate,
                 "ref_rate": ref_rate,
@@ -299,7 +315,7 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2):
         # -------------------------------------------------------------
         ref_pitch_var = float(ideal_pitch_std[ref_indices[i]])
         tgt_pitch_var = float(test_pitch_std[i])
-        if ref_pitch_var >= 0.8 and tgt_pitch_var <= 0.65 * ref_pitch_var:
+        if ref_pitch_var >= 0.5 and tgt_pitch_var <= 0.70 * ref_pitch_var:
             collapse_ratio = 1.0 - tgt_pitch_var / max(ref_pitch_var, 1e-6)
             sigma_val = max(1.0, collapse_ratio * 4.0)
             flagged_records.append({
@@ -316,8 +332,8 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2):
         # -------------------------------------------------------------
         # 4. VOLUME INSTABILITY
         # -------------------------------------------------------------
-        rms_delta = abs(w_tgt.get("rms_energy_zscore", 0.0) - w_ref.get("rms_energy_zscore", 0.0))
-        if rms_delta >= 2.2 and w_tgt["pause_before"] < 0.5:
+        rms_delta = abs(float(w_tgt["rms_energy_zscore"]) - float(w_ref["rms_energy_zscore"]))
+        if rms_delta >= 2.0 and float(w_tgt["pause_before"]) < 1.0:
             flagged_records.append({
                 "flaw_type": "volume_instability",
                 "start": float(w_tgt["start"]),

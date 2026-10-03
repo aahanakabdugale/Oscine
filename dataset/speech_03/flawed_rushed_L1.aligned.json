@@ -1,714 +1,595 @@
 {
   "audio_file": "flawed_rushed_L1.wav",
-  "ground_truth_guided": true,
-  "total_words": 101,
+  "ground_truth_guided": false,
+  "total_words": 98,
   "words": [
     {
       "word": "thank",
-      "start": 12.56,
-      "end": 12.863,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 0.0,
+      "end": 0.88,
+      "probability": 0.327
     },
     {
       "word": "you",
-      "start": 12.863,
-      "end": 13.166,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 0.88,
+      "end": 1.32,
+      "probability": 0.975
     },
     {
       "word": "two",
-      "start": 13.166,
-      "end": 13.469,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 8.0,
+      "end": 8.88,
+      "probability": 0.601
     },
     {
       "word": "years",
-      "start": 13.469,
-      "end": 13.771,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 8.88,
+      "end": 9.76,
+      "probability": 0.996
     },
     {
       "word": "ago",
-      "start": 13.771,
-      "end": 14.074,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 9.76,
+      "end": 10.16,
+      "probability": 0.996
     },
     {
       "word": "i",
-      "start": 14.074,
-      "end": 14.377,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 10.92,
+      "end": 11.3,
+      "probability": 0.986
     },
     {
       "word": "launched",
-      "start": 14.377,
-      "end": 14.68,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 11.3,
+      "end": 11.6,
+      "probability": 0.994
     },
     {
       "word": "a",
-      "start": 14.68,
-      "end": 14.74,
-      "probability": 0.589,
-      "aligned_to_transcript": true
+      "start": 11.6,
+      "end": 11.78,
+      "probability": 0.998
     },
     {
       "word": "campaign",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 11.78,
+      "end": 12.22,
+      "probability": 0.999
     },
     {
       "word": "called",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 12.22,
+      "end": 13.18,
+      "probability": 0.979
     },
     {
       "word": "he",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 13.18,
+      "end": 13.44,
+      "probability": 0.289
     },
     {
       "word": "for",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 13.44,
+      "end": 13.58,
+      "probability": 0.433
     },
     {
       "word": "sheat",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 13.58,
+      "end": 14.1,
+      "probability": 0.781
     },
     {
       "word": "at",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 14.1,
+      "end": 14.66,
+      "probability": 0.763
     },
     {
       "word": "the",
-      "start": 14.74,
-      "end": 14.74,
-      "probability": 0.583,
-      "aligned_to_transcript": true
+      "start": 14.66,
+      "end": 14.8,
+      "probability": 0.989
     },
     {
       "word": "un",
-      "start": 14.74,
-      "end": 14.87,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 14.8,
+      "end": 15.12,
+      "probability": 0.775
     },
     {
       "word": "in",
-      "start": 14.87,
-      "end": 15.0,
-      "probability": 0.85,
-      "aligned_to_transcript": true
+      "start": 15.12,
+      "end": 15.52,
+      "probability": 0.984
     },
     {
       "word": "new",
-      "start": 15.0,
-      "end": 15.0,
-      "probability": 0.106,
-      "aligned_to_transcript": true
+      "start": 15.52,
+      "end": 15.68,
+      "probability": 0.994
     },
     {
       "word": "york",
-      "start": 15.0,
-      "end": 16.02,
-      "probability": 0.986,
-      "aligned_to_transcript": true
+      "start": 15.68,
+      "end": 16.0,
+      "probability": 0.998
     },
     {
       "word": "i",
-      "start": 17.66,
-      "end": 17.78,
-      "probability": 0.061,
-      "aligned_to_transcript": true
+      "start": 17.36,
+      "end": 17.8,
+      "probability": 0.99
     },
     {
       "word": "was",
-      "start": 17.78,
-      "end": 17.94,
-      "probability": 0.779,
-      "aligned_to_transcript": true
+      "start": 17.8,
+      "end": 18.04,
+      "probability": 0.999
     },
     {
       "word": "very",
-      "start": 17.94,
-      "end": 18.58,
-      "probability": 0.817,
-      "aligned_to_transcript": true
+      "start": 18.04,
+      "end": 18.6,
+      "probability": 0.995
     },
     {
       "word": "nervous",
-      "start": 18.58,
-      "end": 18.9,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "start": 18.6,
+      "end": 18.92,
+      "probability": 1.0
     },
     {
       "word": "before",
-      "start": 18.9,
-      "end": 19.36,
-      "probability": 0.909,
-      "aligned_to_transcript": true
+      "start": 18.92,
+      "end": 19.38,
+      "probability": 0.977
     },
     {
       "word": "that",
-      "start": 19.36,
+      "start": 19.38,
       "end": 19.58,
-      "probability": 0.968,
-      "aligned_to_transcript": true
+      "probability": 0.996
     },
     {
       "word": "speech",
       "start": 19.58,
-      "end": 20.12,
-      "probability": 0.993,
-      "aligned_to_transcript": true
+      "end": 20.14,
+      "probability": 0.999
     },
     {
       "word": "the",
-      "start": 21.12,
-      "end": 21.2,
-      "probability": 0.897,
-      "aligned_to_transcript": true
+      "start": 20.72,
+      "end": 21.22,
+      "probability": 0.984
     },
     {
       "word": "nerves",
-      "start": 21.2,
-      "end": 21.52,
-      "probability": 0.959,
-      "aligned_to_transcript": true
+      "start": 21.22,
+      "end": 21.5,
+      "probability": 0.974
     },
     {
       "word": "were",
-      "start": 21.52,
+      "start": 21.5,
       "end": 22.28,
-      "probability": 0.971,
-      "aligned_to_transcript": true
+      "probability": 0.996
     },
     {
       "word": "followed",
       "start": 22.28,
-      "end": 22.58,
-      "probability": 0.97,
-      "aligned_to_transcript": true
+      "end": 22.56,
+      "probability": 0.996
     },
     {
       "word": "by",
-      "start": 22.58,
-      "end": 22.92,
-      "probability": 0.993,
-      "aligned_to_transcript": true
+      "start": 22.56,
+      "end": 22.9,
+      "probability": 0.997
     },
     {
       "word": "a",
-      "start": 22.92,
+      "start": 22.9,
       "end": 23.16,
-      "probability": 0.948,
-      "aligned_to_transcript": true
+      "probability": 0.99
     },
     {
       "word": "tremendous",
       "start": 23.16,
-      "end": 23.66,
-      "probability": 0.986,
-      "aligned_to_transcript": true
+      "end": 23.68,
+      "probability": 0.997
     },
     {
       "word": "high",
-      "start": 23.66,
-      "end": 24.18,
-      "probability": 0.964,
-      "aligned_to_transcript": true
+      "start": 23.68,
+      "end": 24.24,
+      "probability": 0.986
     },
     {
-      "word": "immediately",
-      "start": 24.18,
-      "end": 25.08,
-      "probability": 0.029,
-      "aligned_to_transcript": true
+      "word": "media",
+      "start": 24.24,
+      "end": 25.16,
+      "probability": 0.029
     },
     {
-      "word": "afterwards",
-      "start": 25.08,
-      "end": 25.8,
-      "probability": 0.12,
-      "aligned_to_transcript": true
+      "word": "office",
+      "start": 25.16,
+      "end": 25.66,
+      "probability": 0.254
     },
     {
       "word": "and",
-      "start": 25.8,
+      "start": 25.66,
       "end": 26.4,
-      "probability": 0.246,
-      "aligned_to_transcript": true
+      "probability": 0.481
     },
     {
       "word": "a",
       "start": 26.4,
       "end": 26.5,
-      "probability": 0.349,
-      "aligned_to_transcript": true
+      "probability": 0.246
     },
     {
       "word": "crashing",
       "start": 26.5,
-      "end": 26.88,
-      "probability": 0.101,
-      "aligned_to_transcript": true
+      "end": 26.84,
+      "probability": 0.22
     },
     {
       "word": "low",
-      "start": 26.88,
-      "end": 27.18,
-      "probability": 0.613,
-      "aligned_to_transcript": true
+      "start": 26.84,
+      "end": 27.16,
+      "probability": 0.65
     },
     {
-      "word": "a",
-      "start": 27.18,
-      "end": 27.52,
-      "probability": 0.002,
-      "aligned_to_transcript": true
-    },
-    {
-      "word": "few",
-      "start": 27.52,
-      "end": 27.56,
-      "probability": 0.46,
-      "aligned_to_transcript": true
-    },
-    {
-      "word": "days",
-      "start": 27.56,
-      "end": 27.8,
-      "probability": 0.983,
-      "aligned_to_transcript": true
-    },
-    {
-      "word": "after",
-      "start": 27.8,
-      "end": 28.02,
-      "probability": 0.207,
-      "aligned_to_transcript": true
+      "word": "of",
+      "start": 27.16,
+      "end": 27.88,
+      "probability": 0.237
     },
     {
       "word": "that",
-      "start": 28.02,
-      "end": 28.46,
-      "probability": 0.858,
-      "aligned_to_transcript": true
+      "start": 27.88,
+      "end": 28.16,
+      "probability": 0.315
     },
     {
       "word": "my",
-      "start": 29.74,
+      "start": 29.62,
       "end": 29.88,
-      "probability": 0.791,
-      "aligned_to_transcript": true
+      "probability": 0.903
     },
     {
       "word": "best",
-      "start": 29.98,
-      "end": 30.26,
-      "probability": 0.937,
-      "aligned_to_transcript": true
+      "start": 29.88,
+      "end": 30.32,
+      "probability": 0.998
     },
     {
       "word": "hopes",
-      "start": 30.26,
-      "end": 30.68,
-      "probability": 0.99,
-      "aligned_to_transcript": true
+      "start": 30.32,
+      "end": 30.64,
+      "probability": 0.995
     },
     {
       "word": "and",
-      "start": 30.68,
-      "end": 31.4,
-      "probability": 0.81,
-      "aligned_to_transcript": true
+      "start": 30.64,
+      "end": 31.42,
+      "probability": 0.944
     },
     {
       "word": "my",
-      "start": 31.4,
+      "start": 31.42,
       "end": 31.6,
-      "probability": 0.985,
-      "aligned_to_transcript": true
+      "probability": 0.982
     },
     {
       "word": "worst",
       "start": 31.6,
-      "end": 32.14,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "end": 32.12,
+      "probability": 0.998
     },
     {
       "word": "fears",
-      "start": 32.14,
-      "end": 33.0,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "start": 32.12,
+      "end": 32.98,
+      "probability": 0.996
     },
     {
       "word": "were",
-      "start": 33.0,
+      "start": 32.98,
       "end": 33.92,
-      "probability": 0.607,
-      "aligned_to_transcript": true
+      "probability": 0.869
     },
     {
       "word": "confirmed",
       "start": 33.92,
       "end": 34.48,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "probability": 0.994
     },
     {
       "word": "all",
       "start": 34.48,
-      "end": 34.76,
-      "probability": 0.988,
-      "aligned_to_transcript": true
+      "end": 34.74,
+      "probability": 0.986
     },
     {
       "word": "at",
-      "start": 34.76,
+      "start": 34.74,
       "end": 34.88,
-      "probability": 1.0,
-      "aligned_to_transcript": true
+      "probability": 1.0
     },
     {
       "word": "once",
       "start": 34.88,
-      "end": 35.14,
-      "probability": 1.0,
-      "aligned_to_transcript": true
+      "end": 35.1,
+      "probability": 0.999
     },
     {
       "word": "i",
       "start": 36.66,
       "end": 36.94,
-      "probability": 0.992,
-      "aligned_to_transcript": true
+      "probability": 0.996
     },
     {
       "word": "had",
       "start": 36.94,
-      "end": 37.08,
-      "probability": 0.995,
-      "aligned_to_transcript": true
+      "end": 37.06,
+      "probability": 0.993
     },
     {
       "word": "opened",
-      "start": 37.08,
+      "start": 37.06,
       "end": 37.48,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "probability": 0.993
     },
     {
       "word": "pandoras",
       "start": 37.48,
       "end": 38.14,
-      "probability": 0.991,
-      "aligned_to_transcript": true
+      "probability": 0.991
     },
     {
       "word": "box",
       "start": 38.14,
       "end": 38.32,
-      "probability": 0.737,
-      "aligned_to_transcript": true
+      "probability": 0.623
     },
     {
       "word": "to",
       "start": 38.32,
       "end": 39.3,
-      "probability": 0.963,
-      "aligned_to_transcript": true
+      "probability": 0.968
     },
     {
       "word": "a",
       "start": 39.3,
       "end": 39.4,
-      "probability": 0.987,
-      "aligned_to_transcript": true
+      "probability": 0.992
     },
     {
       "word": "standing",
       "start": 39.4,
       "end": 39.72,
-      "probability": 0.947,
-      "aligned_to_transcript": true
+      "probability": 0.946
     },
     {
       "word": "ovation",
       "start": 39.72,
       "end": 40.24,
-      "probability": 0.977,
-      "aligned_to_transcript": true
+      "probability": 0.979
     },
     {
       "word": "and",
       "start": 40.24,
-      "end": 41.3,
-      "probability": 0.686,
-      "aligned_to_transcript": true
+      "end": 41.32,
+      "probability": 0.721
     },
     {
       "word": "almost",
-      "start": 41.3,
+      "start": 41.32,
       "end": 41.74,
-      "probability": 0.992,
-      "aligned_to_transcript": true
+      "probability": 0.983
     },
     {
       "word": "simultaneously",
       "start": 41.74,
-      "end": 42.58,
-      "probability": 0.976,
-      "aligned_to_transcript": true
+      "end": 42.56,
+      "probability": 0.965
     },
     {
       "word": "a",
-      "start": 42.58,
+      "start": 43.24,
       "end": 43.72,
-      "probability": 0.718,
-      "aligned_to_transcript": true
+      "probability": 0.856
     },
     {
       "word": "level",
       "start": 43.72,
       "end": 44.0,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "probability": 0.998
     },
     {
       "word": "of",
       "start": 44.0,
       "end": 44.3,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "probability": 0.998
     },
     {
       "word": "critique",
       "start": 44.3,
-      "end": 44.68,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "end": 44.66,
+      "probability": 0.997
     },
     {
       "word": "i",
-      "start": 44.68,
+      "start": 44.66,
       "end": 45.42,
-      "probability": 0.974,
-      "aligned_to_transcript": true
+      "probability": 0.975
     },
     {
       "word": "had",
       "start": 45.42,
       "end": 45.7,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "probability": 0.998
     },
     {
       "word": "never",
       "start": 45.7,
-      "end": 46.22,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "end": 46.2,
+      "probability": 0.998
     },
     {
       "word": "experienced",
-      "start": 46.22,
-      "end": 47.48,
-      "probability": 0.992,
-      "aligned_to_transcript": true
+      "start": 46.2,
+      "end": 47.46,
+      "probability": 0.992
     },
     {
       "word": "in",
-      "start": 47.48,
+      "start": 47.46,
       "end": 47.74,
-      "probability": 0.999,
-      "aligned_to_transcript": true
+      "probability": 0.998
     },
     {
       "word": "my",
       "start": 47.74,
-      "end": 47.88,
-      "probability": 1.0,
-      "aligned_to_transcript": true
+      "end": 47.9,
+      "probability": 1.0
     },
     {
       "word": "life",
-      "start": 47.88,
-      "end": 48.32,
-      "probability": 0.999,
-      "aligned_to_transcript": true
+      "start": 47.9,
+      "end": 48.34,
+      "probability": 1.0
     },
     {
       "word": "and",
-      "start": 48.32,
-      "end": 48.98,
-      "probability": 0.803,
-      "aligned_to_transcript": true
+      "start": 48.34,
+      "end": 49.0,
+      "probability": 0.669
     },
     {
       "word": "the",
-      "start": 48.98,
+      "start": 49.0,
       "end": 49.12,
-      "probability": 0.984,
-      "aligned_to_transcript": true
+      "probability": 0.961
     },
     {
       "word": "beginning",
       "start": 49.12,
-      "end": 49.5,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "end": 49.46,
+      "probability": 0.996
     },
     {
       "word": "of",
-      "start": 49.5,
+      "start": 49.46,
       "end": 50.34,
-      "probability": 0.993,
-      "aligned_to_transcript": true
+      "probability": 0.978
     },
     {
       "word": "what",
       "start": 50.34,
       "end": 50.54,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "probability": 0.996
     },
     {
       "word": "would",
       "start": 50.54,
       "end": 50.66,
-      "probability": 0.992,
-      "aligned_to_transcript": true
+      "probability": 0.989
     },
     {
       "word": "become",
       "start": 50.66,
-      "end": 50.92,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "end": 50.94,
+      "probability": 0.995
     },
     {
       "word": "a",
-      "start": 50.92,
-      "end": 51.14,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "start": 50.94,
+      "end": 51.16,
+      "probability": 0.994
     },
     {
       "word": "series",
-      "start": 51.14,
-      "end": 51.54,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "start": 51.16,
+      "end": 51.56,
+      "probability": 0.998
     },
     {
       "word": "of",
-      "start": 51.54,
-      "end": 52.08,
-      "probability": 0.998,
-      "aligned_to_transcript": true
+      "start": 51.56,
+      "end": 52.12,
+      "probability": 0.994
     },
     {
       "word": "threats",
-      "start": 52.08,
-      "end": 52.54,
-      "probability": 0.984,
-      "aligned_to_transcript": true
+      "start": 52.12,
+      "end": 52.52,
+      "probability": 0.985
     },
     {
       "word": "the",
-      "start": 54.0,
+      "start": 54.08,
       "end": 54.88,
-      "probability": 0.657,
-      "aligned_to_transcript": true
+      "probability": 0.983
     },
     {
       "word": "last",
       "start": 54.88,
-      "end": 55.06,
-      "probability": 0.979,
-      "aligned_to_transcript": true
+      "end": 55.08,
+      "probability": 0.997
     },
     {
       "word": "two",
-      "start": 55.06,
+      "start": 55.08,
       "end": 55.42,
-      "probability": 0.949,
-      "aligned_to_transcript": true
+      "probability": 0.99
     },
     {
       "word": "years",
       "start": 55.42,
       "end": 55.92,
-      "probability": 0.997,
-      "aligned_to_transcript": true
+      "probability": 0.999
     },
     {
       "word": "have",
       "start": 55.92,
       "end": 56.44,
-      "probability": 0.931,
-      "aligned_to_transcript": true
+      "probability": 0.974
     },
     {
       "word": "been",
       "start": 56.44,
-      "end": 56.74,
-      "probability": 0.996,
-      "aligned_to_transcript": true
+      "end": 56.72,
+      "probability": 0.998
     },
     {
       "word": "a",
-      "start": 56.74,
+      "start": 56.72,
       "end": 57.0,
-      "probability": 0.936,
-      "aligned_to_transcript": true
+      "probability": 0.962
     },
     {
       "word": "baptism",
       "start": 57.0,
-      "end": 57.46,
-      "probability": 0.98,
-      "aligned_to_transcript": true
+      "end": 57.42,
+      "probability": 0.973
     },
     {
       "word": "of",
-      "start": 57.46,
+      "start": 57.42,
       "end": 57.82,
-      "probability": 0.995,
-      "aligned_to_transcript": true
+      "probability": 0.997
     },
     {
       "word": "fire",
       "start": 57.82,
       "end": 58.26,
-      "probability": 0.985,
-      "aligned_to_transcript": true
+      "probability": 0.982
     }
   ]
 }

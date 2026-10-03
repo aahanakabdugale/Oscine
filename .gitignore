@@ -17,3 +17,7 @@ temp_cut.wav
 *.log
 .vscode/
 Thumbs.db
+uploads/
+pdf_output.txt
+read_pdf.py
+profile_analyze.py

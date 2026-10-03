@@ -86,41 +86,76 @@ def inject_rushed(y: np.ndarray, sr: int, start_sec: float, end_sec: float, rate
 
 def inject_monotone(y: np.ndarray, sr: int, start_sec: float, end_sec: float, var_scale: float) -> np.ndarray:
     """
-    Flattens melodic pitch contours by estimating instantaneous F0 with pYIN
-    and dynamically pulling deviations toward speaker mean F0 via pitch shifting.
+    Compresses pitch variance toward the speaker's median F0 to simulate monotone delivery.
+    Divides the target segment into N chunks, estimates each chunk's average F0,
+    and shifts each chunk toward the global median by -(deviation * (1 - var_scale)).
+    var_scale=0.45 -> 55% compression (L1), 0.20 -> 80% (L2), 0.05 -> 95% (L3/robotic flat).
     """
     s_idx = int(start_sec * sr)
     e_idx = int(end_sec * sr)
     fade_len = int(0.02 * sr)
 
     prefix = y[:s_idx]
-    target_segment = y[s_idx:e_idx]
+    segment = y[s_idx:e_idx]
     suffix = y[e_idx:]
 
     try:
-        # Extract baseline pitch on target segment
+        hop_length = 512
         f0, voiced_flag, _ = librosa.pyin(
-            target_segment,
+            segment,
             fmin=librosa.note_to_hz('C2'),
             fmax=librosa.note_to_hz('C7'),
-            sr=sr
+            sr=sr,
+            hop_length=hop_length
         )
         valid_f0 = f0[voiced_flag > 0]
-        valid_f0 = valid_f0[~np.isnan(valid_f0)]
+        valid_f0 = valid_f0[np.isfinite(valid_f0) & (valid_f0 > 0)]
 
-        if len(valid_f0) > 10:
-            median_f0 = float(np.median(valid_f0))
-            # Flatten by resynthesizing: calculate semitone shift required per frame to compress variance
-            # Approximate by a smoothed pitch shift toward median
-            semitone_shift = -1.5 if var_scale < 0.1 else -0.8
-            processed = librosa.effects.pitch_shift(target_segment, sr=sr, n_steps=semitone_shift * (1.0 - var_scale))
+        if len(valid_f0) < 5:
+            processed = segment.copy()
         else:
-            # Fallback gentle pitch shift
-            processed = librosa.effects.pitch_shift(target_segment, sr=sr, n_steps=-1.0)
-    except Exception:
-        processed = target_segment.copy()
+            median_f0 = float(np.median(valid_f0))
+            f0_times = librosa.times_like(f0, sr=sr, hop_length=hop_length)
 
-    # Blend splice
+            # Split into N_CHUNKS and shift each toward the global median
+            N_CHUNKS = 8
+            chunk_len = len(segment) // N_CHUNKS
+            chunks_out = []
+
+            for ci in range(N_CHUNKS):
+                cs = ci * chunk_len
+                ce = cs + chunk_len if ci < N_CHUNKS - 1 else len(segment)
+                chunk = segment[cs:ce]
+
+                # Average voiced F0 within this chunk's time range
+                chunk_mask = (
+                    (f0_times >= cs / sr) & (f0_times < ce / sr)
+                    & (voiced_flag > 0) & np.isfinite(f0) & (f0 > 0)
+                )
+                chunk_f0_vals = f0[chunk_mask]
+
+                if len(chunk_f0_vals) > 0:
+                    chunk_median = float(np.median(chunk_f0_vals))
+                    # Semitone deviation of this chunk from global median
+                    deviation = 12.0 * np.log2(chunk_median / median_f0)
+                    # Pull toward global median proportional to (1 - var_scale)
+                    n_steps = -deviation * (1.0 - var_scale)
+                else:
+                    n_steps = 0.0
+
+                if abs(n_steps) > 0.1:
+                    chunk_shifted = librosa.effects.pitch_shift(chunk, sr=sr, n_steps=n_steps)
+                else:
+                    chunk_shifted = chunk.copy()
+
+                chunks_out.append(chunk_shifted)
+
+            processed = np.concatenate(chunks_out).astype(segment.dtype)
+
+    except Exception:
+        processed = segment.copy()
+
+    # Crossfade splice boundaries
     if len(prefix) > fade_len and len(processed) > fade_len:
         fade_out = 0.5 * (1.0 + np.cos(np.linspace(0, np.pi, fade_len)))
         fade_in = 0.5 * (1.0 - np.cos(np.linspace(0, np.pi, fade_len)))
@@ -219,8 +254,8 @@ def synthesize_all_flaws():
         json.dump(all_labels, f, indent=2)
 
     print("--------------------------------------------------------")
-    print(f"✓ Completed synthesis of {total_generated} clips across {len(speaker_dirs)} speakers.")
-    print(f"✓ Synchronized all ground-truth records into: {root_labels}")
+    print(f"[OK] Completed synthesis of {total_generated} clips across {len(speaker_dirs)} speakers.")
+    print(f"[OK] Synchronized all ground-truth records into: {root_labels}")
     print("========================================================")
 
 
