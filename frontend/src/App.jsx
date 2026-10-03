@@ -145,7 +145,6 @@ const ScoreRing = ({ value, label, icon: Icon, emoji }) => {
         </div>
       </div>
       <div className="flex items-center gap-1.5">
-        {emoji && <span className="text-xs">{emoji}</span>}
         {Icon && <Icon className="w-3.5 h-3.5 text-slate-500" />}
         <span className="text-xs font-bold text-slate-700 dark:text-slate-300 text-center leading-tight">{label}</span>
       </div>
@@ -858,10 +857,10 @@ export default function App() {
                   </div>
                 </div>
                 <div className="flex flex-wrap justify-around gap-6">
-                  <ScoreRing value={result.scores.pacing_score} label="Pacing Cadence" icon={Zap} emoji="⚡" />
-                  <ScoreRing value={result.scores.pauses_score} label="Pause Continuity" icon={Timer} emoji="⏱️" />
-                  <ScoreRing value={result.scores.volume_score} label="Volume Stability" icon={Volume2} emoji="🔊" />
-                  <ScoreRing value={result.scores.expressiveness_score} label="Pitch Expressiveness" icon={Activity} emoji="📉" />
+                  <ScoreRing value={result.scores.pacing_score} label="Pacing Cadence" icon={Zap} />
+                  <ScoreRing value={result.scores.pauses_score} label="Pause Continuity" icon={Timer} />
+                  <ScoreRing value={result.scores.volume_score} label="Volume Stability" icon={Volume2} />
+                  <ScoreRing value={result.scores.expressiveness_score} label="Pitch Expressiveness" icon={Activity} />
                   {result.text_alignment_ratio !== undefined && (
                     <div className="flex flex-col items-center gap-2">
                       <div className={`w-20 h-20 rounded-2xl border-2 ${darkMode ? 'border-cyan-500/30 bg-cyan-500/10' : 'border-cyan-400/30 bg-cyan-50'} flex flex-col items-center justify-center`}>
@@ -935,11 +934,11 @@ export default function App() {
                   </div>
                   <div className={`flex p-1 rounded-2xl border gap-1 overflow-x-auto ${darkMode ? 'border-white/8 bg-white/[0.03]' : 'border-slate-200 bg-slate-100'}`}>
                     {[
-                      { id: "all", label: "All Anomalies", emoji: "✨" },
-                      { id: "pause", label: "Pauses", emoji: "⏱️" },
-                      { id: "rushed", label: "Pacing", emoji: "⚡" },
-                      { id: "monotone", label: "Pitch", emoji: "📉" },
-                      { id: "volume", label: "Volume", emoji: "🔊" }
+                      { id: "all",      label: "All",    Icon: Sparkles },
+                      { id: "pause",    label: "Pauses", Icon: Timer },
+                      { id: "rushed",   label: "Pacing", Icon: Zap },
+                      { id: "monotone", label: "Pitch",  Icon: Activity },
+                      { id: "volume",   label: "Volume", Icon: Volume2 }
                     ].map(tab => (
                       <button
                         key={tab.id}
@@ -949,7 +948,7 @@ export default function App() {
                           : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
                           }`}
                       >
-                        <span>{tab.emoji}</span>
+                        <tab.Icon className="w-3.5 h-3.5" />
                         <span>{tab.label}</span>
                       </button>
                     ))}
@@ -988,7 +987,6 @@ export default function App() {
                                     <span className="text-sm font-extrabold text-slate-800 dark:text-slate-100 capitalize">
                                       {reg.dimension.replace(/_/g, ' ')}
                                     </span>
-                                    <span className="text-sm">{cfg.emoji}</span>
                                   </div>
                                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${cfg.badge} border ${cfg.border} inline-block mt-0.5`}>
                                     {cfg.subtitle}
@@ -1034,7 +1032,7 @@ export default function App() {
               Objective Prosodic Normalization
             </h4>
             <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-              Oscine extracts acoustic features with <span className="text-indigo-400 font-medium">pYIN</span> and <span className="text-indigo-400 font-medium">Faster-Whisper</span>, computing file-specific Z-scores to ensure evaluation remains independent of speaker gender, vocal timbre, or biological pitch range.
+              Oscine extracts acoustic features with <span className="text-indigo-400 font-medium">YIN</span> and <span className="text-indigo-400 font-medium">Faster-Whisper</span>, computing file-specific Z-scores to ensure evaluation remains independent of speaker gender, vocal timbre, or biological pitch range.
             </p>
           </div>
           <div className={`p-6 rounded-3xl border shadow-sm card-shine ${darkMode ? 'border-white/8 bg-[#0d1220]/70 text-slate-300' : 'border-slate-200 bg-white text-slate-600'}`}>
