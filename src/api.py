@@ -36,6 +36,12 @@ app.mount("/static/uploads", StaticFiles(directory=STATIC_UPLOADS), name="upload
 app.mount("/static/dataset", StaticFiles(directory=DATASET_DIR), name="dataset")
 
 
+@app.get("/health")
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok", "app": "Oscine Prosody Engine"}
+
+
 @app.get("/api/references")
 def get_references():
     refs = []
@@ -125,11 +131,19 @@ async def analyze_speech(
     formatted_regions = []
     for r in regions:
         explanation = generate_causal_explanation(r)
+        start_val = round(float(r["t_start"]), 2)
+        end_val = round(float(r["t_end"]), 2)
+        sigma_val = round(float(r["max_sigma"]), 2)
         formatted_regions.append({
             "dimension": r["flaw_type"],
-            "start": round(float(r["t_start"]), 2),
-            "end": round(float(r["t_end"]), 2),
-            "peak_z": round(float(r["max_sigma"]), 2),
+            "flaw_type": r["flaw_type"],
+            "start": start_val,
+            "end": end_val,
+            "t_start": start_val,
+            "t_end": end_val,
+            "peak_z": sigma_val,
+            "max_sigma": sigma_val,
+            "words": r.get("words", []),
             "explanation": explanation
         })
 
