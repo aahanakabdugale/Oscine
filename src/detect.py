@@ -123,8 +123,14 @@ def _merge_records_by_type(records, merge_gap_sec):
     merged = []
     flaw_types = dict.fromkeys(record["flaw_type"] for record in records)
     for flaw_type in flaw_types:
-        # Flaws spanning rhetorical clauses (monotone pitch) contain natural micro-pauses
-        gap = max(merge_gap_sec, 1.2) if flaw_type == "monotone_pitch" else merge_gap_sec
+        # Flaws spanning rhetorical clauses contain natural micro-pauses
+        if flaw_type == "monotone_pitch":
+            gap = max(merge_gap_sec, 1.2)
+        elif flaw_type == "rushed_delivery":
+            gap = max(merge_gap_sec, 0.75)
+        else:
+            gap = merge_gap_sec
+
         typed_records = sorted(
             (record for record in records if record["flaw_type"] == flaw_type),
             key=lambda record: record["start"],
@@ -149,7 +155,18 @@ def _merge_records_by_type(records, merge_gap_sec):
                     "details": [record],
                 }
             )
-        merged.extend(regions)
+
+        # Filter out transient micro-detections below rhetorical thresholds
+        valid_regions = []
+        for reg in regions:
+            span = reg["t_end"] - reg["t_start"]
+            if flaw_type == "monotone_pitch" and span < 1.5:
+                continue
+            if flaw_type == "rushed_delivery" and span < 0.6:
+                continue
+            valid_regions.append(reg)
+
+        merged.extend(valid_regions)
 
     return sorted(merged, key=lambda region: region["t_start"])
 
@@ -211,6 +228,8 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
         context_index = int(np.argmin(np.abs(test_centers - (silence_start + silence_end) / 2)))
         context_word = df_test["word"].iloc[context_index]
         silence_delta = max(0.0, silence_end - silence_start - reference_silence_overlap)
+        if silence_delta < 0.70:
+            continue
         flagged_records.append(
             {
                 "flaw_type": "errant_pause",
@@ -221,6 +240,8 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
                 "tgt_rate": float(df_test["speech_rate"].iloc[context_index]),
                 "ref_rate": float(ref["speech_rate"].iloc[context_index]),
                 "pause_dur": round(silence_end - silence_start, 3),
+                "ref_pause": round(reference_silence_overlap, 3),
+                "silence_delta": round(silence_delta, 3),
             }
         )
 
@@ -231,15 +252,22 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
         if ideal_f0_column in df_ideal
         else np.full(len(df_ideal), np.nan)
     )
-    valid_ideal_f0 = ideal_f0[np.isfinite(ideal_f0) & (ideal_f0 > 0)]
-    reference_median = float(np.median(valid_ideal_f0)) if len(valid_ideal_f0) else np.nan
-    ideal_pitch = _pitch_semitones(ideal_f0, reference_median)
-    test_pitch = _pitch_semitones(
+    raw_test_f0 = (
         pd.to_numeric(df_test[test_f0_column], errors="coerce").to_numpy(float)
         if test_f0_column in df_test
-        else np.full(len(df_test), np.nan),
-        reference_median,
+        else np.full(len(df_test), np.nan)
     )
+
+    valid_ideal_f0 = ideal_f0[np.isfinite(ideal_f0) & (ideal_f0 > 0)]
+    valid_test_f0 = raw_test_f0[np.isfinite(raw_test_f0) & (raw_test_f0 > 0)]
+
+    reference_median = float(np.median(valid_ideal_f0)) if len(valid_ideal_f0) else 150.0
+    test_median = float(np.median(valid_test_f0)) if len(valid_test_f0) else reference_median
+
+    # Speaker-Agnostic Centering: Express each speaker's pitch in semitones relative to their OWN median F0
+    ideal_pitch = _pitch_semitones(ideal_f0, reference_median)
+    test_pitch = _pitch_semitones(raw_test_f0, test_median)
+
     pitch_window = 5
     ideal_pitch_std = (
         pd.Series(ideal_pitch)
@@ -255,6 +283,15 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
         .fillna(0.0)
         .to_numpy()
     )
+
+    # Precompute Cepstral Means for accent- and microphone-agnostic CMS normalization
+    if "mfcc_1" in df_test.columns and "mfcc_1" in df_ideal.columns:
+        mfcc_cols = [f"mfcc_{k+1}" for k in range(13)]
+        ref_mfcc_means = df_ideal[mfcc_cols].mean(numeric_only=True).to_numpy(float)
+        test_mfcc_means = df_test[mfcc_cols].mean(numeric_only=True).to_numpy(float)
+    else:
+        ref_mfcc_means = None
+        test_mfcc_means = None
 
     test_durations = (df_test["end"] - df_test["start"]).clip(lower=0.02)
     reference_durations = (
@@ -293,19 +330,22 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
             and matched_window >= 2
             else 1.0
         )
-        if rate_ratio >= 1.15:
+        if rate_ratio >= 1.22:
             window_word_count = int(matched_window)
             ref_rate = window_word_count / max(float(ref_window), 1e-6)
             tgt_rate = window_word_count / max(float(test_window), 1e-6)
             sigma_val = min(round(rate_ratio - 1.0, 3), 5.0)
+            compression_pct = round((1.0 - 1.0 / max(rate_ratio, 1.0)) * 100, 1)
             flagged_records.append({
                 "flaw_type": "rushed_delivery",
                 "start": float(w_tgt["start"]),
                 "end": float(w_tgt["end"]),
                 "sigma_dev": sigma_val,
                 "word": w_tgt["word"],
-                "tgt_rate": tgt_rate,
-                "ref_rate": ref_rate,
+                "tgt_rate": round(tgt_rate, 2),
+                "ref_rate": round(ref_rate, 2),
+                "rate_ratio": round(rate_ratio, 2),
+                "compression_pct": compression_pct,
                 "pause_dur": float(w_tgt["pause_before"]),
             })
 
@@ -315,9 +355,10 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
         # -------------------------------------------------------------
         ref_pitch_var = float(ideal_pitch_std[ref_indices[i]])
         tgt_pitch_var = float(test_pitch_std[i])
-        if ref_pitch_var >= 0.5 and tgt_pitch_var <= 0.70 * ref_pitch_var:
+        if ref_pitch_var >= 0.4 and tgt_pitch_var <= 0.72 * ref_pitch_var:
             collapse_ratio = 1.0 - tgt_pitch_var / max(ref_pitch_var, 1e-6)
             sigma_val = max(1.0, collapse_ratio * 4.0)
+            collapse_pct = round(collapse_ratio * 100, 1)
             flagged_records.append({
                 "flaw_type": "monotone_pitch",
                 "start": float(w_tgt["start"]),
@@ -326,6 +367,9 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
                 "word": w_tgt["word"],
                 "tgt_rate": float(w_tgt["speech_rate"]),
                 "ref_rate": float(w_ref["speech_rate"]),
+                "ref_pitch_var": round(ref_pitch_var, 2),
+                "tgt_pitch_var": round(tgt_pitch_var, 2),
+                "collapse_pct": collapse_pct,
                 "pause_dur": float(w_tgt["pause_before"]),
             })
 
@@ -342,7 +386,30 @@ def detect_anomalies(ideal_wav, test_wav, merge_gap_sec=0.2, df_ideal=None, df_t
                 "word": w_tgt["word"],
                 "tgt_rate": float(w_tgt["speech_rate"]),
                 "ref_rate": float(w_ref["speech_rate"]),
+                "tgt_rms_z": round(float(w_tgt["rms_energy_zscore"]), 2),
+                "ref_rms_z": round(float(w_ref["rms_energy_zscore"]), 2),
+                "rms_delta": round(float(rms_delta), 2),
                 "pause_dur": float(w_tgt["pause_before"]),
             })
+
+        # -------------------------------------------------------------
+        # 5. VOCAL CLARITY / TIMBRE DRIFT
+        # -------------------------------------------------------------
+        if ref_mfcc_means is not None and test_mfcc_means is not None:
+            vec_test = np.array([float(w_tgt[f"mfcc_{k+1}"]) for k in range(13)], dtype=float) - test_mfcc_means
+            vec_ref = np.array([float(w_ref[f"mfcc_{k+1}"]) for k in range(13)], dtype=float) - ref_mfcc_means
+            cos_dist = cosine_distance(vec_test, vec_ref)
+            if cos_dist >= 0.40 and float(w_tgt["pause_before"]) < 0.5:
+                flagged_records.append({
+                    "flaw_type": "vocal_clarity_drift",
+                    "start": float(w_tgt["start"]),
+                    "end": float(w_tgt["end"]),
+                    "sigma_dev": round(float(cos_dist * 5.0), 2),
+                    "word": w_tgt["word"],
+                    "tgt_rate": float(w_tgt["speech_rate"]),
+                    "ref_rate": float(w_ref["speech_rate"]),
+                    "pause_dur": float(w_tgt["pause_before"]),
+                    "clarity_drift": round(float(cos_dist), 3),
+                })
 
     return _merge_records_by_type(flagged_records, merge_gap_sec)
