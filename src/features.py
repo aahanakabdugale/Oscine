@@ -67,19 +67,23 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
         y = y[:60 * sr]
     hop_length = 512
 
-    # 1. High-speed pitch extraction via YIN (runs in <0.2s instead of 90s on CPU)
+    # 1. Probabilistic YIN (pYIN) pitch extraction with voiced probability mask
+    #    pYIN returns a proper voiced/unvoiced boolean mask + per-frame probability,
+    #    preventing consonants and silence from contaminating F0 statistics.
     sr_pitch = 8000
     y_pitch = librosa.resample(y, orig_sr=sr, target_sr=sr_pitch)
-    hop_pitch = int(hop_length * (sr_pitch / sr)) # 256 frames
-    f0 = librosa.yin(
+    hop_pitch = int(hop_length * (sr_pitch / sr))  # 256 frames
+    f0, voiced_flag_raw, voiced_prob = librosa.pyin(
         y_pitch,
         fmin=65.0,
         fmax=400.0,
         sr=sr_pitch,
         hop_length=hop_pitch
     )
+    f0 = np.where(voiced_flag_raw, f0, np.nan)  # NaN-fill unvoiced frames
     f0_times = librosa.times_like(f0, sr=sr_pitch, hop_length=hop_pitch)
-    voiced_flag = ((f0 > 66.0) & (f0 < 395.0) & ~np.isnan(f0)).astype(int)
+    # Gate: voiced by pYIN boolean mask AND probability > 0.5 AND in plausible pitch range
+    voiced_flag = (voiced_flag_raw & (voiced_prob > 0.5) & (f0 > 66.0) & (f0 < 395.0)).astype(int)
 
     # 2. Continuous RMS energy
     rms = librosa.feature.rms(y=y, hop_length=hop_length)[0]
