@@ -9,7 +9,7 @@ from src.detect import (
     _silence_intervals,
     detect_anomalies,
 )
-from src.explain import compute_rubric_scores
+from src.explain import compute_rubric_scores, generate_causal_explanation
 
 
 class DetectionAlignmentTests(unittest.TestCase):
@@ -92,6 +92,77 @@ class DetectionAlignmentTests(unittest.TestCase):
         self.assertTrue(7.0 <= scores[0] <= 8.0)
         self.assertTrue(5.0 <= scores[1] <= 7.0)
         self.assertTrue(4.0 <= scores[2] <= 5.0)
+
+
+    def test_causal_explanations_contain_mathematical_metrics_and_coaching(self):
+        flaw_cases = [
+            ("rushed_delivery", "Syllabic Acceleration", "Coaching"),
+            ("errant_pause", "Errant Pause", "Coaching"),
+            ("monotone_pitch", "Monotone Pitch", "Coaching"),
+            ("volume_instability", "Dynamic Volume Instability", "Coaching"),
+            ("vocal_clarity_drift", "Vocal Clarity / Timbre Drift", "Coaching"),
+        ]
+        for flaw, expected_keyword, expected_advice in flaw_cases:
+            region = {
+                "flaw_type": flaw,
+                "t_start": 12.0,
+                "t_end": 15.5,
+                "max_sigma": 2.4,
+                "words": ["we", "shall", "prevail"],
+                "details": [{
+                    "ref_rate": 2.5, "tgt_rate": 4.0, "rate_ratio": 1.6,
+                    "pause_dur": 2.8, "silence_delta": 2.1, "ref_pause": 0.4,
+                    "ref_pitch_var": 1.2, "tgt_pitch_var": 0.3, "collapse_pct": 75.0,
+                    "rms_delta": 2.2, "tgt_rms_z": -1.8, "ref_rms_z": 0.4,
+                    "clarity_drift": 0.45
+                }]
+            }
+            text = generate_causal_explanation(region)
+            self.assertIn(expected_keyword, text)
+            self.assertIn(expected_advice, text)
+            self.assertIn("12.00s", text)
+            self.assertIn("15.50s", text)
+
+
+    def test_cross_speaker_normalization_male_vs_female_pitch(self):
+        # Female reference (median 210 Hz) vs Male participant (median 120 Hz)
+        # Both express normal natural prosodic inflection (varying by +/- 15%)
+        words = ["one", "two", "three", "four", "five", "six", "seven", "eight"]
+        n = len(words)
+        starts = [i * 0.5 for i in range(n)]
+        ends = [(i + 1) * 0.5 for i in range(n)]
+
+        ref_features = pd.DataFrame({
+            "word": words,
+            "start": starts,
+            "end": ends,
+            "pause_before": [0.0] * n,
+            "speech_rate": [2.0] * n,
+            "f0_median_hz": [200.0, 220.0, 205.0, 225.0, 210.0, 230.0, 205.0, 215.0],
+            "f0_hz_zscore": [0.0] * n,
+            "rms_energy_zscore": [0.0] * n,
+        })
+        male_features = pd.DataFrame({
+            "word": words,
+            "start": starts,
+            "end": ends,
+            "pause_before": [0.0] * n,
+            "speech_rate": [2.0] * n,
+            "f0_median_hz": [115.0, 126.0, 117.0, 128.0, 120.0, 131.0, 117.0, 123.0],
+            "f0_hz_zscore": [0.0] * n,
+            "rms_energy_zscore": [0.0] * n,
+        })
+
+        with (
+            patch("src.detect.extract_features_per_word", side_effect=[ref_features, male_features]),
+            patch("src.detect._silence_intervals", return_value=[]),
+        ):
+            regions = detect_anomalies("ref_female.wav", "part_male.wav")
+
+        # Because both speakers have normal relative inflection around their respective medians,
+        # neither monotone pitch nor pitch disparity false alarms should be triggered.
+        pitch_regions = [r for r in regions if r["flaw_type"] == "monotone_pitch"]
+        self.assertEqual(pitch_regions, [])
 
 
 if __name__ == "__main__":

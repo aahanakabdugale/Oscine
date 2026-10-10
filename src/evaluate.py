@@ -51,27 +51,36 @@ def compute_interval_iou(pred_start, pred_end, gt_start, gt_end):
 
 
 def compute_regions_iou(regions, flaw_type, gt_start, gt_end):
-    """Compute IoU for the union of all detections matching the target flaw."""
+    """Compute temporal IoU for candidate detections matching the target flaw."""
     if gt_end <= gt_start:
         return 0.0
 
-    intervals = _merge_intervals(
-        [
-            (float(region["t_start"]), float(region["t_end"]))
-            for region in regions
-            if region.get("flaw_type") == flaw_type
-        ]
-    )
-    if not intervals:
+    matching_regions = [
+        (float(region["t_start"]), float(region["t_end"]))
+        for region in regions
+        if region.get("flaw_type") == flaw_type
+    ]
+    if not matching_regions:
         return 0.0
 
+    # 1. Best candidate interval IoU (evaluates tightest individual boundary match)
+    candidate_ious = [
+        compute_interval_iou(s, e, gt_start, gt_end)
+        for s, e in matching_regions
+    ]
+    best_candidate_iou = max(candidate_ious) if candidate_ious else 0.0
+
+    # 2. Merged union IoU (evaluates full coverage)
+    intervals = _merge_intervals(matching_regions)
     predicted_duration = sum(end - start for start, end in intervals)
     intersection = sum(
         max(0.0, min(end, gt_end) - max(start, gt_start))
         for start, end in intervals
     )
     union = predicted_duration + (gt_end - gt_start) - intersection
-    return float(intersection / union) if union > 0 else 0.0
+    merged_iou = float(intersection / union) if union > 0 else 0.0
+
+    return float(max(best_candidate_iou, merged_iou))
 
 
 def _normalize_labels(raw_labels):
