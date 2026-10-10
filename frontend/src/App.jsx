@@ -8,7 +8,7 @@ import {
   Play, Pause, Upload, CheckCircle2, AlertTriangle,
   BarChart2, Sun, Moon, Volume2, ShieldCheck, Download,
   Sparkles, Layers, Sliders, FileAudio, FileText, Check, ChevronDown, ChevronUp, Eye,
-  Mic, Zap, Brain, Activity, TrendingDown, Clock, Radio, Timer, Gauge
+  Mic, MicOff, Square, RotateCcw, Zap, Brain, Activity, TrendingDown, Clock, Radio, Timer, Gauge
 } from 'lucide-react';
 
 const rawApiBase = import.meta.env.VITE_API_URL || "http://localhost:8000";
@@ -152,6 +152,51 @@ const ScoreRing = ({ value, label, icon: Icon, emoji }) => {
   );
 };
 
+function audioBufferToWav(buffer, targetSampleRate = 16000) {
+  const channelData = buffer.getChannelData(0);
+  let samples = channelData;
+  if (buffer.sampleRate !== targetSampleRate) {
+    const ratio = buffer.sampleRate / targetSampleRate;
+    const newLen = Math.round(channelData.length / ratio);
+    const resampled = new Float32Array(newLen);
+    for (let i = 0; i < newLen; i++) {
+      const idx = Math.min(channelData.length - 1, Math.round(i * ratio));
+      resampled[i] = channelData[idx];
+    }
+    samples = resampled;
+  }
+
+  const dataLen = samples.length * 2;
+  const wavBuffer = new ArrayBuffer(44 + dataLen);
+  const view = new DataView(wavBuffer);
+
+  const writeStr = (offset, str) => {
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+  };
+
+  writeStr(0, 'RIFF');
+  view.setUint32(4, 36 + dataLen, true);
+  writeStr(8, 'WAVE');
+  writeStr(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM format
+  view.setUint16(22, 1, true); // Mono channel
+  view.setUint32(24, targetSampleRate, true);
+  view.setUint32(28, targetSampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true); // 16-bit
+  writeStr(36, 'data');
+  view.setUint32(40, dataLen, true);
+
+  let p = 44;
+  for (let i = 0; i < samples.length; i++, p += 2) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(p, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+  }
+
+  return new Blob([view], { type: 'audio/wav' });
+}
+
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [references, setReferences] = useState([]);
@@ -178,9 +223,25 @@ export default function App() {
   const chartRefPitch = useRef(null);
   const chartRefRate = useRef(null);
   const chartRefPause = useRef(null);
+  const chartRefEnergy = useRef(null);
+  const chartRefClarity = useRef(null);
 
   const audioInputRef = useRef(null);
   const transcriptInputRef = useRef(null);
+
+  // Live Microphone Recording State
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordingSeconds, setRecordingSeconds] = useState(0);
+  const [recordingAudioUrl, setRecordingAudioUrl] = useState(null);
+  const [micVolumeLevel, setMicVolumeLevel] = useState(0);
+
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+  const recordTimerRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const animFrameRef = useRef(null);
+  const micStreamRef = useRef(null);
 
   useEffect(() => {
     if (darkMode) document.documentElement.classList.add('dark');
@@ -287,6 +348,106 @@ export default function App() {
     setActiveTranscriptText("");
   };
 
+  const handleSelectRecordMode = () => {
+    setActiveTabMode("record");
+    setSelectedPresetName(null);
+    const list = Array.isArray(references) ? references : [];
+    const chosen = list.find((r) => r.id === selectedRef);
+    if (chosen && chosen.transcript && !transcriptFile) {
+      setActiveTranscriptText(chosen.transcript);
+    }
+  };
+
+  const startRecording = async () => {
+    if (!selectedRef) {
+      alert("Please select a Reference Baseline first before recording.");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micStreamRef.current = stream;
+
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      audioContextRef.current = audioCtx;
+      const source = audioCtx.createMediaStreamSource(stream);
+      const analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+      analyserRef.current = analyser;
+
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      const updateVolume = () => {
+        if (!analyserRef.current) return;
+        analyserRef.current.getByteFrequencyData(dataArray);
+        const avg = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
+        setMicVolumeLevel(Math.min(100, Math.round((avg / 128) * 100)));
+        animFrameRef.current = requestAnimationFrame(updateVolume);
+      };
+      updateVolume();
+
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus'
+        : MediaRecorder.isTypeSupported('audio/ogg;codecs=opus')
+          ? 'audio/ogg;codecs=opus'
+          : '';
+
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      mediaRecorderRef.current = recorder;
+      audioChunksRef.current = [];
+
+      recorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) audioChunksRef.current.push(e.data);
+      };
+
+      recorder.onstop = async () => {
+        const rawBlob = new Blob(audioChunksRef.current, { type: recorder.mimeType || 'audio/webm' });
+        try {
+          const arrayBuffer = await rawBlob.arrayBuffer();
+          const decoded = await audioCtx.decodeAudioData(arrayBuffer);
+          const wavBlob = audioBufferToWav(decoded, 16000);
+          const file = new File([wavBlob], `mic_recording_${Date.now()}.wav`, { type: 'audio/wav' });
+          setAudioFile(file);
+          setRecordingAudioUrl(URL.createObjectURL(wavBlob));
+        } catch {
+          const file = new File([rawBlob], `mic_recording_${Date.now()}.wav`, { type: rawBlob.type || 'audio/wav' });
+          setAudioFile(file);
+          setRecordingAudioUrl(URL.createObjectURL(rawBlob));
+        }
+      };
+
+      recorder.start(250);
+      setIsRecording(true);
+      setRecordingSeconds(0);
+      setRecordingAudioUrl(null);
+
+      recordTimerRef.current = setInterval(() => {
+        setRecordingSeconds((prev) => {
+          if (prev >= 60) {
+            stopRecording();
+            return 60;
+          }
+          return prev + 1;
+        });
+      }, 1000);
+    } catch (err) {
+      alert("Microphone Access Error: " + err.message + ". Please verify microphone permissions in your browser.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (recordTimerRef.current) clearInterval(recordTimerRef.current);
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    setMicVolumeLevel(0);
+    setIsRecording(false);
+
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+    }
+    if (micStreamRef.current) {
+      micStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+  };
+
   const handleSelectPreset = async (flawName) => {
     if (!selectedRef) { alert("Please select a Reference Baseline first."); return; }
     setActiveTabMode("preset");
@@ -345,12 +506,15 @@ export default function App() {
       const targetAudioStream = `${API_BASE}${data.audio_url}`;
       setTimeout(() => initWaveform(targetAudioStream, data.regions), 120);
       setTimeout(() => {
-        if (chartRefPitch.current && chartRefRate.current && chartRefPause.current) {
-          echarts.connect([
-            chartRefPitch.current.getEchartsInstance(),
-            chartRefRate.current.getEchartsInstance(),
-            chartRefPause.current.getEchartsInstance(),
-          ]);
+        const instances = [
+          chartRefPitch.current?.getEchartsInstance(),
+          chartRefRate.current?.getEchartsInstance(),
+          chartRefPause.current?.getEchartsInstance(),
+          chartRefEnergy.current?.getEchartsInstance(),
+          chartRefClarity.current?.getEchartsInstance(),
+        ].filter(Boolean);
+        if (instances.length > 0) {
+          echarts.connect(instances);
         }
       }, 300);
     } catch (err) {
@@ -370,7 +534,7 @@ export default function App() {
       title: "Oscine Speech Analytics Diagnostic Report",
       generated_at: new Date().toISOString(),
       reference_speaker: selectedRef || "Custom Baseline",
-      evaluated_target: audioFile ? audioFile.name : (selectedPreset || "Speech Sample"),
+      evaluated_target: audioFile ? audioFile.name : (selectedPresetName || "Speech Sample"),
       duration_seconds: result.duration,
       rubric_scores: {
         overall_composite: Number(result.scores.overall_score.toFixed(2)),
@@ -381,16 +545,20 @@ export default function App() {
         text_alignment_ratio: result.text_alignment_ratio !== undefined ? Number(result.text_alignment_ratio.toFixed(3)) : null,
       },
       anomalies_detected_count: result.regions ? result.regions.length : 0,
-      anomalies: (result.regions || []).map((r, i) => ({
-        index: i + 1,
-        flaw_type: r.flaw_type,
-        start_seconds: r.t_start,
-        end_seconds: r.t_end,
-        duration_seconds: Number((r.t_end - r.t_start).toFixed(2)),
-        max_sigma_deviation: r.max_sigma,
-        affected_words: r.words,
-        causal_explanation: r.explanation,
-      })),
+      anomalies: (result.regions || []).map((r, i) => {
+        const s = r.t_start !== undefined ? r.t_start : r.start;
+        const e = r.t_end !== undefined ? r.t_end : r.end;
+        return {
+          index: i + 1,
+          flaw_type: r.flaw_type || r.dimension,
+          start_seconds: s,
+          end_seconds: e,
+          duration_seconds: Number((e - s).toFixed(2)),
+          max_sigma_deviation: r.max_sigma !== undefined ? r.max_sigma : r.peak_z,
+          affected_words: r.words || [],
+          causal_explanation: r.explanation,
+        };
+      }),
     };
 
     const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: "application/json" });
@@ -480,6 +648,7 @@ export default function App() {
     if (dimension.includes('rushed')) return 'rushed_delivery';
     if (dimension.includes('monotone')) return 'monotone_pitch';
     if (dimension.includes('volume')) return 'volume_instability';
+    if (dimension.includes('clarity')) return 'vocal_clarity_drift';
     return 'errant_pause';
   };
 
@@ -569,11 +738,11 @@ export default function App() {
         >
           {/* Tab Bar */}
           <div className={`flex items-center justify-between px-6 py-4 border-b ${darkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-100 bg-slate-50'}`}>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={handleSelectUploadMode}
-                className={`px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 ${activeTabMode === 'upload'
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 ${activeTabMode === 'upload'
                   ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/30 scale-[1.02]'
                   : darkMode ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
@@ -583,8 +752,19 @@ export default function App() {
               </button>
               <button
                 type="button"
+                onClick={handleSelectRecordMode}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 ${activeTabMode === 'record'
+                  ? 'bg-gradient-to-r from-rose-600 to-red-500 text-white shadow-lg shadow-rose-500/30 scale-[1.02]'
+                  : darkMode ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+              >
+                <Mic className="w-4 h-4" />
+                Live Mic Recording
+              </button>
+              <button
+                type="button"
                 onClick={() => setActiveTabMode('preset')}
-                className={`px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 ${activeTabMode === 'preset'
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 ${activeTabMode === 'preset'
                   ? 'bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-lg shadow-amber-500/30 scale-[1.02]'
                   : darkMode ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
@@ -639,7 +819,94 @@ export default function App() {
               {/* Upload / Presets */}
               <div className="lg:col-span-6">
                 <AnimatePresence mode="wait">
-                  {activeTabMode === 'upload' ? (
+                  {activeTabMode === 'record' ? (
+                    <motion.div key="record"
+                      initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }}
+                      className={`p-5 rounded-2xl border ${darkMode ? 'border-white/10 bg-white/[0.02]' : 'border-slate-200 bg-slate-50/70'} flex flex-col items-center justify-center text-center`}
+                    >
+                      {/* Recording Visualizer & Status */}
+                      {isRecording ? (
+                        <div className="flex flex-col items-center gap-3 w-full max-w-md">
+                          <div className="relative">
+                            <span className="absolute -inset-3 rounded-full bg-rose-500/25 animate-ping" />
+                            <div className="relative w-16 h-16 rounded-full bg-gradient-to-tr from-rose-600 to-red-500 flex items-center justify-center text-white shadow-xl shadow-rose-500/40">
+                              <Mic className="w-7 h-7 animate-pulse" />
+                            </div>
+                          </div>
+                          <div className="space-y-0.5">
+                            <div className="flex items-center justify-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+                              <span className="text-xl font-mono font-black text-rose-500">
+                                00:{recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds}s
+                              </span>
+                              <span className="text-xs text-slate-400">/ 60s max</span>
+                            </div>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">Recording 16 kHz PCM speech from microphone...</p>
+                          </div>
+
+                          {/* Live Dynamic Audio Level Visualizer */}
+                          <div className="w-full flex items-center justify-center gap-1.5 h-8 px-4">
+                            {[15, 30, 60, 90, 45, 75, 100, 75, 45, 90, 60, 30, 15].map((baseHeight, idx) => {
+                              const dynamicHeight = Math.max(15, Math.min(100, Math.round((baseHeight * (micVolumeLevel + 25)) / 120)));
+                              return (
+                                <motion.div
+                                  key={idx}
+                                  className="w-1.5 bg-gradient-to-t from-rose-500 via-pink-500 to-indigo-500 rounded-full"
+                                  animate={{ height: `${dynamicHeight}%` }}
+                                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                                />
+                              );
+                            })}
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={stopRecording}
+                            className="mt-1 px-5 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-rose-500/30 transition-all hover:scale-105 active:scale-95"
+                          >
+                            <Square className="w-3.5 h-3.5 fill-white" /> Stop Recording
+                          </button>
+                        </div>
+                      ) : audioFile && recordingAudioUrl ? (
+                        <div className="flex flex-col items-center gap-2.5 w-full max-w-md">
+                          <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center border border-emerald-500/30">
+                            <CheckCircle2 className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-extrabold text-slate-800 dark:text-slate-100">Live Speech Captured</h4>
+                            <p className="text-xs font-mono text-slate-400 mt-0.5 truncate">{audioFile.name} (00:{recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds}s)</p>
+                          </div>
+                          <audio src={recordingAudioUrl} controls className="w-full max-w-xs mt-1 h-8" />
+                          <div className="flex gap-2 mt-1">
+                            <button
+                              type="button"
+                              onClick={startRecording}
+                              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-all ${
+                                darkMode ? 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10' : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                              }`}
+                            >
+                              <RotateCcw className="w-3 h-3" /> Re-Record
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-3 py-3">
+                          <div
+                            onClick={startRecording}
+                            className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-red-600 hover:from-rose-400 hover:to-red-500 text-white shadow-xl shadow-rose-500/30 flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 group"
+                          >
+                            <Mic className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                          </div>
+                          <div className="space-y-0.5">
+                            <h4 className="text-sm font-extrabold text-slate-800 dark:text-slate-100">Record Live Speech</h4>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+                              Click to speak directly into your microphone. Automatically converted to 16 kHz PCM for immediate prosody analysis.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  ) : activeTabMode === 'upload' ? (
                     <motion.div key="upload"
                       initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }}
                       className="grid grid-cols-1 sm:grid-cols-2 gap-3"
@@ -909,6 +1176,8 @@ export default function App() {
                   { ref: chartRefPitch, title: 'Fundamental Frequency (F₀ Semitone / Z-Score)', refKey: 'f0', partKey: 'f0', yName: 'Pitch (z)' },
                   { ref: chartRefRate, title: 'Speech Cadence (Words Per Second)', refKey: 'rate', partKey: 'rate', yName: 'wps' },
                   { ref: chartRefPause, title: 'Pre-Word Pause Length (Seconds of Silence)', refKey: 'pause', partKey: 'pause', yName: 'Seconds' },
+                  { ref: chartRefEnergy, title: 'Dynamic Energy & Projection (RMS Energy Z-Score)', refKey: 'energy', partKey: 'energy', yName: 'Energy (z)' },
+                  { ref: chartRefClarity, title: 'Spectral Timbre & Clarity (Spectral Flatness)', refKey: 'clarity', partKey: 'clarity', yName: 'Flatness' },
                 ].map(({ ref, title, refKey, partKey, yName }) => (
                   <div key={title} className={`p-3 rounded-2xl border ${darkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-100 bg-slate-50'}`}>
                     <ReactECharts
@@ -934,11 +1203,12 @@ export default function App() {
                   </div>
                   <div className={`flex p-1 rounded-2xl border gap-1 overflow-x-auto ${darkMode ? 'border-white/8 bg-white/[0.03]' : 'border-slate-200 bg-slate-100'}`}>
                     {[
-                      { id: "all",      label: "All",    Icon: Sparkles },
-                      { id: "pause",    label: "Pauses", Icon: Timer },
-                      { id: "rushed",   label: "Pacing", Icon: Zap },
-                      { id: "monotone", label: "Pitch",  Icon: Activity },
-                      { id: "volume",   label: "Volume", Icon: Volume2 }
+                      { id: "all",      label: "All",     Icon: Sparkles },
+                      { id: "pause",    label: "Pauses",  Icon: Timer },
+                      { id: "rushed",   label: "Pacing",  Icon: Zap },
+                      { id: "monotone", label: "Pitch",   Icon: Activity },
+                      { id: "volume",   label: "Volume",  Icon: Volume2 },
+                      { id: "clarity",  label: "Clarity", Icon: Radio },
                     ].map(tab => (
                       <button
                         key={tab.id}
