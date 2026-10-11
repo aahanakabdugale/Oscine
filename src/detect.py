@@ -24,11 +24,20 @@ def cosine_distance(vec_a, vec_b):
     return float(np.clip(1.0 - (np.dot(vec_a, vec_b) / (norm_a * norm_b)), 0.0, 2.0))
 
 
+_RMS_CACHE = {}
+
+
 def compute_rms_energy(audio_path: str):
+    mtime = os.path.getmtime(audio_path) if os.path.exists(audio_path) else 0.0
+    cache_key = (os.path.abspath(audio_path), mtime)
+    if cache_key in _RMS_CACHE:
+        return _RMS_CACHE[cache_key]
+
     y, sr = librosa.load(audio_path, sr=16000, mono=True)
     hop_length = 512
     rms = librosa.feature.rms(y=y, hop_length=hop_length)[0]
     times = librosa.times_like(rms, sr=sr, hop_length=hop_length)
+    _RMS_CACHE[cache_key] = (times, rms)
     return times, rms
 
 
