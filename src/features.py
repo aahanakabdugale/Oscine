@@ -62,28 +62,36 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
         return pd.DataFrame()
 
     y, sr = librosa.load(audio_path, sr=16000, mono=True)
-    # Cap duration to 60 seconds max for cloud stability
-    if len(y) > 60 * sr:
-        y = y[:60 * sr]
+    # Cap duration to 35 seconds max for cloud stability
+    if len(y) > 35 * sr:
+        y = y[:35 * sr]
     hop_length = 512
 
-    # 1. Probabilistic YIN (pYIN) pitch extraction with voiced probability mask
-    #    pYIN returns a proper voiced/unvoiced boolean mask + per-frame probability,
-    #    preventing consonants and silence from contaminating F0 statistics.
+    # 1. Fast YIN pitch extraction with RMS energy voicing gate (< 0.2s in C/vectorized NumPy)
     sr_pitch = 8000
-    y_pitch = librosa.resample(y, orig_sr=sr, target_sr=sr_pitch)
+    y_pitch = librosa.resample(y, orig_sr=sr, target_sr=sr_pitch, res_type="kaiser_fast")
     hop_pitch = int(hop_length * (sr_pitch / sr))  # 256 frames
-    f0, voiced_flag_raw, voiced_prob = librosa.pyin(
-        y_pitch,
-        fmin=65.0,
-        fmax=400.0,
-        sr=sr_pitch,
-        hop_length=hop_pitch
-    )
-    f0 = np.where(voiced_flag_raw, f0, np.nan)  # NaN-fill unvoiced frames
-    f0_times = librosa.times_like(f0, sr=sr_pitch, hop_length=hop_pitch)
-    # Gate: voiced by pYIN boolean mask AND probability > 0.5 AND in plausible pitch range
-    voiced_flag = (voiced_flag_raw & (voiced_prob > 0.5) & (f0 > 66.0) & (f0 < 395.0)).astype(int)
+    try:
+        f0 = librosa.yin(
+            y_pitch,
+            fmin=70.0,
+            fmax=360.0,
+            sr=sr_pitch,
+            hop_length=hop_pitch,
+            trough_threshold=0.15
+        )
+        rms_pitch = librosa.feature.rms(y=y_pitch, hop_length=hop_pitch)[0]
+        f0_times = librosa.times_like(f0, sr=sr_pitch, hop_length=hop_pitch)
+        noise_floor = float(np.percentile(rms_pitch, 20)) if len(rms_pitch) > 0 else 0.01
+        voiced_flag = ((rms_pitch > max(0.005, noise_floor * 1.5)) & (f0 > 72.0) & (f0 < 355.0)).astype(int)
+        f0 = np.where(voiced_flag > 0, f0, np.nan)
+    except Exception:
+        f0, voiced_flag_raw, _ = librosa.pyin(
+            y_pitch, fmin=70.0, fmax=360.0, sr=sr_pitch, hop_length=hop_pitch
+        )
+        f0 = np.where(voiced_flag_raw, f0, np.nan)
+        f0_times = librosa.times_like(f0, sr=sr_pitch, hop_length=hop_pitch)
+        voiced_flag = (voiced_flag_raw & (f0 > 72.0) & (f0 < 355.0)).astype(int)
 
     # 2. Continuous RMS energy
     rms = librosa.feature.rms(y=y, hop_length=hop_length)[0]
