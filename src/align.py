@@ -90,18 +90,21 @@ def align_audio_file(audio_path: str, reference_transcript: str = None, force_re
 
     model = get_whisper_model()
     y, sr = librosa.load(audio_path, sr=16000, mono=True)
-    # Cap duration to 60 seconds max to prevent cloud timeouts
-    if len(y) > 60 * sr:
-        y = y[:60 * sr]
+    # Cap duration to 35 seconds max to prevent cloud timeouts
+    if len(y) > 35 * sr:
+        y = y[:35 * sr]
 
     # Prompt guidance to bias ASR toward expected lexicon
     prompt = reference_transcript[:400] if reference_transcript else None
     segments, _ = model.transcribe(
         y,
+        language="en",
         word_timestamps=True,
         beam_size=1,
+        best_of=1,
         initial_prompt=prompt,
         vad_filter=True,
+        vad_parameters=dict(min_silence_duration_ms=500),
         condition_on_previous_text=False,
         temperature=0.0
     )
