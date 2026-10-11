@@ -1,8 +1,14 @@
 import os
+import sys
 import json
 import numpy as np
 import pandas as pd
 import librosa
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
+
 from align import align_audio_file
 
 _FEATURES_CACHE = {}
@@ -69,7 +75,7 @@ def extract_features_per_word(audio_path: str, alignment_json_path: str = None, 
 
     # 1. Fast YIN pitch extraction with RMS energy voicing gate (< 0.2s in C/vectorized NumPy)
     sr_pitch = 8000
-    y_pitch = librosa.resample(y, orig_sr=sr, target_sr=sr_pitch, res_type="kaiser_fast")
+    y_pitch = librosa.resample(y, orig_sr=sr, target_sr=sr_pitch, res_type="soxr_qq")
     hop_pitch = int(hop_length * (sr_pitch / sr))  # 256 frames
     try:
         f0 = librosa.yin(
