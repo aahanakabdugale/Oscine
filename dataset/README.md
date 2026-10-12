@@ -87,12 +87,12 @@ The 6 reference speakers provide diverse vocal registers, fundamental frequency 
 
 | Speaker ID | Orator | Gender | Dialect / Accent | Source Address | Mean $F_0$ | Mean WPS |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `speech_01` | Michelle Obama | Female | US English | 2016 DNC Address | ~185 Hz | 2.50 wps |
-| `speech_02` | Sudha Murty | Female | Indian English | Keynote Public Address | ~195 Hz | 2.45 wps |
+| `speech_01` | Michelle Obama | Female | US English | 2016 Democratic National Convention | ~185 Hz | 2.50 wps |
+| `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address | ~195 Hz | 2.45 wps |
 | `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Speech | ~210 Hz | 2.38 wps |
 | `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate | ~132 Hz | 2.62 wps |
-| `speech_05` | Andrew Ng | Male | US English | Stanford AI Lecture | ~125 Hz | 2.20 wps |
-| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Commonwealth Lecture | ~190 Hz | 2.30 wps |
+| `speech_05` | Andrew Ng | Male | US English | Ted Talk | ~125 Hz | 2.20 wps |
+| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Lecture Address | ~190 Hz | 2.30 wps |
 
 ---
 
