@@ -49,70 +49,60 @@
 
 ## Tech Stack
 
-| Layer | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Backend Framework** | [FastAPI](https://fastapi.tiangolo.com/) | `^0.115` | High-performance asynchronous REST API & streaming static server |
-| **ASR & Alignment** | [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper) | `^1.2` | Fast CTranslate2 Whisper implementation for word-level timestamps |
-| **Audio Processing** | [Librosa](https://librosa.org/) | `^0.11` | Feature extraction: pYIN pitch tracking, RMS energy, spectral features |
-| **Scientific Stack** | NumPy / SciPy / Pandas | Latest | Statistical z-score normalization, signal processing, metrics logging |
-| **Audio I/O** | SoundFile & FFmpeg | — | Lossless PCM reading, conversion, and EBU R128 loudness normalization |
-| **Frontend Framework**| [React](https://react.dev/) | `^19.2` | Component-driven reactive user interface |
-| **Build Tooling** | [Vite](https://vitejs.dev/) | `^8.3` | Fast HMR dev server and production asset bundling |
-| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | `^3.4` | Responsive dark-mode styling and modern UI tokens |
-| **Audio Visualization**| [WaveSurfer.js](https://wavesurfer.js.org/) | `^8.0` | Interactive audio waveform rendering and synchronized playback |
-| **Data Visualization** | [Apache ECharts](https://echarts.apache.org/) | `^6.1` | Synchronized multi-track acoustic feature charts (Pitch & Energy) |
-| **Icons & Motion** | Lucide React & Framer Motion | Latest | Sleek icons and smooth UI transitions |
+### Backend & API
+| Technology | Version / Tooling | Purpose |
+| :--- | :--- | :--- |
+| **Python** | `3.10+` (3.11 recommended) | Core execution runtime for audio analytics and ML pipelines |
+| [FastAPI](https://fastapi.tiangolo.com/) | `^0.115` | High-performance asynchronous REST API framework |
+| [Uvicorn](https://www.uvicorn.org/) | `^0.34` | Lightning-fast ASGI web server for API endpoints and static streaming |
+
+### Speech Processing & ML Pipeline
+| Technology | Role | Purpose |
+| :--- | :--- | :--- |
+| [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper) | ASR & Forced Alignment | CTranslate2-accelerated Whisper model generating word-level timestamps |
+| [Librosa](https://librosa.org/) | Acoustic Feature Extraction | Probabilistic YIN (pYIN) pitch tracking, RMS energy contours, and STFT spectral analysis |
+| NumPy & SciPy | Scientific Computing | Signal crossfading, moving-window statistics, and cross-utterance $z$-score normalization |
+| SoundFile & FFmpeg | Audio I/O & Encoding | Lossless 16 kHz 16-bit PCM read/write and EBU R128 loudness normalization (-20 LUFS) |
+
+### Frontend & Data Visualization
+| Technology | Version / Tooling | Purpose |
+| :--- | :--- | :--- |
+| [React](https://react.dev/) | `^19.2` | Reactive component architecture for interactive evaluation dashboard |
+| [Vite](https://vitejs.dev/) | `^8.3` | Next-generation build tool with instant Hot Module Replacement (HMR) |
+| [Tailwind CSS](https://tailwindcss.com/) | `^3.4` | Modern utility-first CSS styling with unified dark-mode tokens |
+| [WaveSurfer.js](https://wavesurfer.js.org/) | `^8.0` | Interactive audio waveform rendering and synchronized playback scrubbing |
+| [Apache ECharts](https://echarts.apache.org/) | `^6.1` (`echarts-for-react`) | Synchronized multi-track crosshair visualizer for pitch and volume contours |
+| Lucide React & Framer Motion | Latest | Modern icon set and smooth micro-animations |
 
 ---
 
 ## Dataset & Google Drive Access
 
-The Oscine benchmark dataset contains **54 calibrated speech clips** across 6 world-class orators, paired with 3-tier severity flaw mirrors. All baselines are normalized to **16 kHz 16-bit PCM Mono** at **-20.0 LUFS (EBU R128)**.
+Oscine benchmark dataset consists of **54 calibrated speech clips** spanning 6 diverse global orators, paired with 3-tier severity flaw mirrors (errant pauses, rushed pacing, monotone intonation). Audio recordings are normalized to **16 kHz 16-bit PCM Mono** at **-20.0 LUFS (EBU R128)**.
 
-### Speaker Baseline Matrix
-
-| ID | Orator | Gender | Accent | Source Address | Duration |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `speech_01` | Michelle Obama | Female | US English | 2016 Democratic National Convention | ~62s |
-| `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address | ~60s |
-| `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Campaign | ~60s |
-| `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate Address | ~60s |
-| `speech_05` | Andrew Ng | Male | US English | Educational Keynote & Talk | ~60s |
-| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Commonwealth Lecture Address | ~60s |
+> [!NOTE]
+> *Full orator attribution and speech provenance are documented in [`SOURCES.md`](./SOURCES.md). Detailed flaw calibration formulas and label schemas are documented in [`dataset/README.md`](./dataset/README.md) and the accompanying project report.*
 
 ### Dataset Download
 
 > [!IMPORTANT]
 > **Google Drive Dataset Link:**  
 > 🔗 **[Download Complete Oscine Dataset (Google Drive)](PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE)**  
-> *(Replace the placeholder above with your actual Google Drive sharing URL)*
+> *(Replace the placeholder link above with your Google Drive sharing link)*
 
-#### Dataset Setup Steps:
-1. Download the archive (`oscine_dataset.zip`) from the Google Drive link above.
-2. Extract the contents directly into the project root so the folder structure matches:
-   ```text
-   Oscine/
-   └── dataset/
-       ├── labels.json
-       ├── metadata.csv
-       ├── speech_01/ ... speech_06/
-       │   ├── ideal.wav
-       │   ├── transcript.txt
-       │   ├── labels.json
-       │   └── flawed_*.wav
-   ```
-
----
-
-## Contrastive Flaw Matrix
-
-Each baseline was synthetically perturbed across 3 distinct flaw axes using anchor-based signal synthesis (`src/inject.py`):
-
-| Flaw Category | Target Anchor | Level 1 (Mild) | Level 2 (Moderate) | Level 3 (Severe) | Grounding Metric |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Errant Pause** | Anchor $t \approx 18.0\text{s}$ | $+1.2\text{s}$ hesitation | $+2.2\text{s}$ disruption | $+3.8\text{s}$ rhetorical stall | Gap duration $> 0.45\text{s}$ vs baseline |
-| **Rushed Delivery** | Anchor $t \approx 25\text{s}-30\text{s}$ | $1.30\times$ speedup | $1.55\times$ speedup | $1.80\times$ speedup | Token rate ratio $\ge 1.15\times$ |
-| **Monotone Pitch** | Anchor $t \approx 35\text{s}-44\text{s}$ | $55\%$ variance cut | $80\%$ variance cut | $95\%$ variance cut | $F_0$ variance $\le 70\%$ of reference |
+#### Extraction & Placement:
+Download and extract the dataset archive (`oscine_dataset.zip`) into the project root:
+```text
+Oscine/
+└── dataset/
+    ├── labels.json
+    ├── metadata.csv
+    ├── speech_01/ ... speech_06/
+    │   ├── ideal.wav
+    │   ├── transcript.txt
+    │   ├── labels.json
+    │   └── flawed_*.wav
+```
 
 ---
 
