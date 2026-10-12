@@ -1,219 +1,237 @@
 # Oscine: Contrastive Speech Analytics & Temporal Flaw Grounding
-> **Multimodal AI Hackathon 2026 — Track C**  
-> *Objective: Develop an objective, contrastive speech evaluation engine that temporally bounds delivery flaws, explains their mathematical rationale, and scores spoken performances against elite rhetorical baselines.*
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19-61DAFB.svg)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF.svg)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC.svg)](https://tailwindcss.com/)
+[![Status](https://img.shields.io/badge/Project-Hackathon%20Prototype-orange.svg)](#educational-hackathon-disclaimer)
+
+> **Oscine** is an automated, contrastive speech evaluation engine that temporally bounds oratorical flaws (errant pauses, rushed delivery, monotone pitch, volume shifts), computes causal mathematical rationales, and evaluates spoken delivery against elite rhetorical baselines.
 
 ---
 
-## 1. Executive Summary & Problem Overview
-Evaluating competitive spoken performances (Interpretive Reading, Declamation, Extemporaneous, and Persuasive Oratory) is traditionally plagued by subjectivity and vague feedback. Participants lose points without understanding the precise acoustic failure point.
-
-**Oscine** solves this by:
-1. **Engineering a 54-clip Contrastive Speech Dataset** across 6 diverse world-class orators, pairing baseline performances with calibrated 3-tier severity flaw mirrors.
-2. **Employing Speaker-Agnostic Acoustic Feature Extraction** ($F_0$ pitch tracking via pYIN, RMS energy contours, speech rate, pause topology, and MFCCs).
-3. **Temporally Grounding Anomalies** to exact millisecond intervals via forced alignment and sliding-window contrastive delta analysis.
-4. **Generating Causal Mathematical Explanations** that translate raw acoustic deltas into actionable coaching insights.
-5. **Interactive Full-Stack Dashboard** featuring real-time audio playback, synchronized waveform/feature overlays, and evaluative rubric scoring.
-
----
-
-## 2. Dataset Architecture & Contrastive Flaw Matrix
-
-### 2.1 The "Ideal" Baselines
-We curated high-fidelity keynote recordings from 6 prominent speakers across diverse genders and global accents, normalized to **16 kHz 16-bit PCM Mono** and **EBU R128 (-20 LUFS)**:
-
-| ID | Speaker | Gender | Accent | Sourced Address |
-| :--- | :--- | :--- | :--- | :--- |
-| `speech_01` | Michelle Obama | Female | US English | 2016 DNC Address |
-| `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address |
-| `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Campaign |
-| `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate Address |
-| `speech_05` | Andrew Ng | Male | US English | Ted Talk |
-| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Lecture Address |
-
-### 2.2 The "Flawed" Gradient Spectrum (54 Clips)
-Using anchor-based signal synthesis (`src/inject.py`), each speaker's baseline was perturbed along 3 flaw axes across a 3-tier severity ladder:
-
-| Flaw Type | Target Region | L1 Severity | L2 Severity | L3 Severity |
-| :--- | :--- | :--- | :--- | :--- |
-| **Errant Pause** | Anchor $t=18.0\text{s}$ | 1.2s hesitation | 2.2s disruption | 3.8s rhetorical stall |
-| **Rushed Delivery** | Anchor $t=25.0\text{s}-30.0\text{s}$ | 1.30× speedup | 1.55× speedup | 1.80× compression |
-| **Monotone Pitch** | Anchor $t=35.0\text{s}-44.0\text{s}$ | 55% variance cut | 80% variance cut | 95% variance cut |
-
-All 54 clips have exact millisecond ground-truth annotations stored in both individual `dataset/speech_0X/labels.json` and unified `dataset/labels.json`. The master dataset index is published as a tabular manifest in [`dataset/metadata.csv`](./dataset/metadata.csv), accompanied by comprehensive dataset documentation in [`dataset/README.md`](./dataset/README.md).
-
----
-
-## 3. Algorithmic Pipeline & Technical Methodology
+## System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                       INPUT AUDIO                           │
-│           (Ideal Baseline  vs.  Test Recording)             │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-       ┌───────────────────────┴───────────────────────┐
-       ▼                                               ▼
-┌──────────────────────────────┐       ┌──────────────────────────────┐
-│       FORCED ALIGNMENT       │       │  ACOUSTIC FEATURE EXTRACTION │
-│  - Word-level timestamps     │       │  - pYIN F0 & Voicing Mask    │
-│  - Pause detection (<15th %) │       │  - RMS Energy & Z-score      │
-│  - Dynamic token matching    │       │  - Local Speech Rate (syl/s) │
-└──────────────┬───────────────┘       └───────────────┬──────────────┘
-               │                                       │
-               └───────────────────────┬───────────────┘
-                                       ▼
-┌─────────────────────────────────────────────────────────────┐
-│           TEMPORAL FLAW GROUNDING (detect.py)               │
-│  - Paired word alignment across temporal timelines          │
-│  - Contrastive delta evaluation (Pause, Rate, Pitch, RMS)   │
-│  - Temporal gap merging (<= 0.4s) into continuous regions   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│           CAUSAL EXPLANATIONS & RUBRIC (explain.py)         │
-│  - Mathematical rationale (deviation metrics, z-scores)     │
-│  - 4-Tier Rubric: Pacing, Intonation, Energy, Articulation  │
-└─────────────────────────────────────────────────────────────┘
+  ┌───────────────────────────────────────────────────────────────┐
+  │                         Input Audio                           │
+  │            (Elite Baseline vs. User / Flawed Audio)           │
+  └───────────────────────────────┬───────────────────────────────┘
+                                  │
+         ┌────────────────────────┴────────────────────────┐
+         ▼                                                 ▼
+┌─────────────────────────────────┐       ┌─────────────────────────────────┐
+│     Word-Level Alignment        │       │   Acoustic Feature Extraction   │
+│  - Faster-Whisper transcription │       │  - Probabilistic YIN (pYIN F0)  │
+│  - Dynamic token alignment      │       │  - Frame-level RMS energy       │
+│  - Inter-word silence discovery │       │  - Speech rate (Words / Sec)    │
+└────────────────┬────────────────┘       └────────────────┬────────────────┘
+                 │                                         │
+                 └────────────────────────┬────────────────┘
+                                          ▼
+┌───────────────────────────────────────────────────────────────────────────┐
+│                     Temporal Flaw Grounding Engine                        │
+│   - Paired token delta computation (Pause, Rate, Pitch, Energy)           │
+│   - Moving-window statistical deviation analysis (z-scores)               │
+│   - Contiguous anomaly merging (<= 400ms delta threshold)                 │
+└─────────────────────────────────────┬─────────────────────────────────────┘
+                                      ▼
+┌───────────────────────────────────────────────────────────────────────────┐
+│                    Causal Explanation & Rubric Scoring                    │
+│   - Mathematical justification (severity magnitude & acoustic deltas)    │
+│   - 10.0 Composite Rubric: Pacing, Intonation, Dynamic Range, Continuity  │
+│   - Real-time React / WaveSurfer / ECharts multi-track visualization      │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.1 Feature Extraction (`src/features.py`)
-- **Pitch Tracking ($F_0$)**: Uses probabilistic YIN (`librosa.pyin`) over $65\text{ Hz} - 450\text{ Hz}$. Voiced frames are segmented per word to compute median $F_0$, semitone deviation relative to reference median, and cross-utterance $z$-score.
-- **Direct FFT Spectral Features & Vocal Clarity**: Evaluates STFT magnitude to compute:
-  - **Spectral Centroid (Hz)**: Measures the center-of-mass frequency distribution of the voice.
-  - **Vocal Clarity (Spectral Flatness)**: Quantifies harmonic purity vs. noisy breathiness.
-- **Energy Dynamics**: Root-Mean-Square (RMS) frame energy normalized via cross-utterance $z$-score for speaker-agnostic volume comparisons.
-- **Pause & Cadence Computation**: Audio below $3\times$ the 15th energy percentile is flagged as silence. Speech rate is computed via a 3-word moving window in Words Per Second (WPS).
-- **Timbre Representation**: 13 Mel-Frequency Cepstral Coefficients (MFCCs) extracted per aligned word segment.
+---
 
-### 3.2 Contrastive Detection (`src/detect.py`)
-- Aligns test words to reference words using fuzzy Levenshtein / SequenceMatcher token alignment.
-- Computes local moving-window rate ratios $\frac{\text{duration}_{\text{ref}}}{\text{duration}_{\text{test}}}$.
-- Flags:
-  - **Errant Pause**: Silence interval $> 0.45\text{s}$ exceeding reference baseline silences.
-  - **Rushed Delivery**: Local rate ratio $\ge 1.15\times$ baseline.
-  - **Monotone Pitch**: Pitch variance drops $\le 70\%$ of reference baseline pitch variance.
-  - **Volume Instability**: Normalized $|z_{\text{rms}} - z_{\text{ref}}| \ge 2.0\sigma$.
+## Tech Stack
 
-### 3.3 Causal Explainability (`src/explain.py`)
-Each flaw region provides:
-- Exact temporal boundary $[t_{\text{start}}, t_{\text{end}}]$ and affected words.
-- Precise numeric delta (e.g., *"+1.8s hesitation vs baseline"*, *"1.42× acceleration (+2.1 sigma)"*).
-- Pedagogical coaching recommendation for competitive speech improvement.
+| Layer | Technology | Version | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Backend Framework** | [FastAPI](https://fastapi.tiangolo.com/) | `^0.115` | High-performance asynchronous REST API & streaming static server |
+| **ASR & Alignment** | [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper) | `^1.2` | Fast CTranslate2 Whisper implementation for word-level timestamps |
+| **Audio Processing** | [Librosa](https://librosa.org/) | `^0.11` | Feature extraction: pYIN pitch tracking, RMS energy, spectral features |
+| **Scientific Stack** | NumPy / SciPy / Pandas | Latest | Statistical z-score normalization, signal processing, metrics logging |
+| **Audio I/O** | SoundFile & FFmpeg | — | Lossless PCM reading, conversion, and EBU R128 loudness normalization |
+| **Frontend Framework**| [React](https://react.dev/) | `^19.2` | Component-driven reactive user interface |
+| **Build Tooling** | [Vite](https://vitejs.dev/) | `^8.3` | Fast HMR dev server and production asset bundling |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | `^3.4` | Responsive dark-mode styling and modern UI tokens |
+| **Audio Visualization**| [WaveSurfer.js](https://wavesurfer.js.org/) | `^8.0` | Interactive audio waveform rendering and synchronized playback |
+| **Data Visualization** | [Apache ECharts](https://echarts.apache.org/) | `^6.1` | Synchronized multi-track acoustic feature charts (Pitch & Energy) |
+| **Icons & Motion** | Lucide React & Framer Motion | Latest | Sleek icons and smooth UI transitions |
 
 ---
 
-## 4. Evaluative Rubric Scoring & Export
-The engine outputs an objective **10.0-point composite rubric score** partitioned into 4 core delivery dimensions:
-1. **Cadence & Pacing (10 pts)**: Penalties for rushed acceleration and tempo compression.
-2. **Pitch Modulation & Dynamic Range (10 pts)**: Penalties for flatline intonation.
-3. **Volume Consistency & Projection (10 pts)**: Penalties for erratic loudness drops.
-4. **Pause Placement & Continuity (10 pts)**: Penalties for unnatural dead air.
+## Dataset & Google Drive Access
 
-* **Diagnostic Export**: Full evaluative data (composite score, sub-scores, millisecond timestamps, and causal explanations) can be exported directly from the dashboard via the **Export Diagnostic Report (JSON)** button.
+The Oscine benchmark dataset contains **54 calibrated speech clips** across 6 world-class orators, paired with 3-tier severity flaw mirrors. All baselines are normalized to **16 kHz 16-bit PCM Mono** at **-20.0 LUFS (EBU R128)**.
+
+### Speaker Baseline Matrix
+
+| ID | Orator | Gender | Accent | Source Address | Duration |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `speech_01` | Michelle Obama | Female | US English | 2016 Democratic National Convention | ~62s |
+| `speech_02` | Sudha Murty | Female | Indian English | Keynote & Public Address | ~60s |
+| `speech_03` | Emma Watson | Female | British English | UN Women HeForShe Campaign | ~60s |
+| `speech_04` | Dr. Shashi Tharoor | Male | Indian English | Oxford Union Debate Address | ~60s |
+| `speech_05` | Andrew Ng | Male | US English | Educational Keynote & Talk | ~60s |
+| `speech_06` | Chimamanda Ngozi Adichie | Female | Nigerian English | Commonwealth Lecture Address | ~60s |
+
+### Dataset Download
+
+> [!IMPORTANT]
+> **Google Drive Dataset Link:**  
+> 🔗 **[Download Complete Oscine Dataset (Google Drive)](PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE)**  
+> *(Replace the placeholder above with your actual Google Drive sharing URL)*
+
+#### Dataset Setup Steps:
+1. Download the archive (`oscine_dataset.zip`) from the Google Drive link above.
+2. Extract the contents directly into the project root so the folder structure matches:
+   ```text
+   Oscine/
+   └── dataset/
+       ├── labels.json
+       ├── metadata.csv
+       ├── speech_01/ ... speech_06/
+       │   ├── ideal.wav
+       │   ├── transcript.txt
+       │   ├── labels.json
+       │   └── flawed_*.wav
+   ```
 
 ---
 
-## 5. Quickstart & Reproducibility Guide
+## Contrastive Flaw Matrix
 
-### 5.1 Prerequisites
-- Python 3.10+
-- Node.js 18+
-- FFmpeg (added to system PATH)
+Each baseline was synthetically perturbed across 3 distinct flaw axes using anchor-based signal synthesis (`src/inject.py`):
 
-### 5.2 Backend Setup
+| Flaw Category | Target Anchor | Level 1 (Mild) | Level 2 (Moderate) | Level 3 (Severe) | Grounding Metric |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Errant Pause** | Anchor $t \approx 18.0\text{s}$ | $+1.2\text{s}$ hesitation | $+2.2\text{s}$ disruption | $+3.8\text{s}$ rhetorical stall | Gap duration $> 0.45\text{s}$ vs baseline |
+| **Rushed Delivery** | Anchor $t \approx 25\text{s}-30\text{s}$ | $1.30\times$ speedup | $1.55\times$ speedup | $1.80\times$ speedup | Token rate ratio $\ge 1.15\times$ |
+| **Monotone Pitch** | Anchor $t \approx 35\text{s}-44\text{s}$ | $55\%$ variance cut | $80\%$ variance cut | $95\%$ variance cut | $F_0$ variance $\le 70\%$ of reference |
+
+---
+
+## Prerequisites & System Requirements
+
+Ensure the following tools are installed on your host system:
+
+| Dependency | Minimum Version | Verification Command | Notes |
+| :--- | :--- | :--- | :--- |
+| **Python** | 3.10+ (3.11 recommended) | `python --version` | Required for backend and ML pipeline |
+| **Node.js** | 18+ (20+ recommended) | `node --version` | Required for frontend UI |
+| **npm** | 9+ | `npm --version` | Node package manager |
+| **FFmpeg** | Any modern release | `ffmpeg -version` | Audio transcoding; must be available in system `PATH` |
+| **Git** | Any modern release | `git --version` | Version control |
+
+---
+
+## Setup & Installation
+
+### 1. Clone the Repository
 ```bash
-# Clone the repository
 git clone https://github.com/aahanakabdugale/Oscine.git
 cd Oscine
-
-# Activate virtual environment
-.\.venv\Scripts\activate   # On Windows
-# source .venv/bin/activate # On Unix/macOS
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start FastAPI server (runs on http://localhost:8000)
-uvicorn src.api:app --reload --port 8000
 ```
 
-### 5.3 Frontend Setup
+### 2. Backend Environment Setup
+Create and activate an isolated virtual environment, then install Python dependencies:
+
+**On Windows (PowerShell):**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+**On Linux / macOS:**
 ```bash
-# In a second terminal window:
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 3. Frontend Setup
+Install frontend dependencies:
+```bash
 cd frontend
 npm install
-npm run dev
-# Open http://localhost:5173 in browser
+cd ..
 ```
 
-### 5.4 Running Benchmark Evaluation & Calibration
+---
+
+## Running the Application
+
+Oscine operates with a FastAPI backend service and a Vite + React frontend dashboard.
+
+### Terminal 1: Start Backend API
 ```bash
-# Run full contrastive benchmark (IoU hit-rate & monotonicity test)
+# Ensure virtual environment is activated
+uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
+```
+- API health check: [http://localhost:8000/health](http://localhost:8000/health)
+- Swagger documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+### Terminal 2: Start Frontend UI
+```bash
+cd frontend
+npm run dev
+```
+- Interactive Dashboard: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## API Reference
+
+| Method | Endpoint | Description | Payload / Parameters | Response |
+| :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/api/health` | Service health status | None | `{"status": "ok", "app": "..."}` |
+| `GET` | `/api/references` | Lists all baseline orators and metadata | None | JSON array of reference speech models |
+| `POST` | `/api/analyze` | Contrastive evaluation of input audio | Multipart Form: `reference_id`, `audio` (file), `transcript` (opt) | Millisecond flaw bounds, z-scores, rubric scores, diagnostic explanations |
+
+---
+
+## Evaluation & Benchmark
+
+Validate the acoustic engine and forced-alignment subsystem locally:
+
+```bash
+# Run full benchmark evaluation (IoU hit-rate & severity monotonicity)
 python src/evaluate.py
 
-# Run unit & alignment test suite
-$env:PYTHONPATH="."; python tests/test_detection_alignment.py
-
-# (Optional) Re-synthesize & calibrate flaw dataset
-python src/inject.py
-python src/verify_labels.py
+# Run unit tests and detection alignment verification
+python tests/test_detection_alignment.py
 ```
 
 ---
 
-## 6. Repository Structure
-```
-Oscine/
-├── dataset/                    # 6 Speakers x 10 clips = 60 audio files
-│   ├── speech_01/ ... speech_06/
-│   │   ├── ideal.wav           # Baseline audio (16kHz PCM)
-│   │   ├── transcript.txt      # Reference text
-│   │   ├── labels.json         # Ground-truth flaw boundaries
-│   │   └── flawed_*.wav        # 9 Flaw variants (L1, L2, L3)
-│   └── labels.json             # Consolidated ground truth
-├── src/
-│   ├── api.py                  # FastAPI REST endpoints
-│   ├── align.py                # Forced alignment engine
-│   ├── features.py             # pYIN F0, RMS, MFCC, speech rate
-│   ├── detect.py               # Contrastive flaw grounding
-│   ├── explain.py              # Causal rationale & rubrics
-│   ├── inject.py               # Contrastive flaw synthesis
-│   └── verify_labels.py        # Dataset auditor & calibration
-├── frontend/                   # React + Vite + Tailwind dashboard
-│   └── src/
-│       ├── App.jsx             # Main interactive evaluation UI
-│       └── components/         # Waveform & metrics visualizations
-├── tests/                      # Unit & integration test suite
-├── SOURCES.md                  # Baseline speaker attributions
-└── README.md                   # System documentation
-```
+## AI Assistance Disclosure
+
+In full compliance with hackathon submission guidelines, AI coding assistants were utilized during the development of this repository.
+
+| Tool | Model / Provider | Primary Application Areas |
+| :--- | :--- | :--- |
+| **Antigravity IDE** | Google Gemini & Anthropic Claude | UI layout scaffolding, ECharts multi-track crosshair synchronization logic, mathematical crossfade formulation for audio perturbation, and automated test harness scripting. |
+
+**Specific Contributions:**
+1. **Frontend Visualization:** Assisted in structuring cross-synchronized WaveSurfer.js playback with Apache ECharts feature tracks.
+2. **Audio Perturbation Math:** Co-engineered boundary crossfading logic in `src/inject.py` to prevent phase-cancellation artifacts during splicing.
+3. **Causal Explanation Engine:** Templated numeric z-score translations into actionable oratorical feedback in `src/explain.py`.
 
 ---
 
-## 7. Built With & AI Assistance Disclosure
+## Educational Hackathon Disclaimer
 
-### 7.1 Technologies & Libraries
-* **Backend:** Python 3.11, FastAPI, Uvicorn, Librosa, Faster-Whisper, SoundFile, NumPy, Pandas, SciPy, NoiseReduce
-* **Frontend:** React 18, Vite, Tailwind CSS, Lucide React, Framer Motion, WaveSurfer.js, Apache ECharts (`echarts-for-react`)
-* **Audio Engineering:** FFmpeg, EBU R128 loudness normalization, pYIN pitch tracking, WSOLA time-stretching
-
-### 7.2 AI Tools & Assistance Disclosure
-In full compliance with hackathon submission guidelines, the following AI coding assistants were utilized during the development of this project:
-* **Tools Used:** Antigravity IDE (powered by Google Gemini & Anthropic Claude models).
-
-**Areas of AI Assistance:**
-1. **Frontend Scaffolding & Visualization:** Assistance in generating initial React component layouts, ECharts multi-track crosshair synchronization logic, and Tailwind aesthetic styling.
-2. **Signal Synthesis Algorithms:** Co-developing the mathematical crossfade splicing in `src/inject.py` for artifact-free audio insertion, time-stretching, and pitch dampening.
-3. **Causal Explanation Structuring:** Drafting dynamic text templating functions to translate numeric $\sigma$-deviations into structured coaching recommendations in `src/explain.py`.
-4. **Harness & Debugging:** Writing regression and calibration verification scripts (`verify_labels.py` and `evaluate.py`).
+> [!NOTE]
+> **Hackathon & Educational Notice:**  
+> This project was developed as an exploratory prototype for the **Multimodal AI Hackathon 2026** strictly for **educational and research purposes**. It is designed to demonstrate contrastive speech analytics concepts and is not intended or certified for commercial production, clinical diagnosis, or speech-language pathology assessment.
 
 ---
 
-## 8. Scope & Academic Disclaimer
-
-> **Note on Project Scope & Intended Use:**  
-> **Oscine** was engineered, researched, and packaged exclusively as an exploratory prototype for the **Multimodal AI Hackathon 2026 (Track C: Contrastive Speech Analytics & Temporal Flaw Grounding)**.
-> * The code may contain incomplete features, experimental logic, or unoptimized implementations, as is natural for a hackathon build.
-> * No guarantees are made regarding security, stability, or long-term maintenance.
-> * It is developed strictly for academic evaluation, hackathon judging, and educational demonstration, and is not intended or certified for commercial deployment, production software integration, or clinical speech pathology assessment.
+**Author / Maintainer:** [aahanakabdugale](https://github.com/aahanakabdugale)  
+**License:** Educational & Hackathon Use
