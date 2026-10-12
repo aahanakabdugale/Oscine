@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB.svg)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF.svg)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC.svg)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Status](https://img.shields.io/badge/Project-Hackathon%20Prototype-orange.svg)](#educational-hackathon-disclaimer)
 
 > **Oscine** is an automated, contrastive speech evaluation engine that temporally bounds oratorical flaws (errant pauses, rushed delivery, monotone pitch, volume shifts), computes causal mathematical rationales, and evaluates spoken delivery against elite rhetorical baselines.
@@ -53,8 +54,8 @@
 | Technology | Version / Tooling | Purpose |
 | :--- | :--- | :--- |
 | **Python** | `3.10+` (3.11 recommended) | Core execution runtime for audio analytics and ML pipelines |
-| [FastAPI](https://fastapi.tiangolo.com/) | `^0.115` | High-performance asynchronous REST API framework |
-| [Uvicorn](https://www.uvicorn.org/) | `^0.34` | Lightning-fast ASGI web server for API endpoints and static streaming |
+| [FastAPI](https://fastapi.tiangolo.com/) | `0.115+` | High-performance asynchronous REST API framework |
+| [Uvicorn](https://www.uvicorn.org/) | `0.34+` | Lightning-fast ASGI web server for API endpoints and static streaming |
 
 ### Speech Processing & ML Pipeline
 | Technology | Role | Purpose |
@@ -67,11 +68,11 @@
 ### Frontend & Data Visualization
 | Technology | Version / Tooling | Purpose |
 | :--- | :--- | :--- |
-| [React](https://react.dev/) | `^19.2` | Reactive component architecture for interactive evaluation dashboard |
-| [Vite](https://vitejs.dev/) | `^8.3` | Next-generation build tool with instant Hot Module Replacement (HMR) |
-| [Tailwind CSS](https://tailwindcss.com/) | `^3.4` | Modern utility-first CSS styling with unified dark-mode tokens |
-| [WaveSurfer.js](https://wavesurfer.js.org/) | `^8.0` | Interactive audio waveform rendering and synchronized playback scrubbing |
-| [Apache ECharts](https://echarts.apache.org/) | `^6.1` (`echarts-for-react`) | Synchronized multi-track crosshair visualizer for pitch and volume contours |
+| [React](https://react.dev/) | `19.2` | Reactive component architecture for interactive evaluation dashboard |
+| [Vite](https://vitejs.dev/) | `8.3` | Next-generation build tool with instant Hot Module Replacement (HMR) |
+| [Tailwind CSS](https://tailwindcss.com/) | `3.4` | Modern utility-first CSS styling with unified dark-mode tokens |
+| [WaveSurfer.js](https://wavesurfer.js.org/) | `8.0` | Interactive audio waveform rendering and synchronized playback scrubbing |
+| [Apache ECharts](https://echarts.apache.org/) | `6.1` (`echarts-for-react`) | Synchronized multi-track crosshair visualizer for pitch and volume contours |
 | Lucide React & Framer Motion | Latest | Modern icon set and smooth micro-animations |
 
 ---
@@ -87,8 +88,7 @@ Oscine benchmark dataset consists of **54 calibrated speech clips** spanning 6 d
 
 > [!IMPORTANT]
 > **Google Drive Dataset Link:**  
-> 🔗 **[Download Complete Oscine Dataset (Google Drive)]((https://drive.google.com/file/d/1eq33VpF9Ev41haum4Vl4sAh6z1U2vsR7/view?usp=sharing))**  
-
+> 🔗 **[Download Complete Oscine Dataset (Google Drive)](https://drive.google.com/file/d/1eq33VpF9Ev41haum4Vl4sAh6z1U2vsR7/view?usp=sharing)**
 
 #### Extraction & Placement:
 Download and extract the dataset archive (`oscine_dataset.zip`) into the project root:
@@ -223,4 +223,6 @@ In full compliance with hackathon submission guidelines, AI coding assistants we
 
 ---
 
+## License
 
+This project is open-source and available under the [MIT License](LICENSE).
