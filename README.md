@@ -87,8 +87,8 @@ Oscine benchmark dataset consists of **54 calibrated speech clips** spanning 6 d
 
 > [!IMPORTANT]
 > **Google Drive Dataset Link:**  
-> 🔗 **[Download Complete Oscine Dataset (Google Drive)](PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE)**  
-> *(Replace the placeholder link above with your Google Drive sharing link)*
+> 🔗 **[Download Complete Oscine Dataset (Google Drive)]((https://drive.google.com/file/d/1eq33VpF9Ev41haum4Vl4sAh6z1U2vsR7/view?usp=sharing))**  
+
 
 #### Extraction & Placement:
 Download and extract the dataset archive (`oscine_dataset.zip`) into the project root:
@@ -223,5 +223,4 @@ In full compliance with hackathon submission guidelines, AI coding assistants we
 
 ---
 
-**Author / Maintainer:** [aahanakabdugale](https://github.com/aahanakabdugale)  
-**License:** Educational & Hackathon Use
+
