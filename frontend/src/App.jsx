@@ -251,7 +251,7 @@ function audioBufferToWav(buffer, targetSampleRate = 16000) {
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [references, setReferences] = useState([]);
-  const [selectedRef, setSelectedRef] = useState(null);
+  const [selectedRef, setSelectedRef] = useState("");
 
   const [activeTabMode, setActiveTabMode] = useState("upload");
   const [audioFile, setAudioFile] = useState(null);
@@ -342,9 +342,16 @@ export default function App() {
   }, [isAnalyzing]);
 
   const handleRefChange = (refId) => {
-    setSelectedRef(refId);
+    const cleanId = refId || "";
+    setSelectedRef(cleanId);
+    if (!cleanId) {
+      setActiveTranscriptText("");
+      setAudioFile(null);
+      setSelectedPresetName(null);
+      return;
+    }
     const list = Array.isArray(references) ? references : [];
-    const chosen = list.find(r => r.id === refId);
+    const chosen = list.find(r => r.id === cleanId);
     if (chosen && chosen.transcript && !transcriptFile) {
       setActiveTranscriptText(chosen.transcript);
     }
@@ -855,7 +862,7 @@ export default function App() {
                     : darkMode ? 'bg-white/5 border-white/10 text-slate-200' : 'bg-slate-50 border-slate-200 text-slate-800'
                     }`}
                 >
-                  <option value="" disabled>— Select Speaker —</option>
+                  <option value="">— Select Speaker —</option>
                   {(Array.isArray(references) ? references : []).map(r => {
                     const spkMeta = SPEAKER_CATALOG[r.id];
                     const label = spkMeta ? `${spkMeta.name} (${r.id})` : r.title;
