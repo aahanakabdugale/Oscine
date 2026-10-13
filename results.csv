@@ -1,55 +1,55 @@
 speaker,filename,flaw_type,severity,gt_start,gt_end,detected,iou,hit,score,target_score_dimension,target_score,duration_sec,duration_ratio,detection_count,matching_detection_count
-speech_01,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"1.5-2.6, 5.7-6.7, 17.0-19.6, 21.0-22.5, 31.4-32.7",0.469,True,4.78,pauses_score,4.0,61.2,1.02,14,5
-speech_01,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"1.5-2.6, 5.7-6.7, 17.0-20.5, 22.0-23.5, 32.4-33.5",0.625,True,4.76,pauses_score,4.0,62.2,1.0367,14,5
-speech_01,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"1.6-2.6, 5.7-6.7, 17.0-22.0, 23.6-25.1, 34.0-34.9",0.761,True,4.83,pauses_score,4.0,63.8,1.0633,15,5
-speech_01,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"23.7-27.7, 33.6-34.9",0.526,True,5.41,pacing_score,2.2,58.846,0.9808,13,2
-speech_01,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"23.5-24.8, 33.2-34.3, 38.8-39.7",0.0,False,5.34,pacing_score,2.2,58.226,0.9704,14,3
-speech_01,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"23.5-24.8, 32.5-33.8, 38.6-39.3",0.0,False,5.51,pacing_score,2.1,57.778,0.963,14,3
-speech_01,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,37.2-38.9,0.189,False,6.08,expressiveness_score,9.2,60.0,1.0,15,1
-speech_01,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,wrong:volume_instability:0.0-1.0,0.0,False,6.25,expressiveness_score,10.0,60.0,1.0,13,0
-speech_01,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:volume_instability:0.0-1.0,0.0,False,6.25,expressiveness_score,10.0,60.0,1.0,13,0
-speech_02,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"17.8-19.4, 58.5-59.2",0.721,True,6.91,pauses_score,8.3,61.2,1.02,5,2
-speech_02,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,17.8-20.4,0.828,True,5.25,pauses_score,4.9,62.2,1.0367,5,1
-speech_02,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,17.8-22.0,0.9,True,5.0,pauses_score,4.0,63.8,1.0633,4,1
-speech_02,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"39.1-40.1, 53.4-54.8",0.0,False,6.8,pacing_score,2.4,58.846,0.9808,5,2
-speech_02,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,52.9-54.2,0.0,False,6.5,pacing_score,2.5,58.226,0.9704,4,1
-speech_02,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,wrong:errant_pause:55.0-55.8,0.0,False,9.15,pacing_score,9.4,57.778,0.963,3,0
-speech_02,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,37.4-39.1,0.187,False,9.4,expressiveness_score,8.8,60.0,1.0,3,1
-speech_02,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,38.4-40.9,0.271,True,6.55,expressiveness_score,7.7,60.0,1.0,5,1
-speech_02,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:rushed_delivery:54.7-55.9,0.0,False,7.13,expressiveness_score,10.0,60.0,1.0,3,0
-speech_03,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,4.0-5.2,0.0,False,7.44,pauses_score,8.2,53.2,1.0231,5,1
-speech_03,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,4.0-5.2,0.0,False,7.44,pauses_score,8.2,54.2,1.0423,3,1
-speech_03,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,4.0-5.0,0.0,False,7.27,pauses_score,8.8,55.8,1.0731,5,1
-speech_03,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"8.0-10.2, 17.4-18.0, 20.7-22.3, 41.7-44.0",0.0,False,7.16,pacing_score,3.7,50.846,0.9778,5,4
-speech_03,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"7.9-10.2, 17.3-18.0, 20.7-22.3",0.0,False,7.23,pacing_score,3.9,50.226,0.9659,4,3
-speech_03,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"8.0-10.1, 17.3-18.0, 20.7-22.3",0.0,False,7.02,pacing_score,3.3,49.778,0.9573,4,3
-speech_03,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,39.3-43.7,0.491,True,6.64,expressiveness_score,6.7,52.0,1.0,5,1
-speech_03,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"39.2-40.9, 42.4-44.9",0.335,True,6.82,expressiveness_score,7.6,52.0,1.0,6,2
-speech_03,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,37.9-39.5,0.182,False,7.1,expressiveness_score,9.0,52.0,1.0,6,1
-speech_04,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"0.1-0.8, 14.9-15.9, 18.0-19.2",0.933,True,6.63,pauses_score,8.6,61.2,1.02,5,3
-speech_04,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"15.0-15.9, 18.1-20.1",0.945,True,5.75,pauses_score,5.6,62.2,1.0367,6,2
-speech_04,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"15.0-15.8, 18.1-21.7",0.968,True,5.3,pauses_score,4.0,63.8,1.0633,6,2
-speech_04,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,44.1-44.9,0.0,False,8.65,pacing_score,8.7,58.846,0.9808,5,1
-speech_04,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,wrong:errant_pause:0.1-0.8,0.0,False,9.12,pacing_score,9.6,58.226,0.9704,2,0
-speech_04,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,43.0-43.8,0.0,False,8.56,pacing_score,8.2,57.778,0.963,4,1
-speech_04,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,38.7-41.8,0.342,True,6.25,expressiveness_score,7.9,60.0,1.0,4,1
-speech_04,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,53.8-55.5,0.0,False,6.46,expressiveness_score,9.3,60.0,1.0,6,1
-speech_04,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,"40.0-41.8, 53.8-55.5",0.204,False,6.3,expressiveness_score,7.9,60.0,1.0,7,2
-speech_05,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,18.0-19.2,0.961,True,6.84,pauses_score,8.5,56.2,1.0218,5,1
-speech_05,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,18.0-20.1,0.96,True,6.09,pauses_score,5.4,57.2,1.04,6,1
-speech_05,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,18.1-21.7,0.968,True,5.81,pauses_score,4.0,58.8,1.0691,5,1
-speech_05,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,35.3-36.7,0.0,False,8.46,pacing_score,7.1,53.846,0.979,2,1
-speech_05,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,45.3-46.3,0.0,False,8.27,pacing_score,6.7,53.226,0.9677,4,1
-speech_05,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,wrong:monotone_pitch:24.1-29.0,0.0,False,8.91,pacing_score,9.4,52.778,0.9596,2,0
-speech_05,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,37.4-40.0,0.289,True,7.66,expressiveness_score,7.2,55.0,1.0,2,1
+speech_01,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"1.5-2.6, 5.7-6.7, 17.0-19.6, 21.0-22.5, 31.4-32.7",0.469,True,4.36,pauses_score,4.0,61.2,1.02,28,5
+speech_01,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"1.5-2.6, 5.7-6.7, 17.0-20.5, 22.0-23.5, 32.4-33.5",0.625,True,4.15,pauses_score,4.0,62.2,1.0367,28,5
+speech_01,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"1.6-2.6, 5.7-6.7, 17.0-22.0, 23.6-25.1, 34.0-34.9",0.761,True,4.21,pauses_score,4.0,63.8,1.0633,28,5
+speech_01,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"23.7-27.7, 33.6-34.9",0.526,True,5.29,pacing_score,2.2,58.846,0.9808,26,2
+speech_01,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"23.5-24.8, 33.2-34.3, 38.8-39.7",0.0,False,5.52,pacing_score,2.2,58.226,0.9704,24,3
+speech_01,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"23.5-24.8, 32.5-33.8, 38.6-39.3",0.0,False,5.45,pacing_score,2.1,57.778,0.963,25,3
+speech_01,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,"0.0-3.8, 9.9-12.8, 28.2-30.3",0.0,False,5.61,expressiveness_score,6.7,60.0,1.0,25,3
+speech_01,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"0.0-3.8, 9.9-12.8, 28.2-30.3",0.0,False,5.61,expressiveness_score,6.7,60.0,1.0,24,3
+speech_01,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,"0.0-3.8, 9.9-12.8, 28.2-30.3",0.0,False,5.61,expressiveness_score,6.7,60.0,1.0,24,3
+speech_02,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"17.8-19.4, 58.5-59.2",0.721,True,7.03,pauses_score,8.3,61.2,1.02,5,2
+speech_02,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,17.8-20.4,0.828,True,5.59,pauses_score,4.9,62.2,1.0367,4,1
+speech_02,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,17.8-22.0,0.9,True,5.34,pauses_score,4.0,63.8,1.0633,4,1
+speech_02,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"39.1-40.1, 53.4-54.8",0.0,False,7.06,pacing_score,2.4,58.846,0.9808,5,2
+speech_02,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,52.9-54.2,0.0,False,7.09,pacing_score,2.5,58.226,0.9704,3,1
+speech_02,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,wrong:vocal_clarity_drift:33.1-35.5,0.0,False,9.51,pacing_score,9.4,57.778,0.963,2,0
+speech_02,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,wrong:errant_pause:57.2-58.0,0.0,False,9.75,expressiveness_score,10.0,60.0,1.0,1,0
+speech_02,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,wrong:rushed_delivery:40.2-40.9,0.0,False,7.13,expressiveness_score,10.0,60.0,1.0,3,0
+speech_02,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:rushed_delivery:54.7-55.9,0.0,False,7.2,expressiveness_score,10.0,60.0,1.0,2,0
+speech_03,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,4.0-5.2,0.0,False,6.24,pauses_score,8.2,53.2,1.0231,23,1
+speech_03,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,4.0-5.2,0.0,False,6.24,pauses_score,8.2,54.2,1.0423,20,1
+speech_03,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,4.0-5.0,0.0,False,6.07,pauses_score,8.8,55.8,1.0731,24,1
+speech_03,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,"8.0-10.2, 17.4-18.0, 20.7-22.3, 41.7-44.0",0.0,False,6.52,pacing_score,3.7,50.846,0.9778,9,4
+speech_03,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,"7.9-10.2, 17.3-18.0, 20.7-22.3",0.0,False,6.03,pacing_score,3.9,50.226,0.9659,22,3
+speech_03,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"8.0-10.1, 17.3-18.0, 20.7-22.3",0.0,False,5.82,pacing_score,3.3,49.778,0.9573,20,3
+speech_03,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,"11.6-13.6, 38.1-44.9, 46.6-52.7",0.598,True,6.1,expressiveness_score,4.0,52.0,1.0,22,3
+speech_03,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"11.6-13.6, 39.2-44.9, 46.6-52.7",0.487,True,6.1,expressiveness_score,4.0,52.0,1.0,24,3
+speech_03,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,"11.6-13.6, 39.3-43.6, 46.6-52.7",0.48,True,6.1,expressiveness_score,4.0,52.0,1.0,25,3
+speech_04,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,"0.1-0.8, 14.9-15.9, 18.0-19.2",0.933,True,5.79,pauses_score,8.6,61.2,1.02,21,3
+speech_04,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,"15.0-15.9, 18.1-20.1",0.945,True,4.67,pauses_score,5.6,62.2,1.0367,21,2
+speech_04,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,"15.0-15.8, 18.1-21.7",0.968,True,4.11,pauses_score,4.0,63.8,1.0633,25,2
+speech_04,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,44.1-44.9,0.0,False,7.61,pacing_score,8.7,58.846,0.9808,18,1
+speech_04,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,wrong:errant_pause:0.1-0.8,0.0,False,7.92,pacing_score,9.6,58.226,0.9704,21,0
+speech_04,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,43.0-43.8,0.0,False,7.35,pacing_score,8.2,57.778,0.963,18,1
+speech_04,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,"1.1-2.9, 5.5-12.4",0.0,False,5.47,expressiveness_score,4.0,60.0,1.0,18,2
+speech_04,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,"1.1-2.9, 5.5-12.4",0.0,False,5.47,expressiveness_score,4.0,60.0,1.0,20,2
+speech_04,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:errant_pause:0.1-0.8,0.0,False,6.72,expressiveness_score,10.0,60.0,1.0,7,0
+speech_05,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,18.0-19.2,0.961,True,7.62,pauses_score,8.5,56.2,1.0218,3,1
+speech_05,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,18.0-20.1,0.96,True,6.57,pauses_score,5.4,57.2,1.04,4,1
+speech_05,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,18.1-21.7,0.968,True,5.89,pauses_score,4.0,58.8,1.0691,6,1
+speech_05,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,35.3-36.7,0.0,False,8.98,pacing_score,7.1,53.846,0.979,1,1
+speech_05,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,45.3-46.3,0.0,False,8.84,pacing_score,6.7,53.226,0.9677,2,1
+speech_05,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,wrong:vocal_clarity_drift:34.2-35.2,0.0,False,9.79,pacing_score,9.4,52.778,0.9596,1,0
+speech_05,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,wrong:rushed_delivery:19.3-20.3,0.0,False,8.21,expressiveness_score,10.0,55.0,1.0,1,0
 speech_05,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,wrong:rushed_delivery:19.3-20.3,0.0,False,8.21,expressiveness_score,10.0,55.0,1.0,1,0
-speech_05,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,37.5-40.0,0.28,True,7.01,expressiveness_score,7.3,55.0,1.0,3,1
-speech_06,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,17.7-19.6,0.647,True,8.49,pauses_score,8.0,61.2,1.02,3,1
-speech_06,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,17.7-20.6,0.772,True,7.17,pauses_score,4.7,62.2,1.0367,5,1
-speech_06,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,17.7-22.2,0.854,True,7.9,pauses_score,4.0,63.8,1.0633,1,1
-speech_06,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,34.5-35.2,0.0,False,9.54,pacing_score,8.7,58.846,0.9808,1,1
-speech_06,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,33.9-34.5,0.0,False,9.47,pacing_score,8.5,58.226,0.9704,1,1
-speech_06,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"30.6-31.3, 33.4-34.1",0.0,False,9.41,pacing_score,8.6,57.778,0.963,4,2
-speech_06,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,34.6-36.3,0.142,False,8.67,expressiveness_score,9.3,60.0,1.0,3,1
-speech_06,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,39.8-41.8,0.222,False,8.52,expressiveness_score,8.7,60.0,1.0,3,1
-speech_06,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,34.6-37.0,0.21,False,6.31,expressiveness_score,6.0,60.0,1.0,5,1
+speech_05,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:rushed_delivery:19.3-20.3,0.0,False,7.55,expressiveness_score,10.0,55.0,1.0,3,0
+speech_06,flawed_pause_L1.wav,errant_pause,L1,18.0,19.2,17.7-19.6,0.647,True,7.71,pauses_score,8.0,61.2,1.02,6,1
+speech_06,flawed_pause_L2.wav,errant_pause,L2,18.0,20.2,17.7-20.6,0.772,True,6.18,pauses_score,4.7,62.2,1.0367,9,1
+speech_06,flawed_pause_L3.wav,errant_pause,L3,18.0,21.8,17.7-22.2,0.854,True,6.63,pauses_score,4.0,63.8,1.0633,4,1
+speech_06,flawed_rushed_L1.wav,rushed_delivery,L1,25.0,28.85,34.5-35.2,0.0,False,8.93,pacing_score,8.7,58.846,0.9808,3,1
+speech_06,flawed_rushed_L2.wav,rushed_delivery,L2,25.0,28.23,33.9-34.5,0.0,False,9.47,pacing_score,8.5,58.226,0.9704,2,1
+speech_06,flawed_rushed_L3.wav,rushed_delivery,L3,25.0,27.78,"30.6-31.3, 33.4-34.1",0.0,False,9.41,pacing_score,8.6,57.778,0.963,7,2
+speech_06,flawed_monotone_L1.wav,monotone_pitch,L1,35.0,44.0,wrong:errant_pause:28.1-28.9,0.0,False,8.81,expressiveness_score,10.0,60.0,1.0,4,0
+speech_06,flawed_monotone_L2.wav,monotone_pitch,L2,35.0,44.0,wrong:errant_pause:28.1-28.9,0.0,False,8.78,expressiveness_score,10.0,60.0,1.0,3,0
+speech_06,flawed_monotone_L3.wav,monotone_pitch,L3,35.0,44.0,wrong:vocal_clarity_drift:34.9-35.7,0.0,False,7.2,expressiveness_score,10.0,60.0,1.0,3,0
