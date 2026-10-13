@@ -42,6 +42,16 @@ def health_check():
     return {"status": "ok", "app": "Oscine Prosody Engine"}
 
 
+SPEAKER_NAMES = {
+    "speech_01": "Michelle Obama",
+    "speech_02": "Sudha Murty",
+    "speech_03": "Emma Watson",
+    "speech_04": "Dr. Shashi Tharoor",
+    "speech_05": "Andrew Ng",
+    "speech_06": "Chimamanda Ngozi Adichie",
+}
+
+
 @app.get("/api/references")
 def get_references():
     refs = []
@@ -61,9 +71,10 @@ def get_references():
                         duration = round(wf.getnframes() / float(wf.getframerate()), 2)
                 except Exception:
                     pass
+                speaker_display = SPEAKER_NAMES.get(spk, f"Reference ({spk})")
                 refs.append({
                     "id": spk,
-                    "title": f"Reference Baseline ({spk})",
+                    "title": f"{speaker_display} ({spk})",
                     "duration": duration,
                     "transcript": transcript_text
                 })
