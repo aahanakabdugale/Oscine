@@ -14,6 +14,57 @@ import {
 const rawApiBase = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const API_BASE = rawApiBase.replace(/\/+$/, "");
 
+const SPEAKER_CATALOG = {
+  speech_01: {
+    name: "Michelle Obama",
+    role: "Former First Lady & Public Orator",
+    accent: "US English",
+    gender: "Female",
+    source: "2016 Democratic National Convention Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  },
+  speech_02: {
+    name: "Sudha Murty",
+    role: "Author, Educator & Philanthropist",
+    accent: "Indian English",
+    gender: "Female",
+    source: "Keynote & Public Convocation Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  },
+  speech_03: {
+    name: "Emma Watson",
+    role: "UN Goodwill Ambassador & Actress",
+    accent: "British English",
+    gender: "Female",
+    source: "UN Women HeForShe Campaign Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  },
+  speech_04: {
+    name: "Dr. Shashi Tharoor",
+    role: "Diplomat, Author & Parliamentarian",
+    accent: "Indian English",
+    gender: "Male",
+    source: "Oxford Union Debate Keynote Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  },
+  speech_05: {
+    name: "Andrew Ng",
+    role: "AI Scientist & Stanford Adjunct Professor",
+    accent: "US English",
+    gender: "Male",
+    source: "TED / Global AI Keynote Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  },
+  speech_06: {
+    name: "Chimamanda Ngozi Adichie",
+    role: "Award-winning Author & Keynote Speaker",
+    accent: "Nigerian English",
+    gender: "Female",
+    source: "TEDxEuston & Global Lecture Address",
+    standard: "16 kHz Mono • -20 LUFS"
+  }
+};
+
 const DIMENSION_CONFIG = {
   errant_pause: {
     title: 'Errant Pause',
@@ -805,14 +856,53 @@ export default function App() {
                     }`}
                 >
                   <option value="" disabled>— Select Speaker —</option>
-                  {(Array.isArray(references) ? references : []).map(r => (
-                    <option key={r.id} value={r.id}>{r.title} ({r.duration}s)</option>
-                  ))}
+                  {(Array.isArray(references) ? references : []).map(r => {
+                    const spkMeta = SPEAKER_CATALOG[r.id];
+                    const label = spkMeta ? `${spkMeta.name} (${r.id})` : r.title;
+                    return (
+                      <option key={r.id} value={r.id}>{label} ({r.duration}s)</option>
+                    );
+                  })}
                 </select>
-                {!selectedRef && (
+                {!selectedRef ? (
                   <p className="text-xs text-indigo-400 flex items-center gap-1 mt-1">
                     <AlertTriangle className="w-3 h-3" /> Required before analysis
                   </p>
+                ) : (
+                  <AnimatePresence>
+                    {SPEAKER_CATALOG[selectedRef] && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 5 }}
+                        className={`p-3.5 rounded-xl border text-xs mt-2 transition-all shadow-sm ${
+                          darkMode
+                            ? 'bg-indigo-500/10 border-indigo-500/25 text-slate-200'
+                            : 'bg-indigo-50/80 border-indigo-200 text-slate-800'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-1 mb-1">
+                          <span className="font-bold text-sm text-indigo-600 dark:text-indigo-400">
+                            {SPEAKER_CATALOG[selectedRef].name}
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300">
+                            {SPEAKER_CATALOG[selectedRef].accent}
+                          </span>
+                        </div>
+                        <p className="text-[11px] font-medium text-slate-600 dark:text-slate-300 mb-1">
+                          {SPEAKER_CATALOG[selectedRef].role}
+                        </p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-1 mb-1.5">
+                          {SPEAKER_CATALOG[selectedRef].source}
+                        </p>
+                        <div className="flex items-center gap-2 pt-1.5 border-t border-indigo-200/50 dark:border-indigo-500/20 text-[10px] text-slate-400">
+                          <span>{SPEAKER_CATALOG[selectedRef].gender}</span>
+                          <span>•</span>
+                          <span>{SPEAKER_CATALOG[selectedRef].standard}</span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 )}
               </div>
 
@@ -1072,7 +1162,7 @@ export default function App() {
                       <FileText className="w-4 h-4 text-indigo-500" />
                       <span className="text-sm font-bold text-slate-700 dark:text-slate-200">Active Speech Script</span>
                       <span className={`text-xs px-2 py-0.5 rounded-full font-mono ${darkMode ? 'bg-white/5 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
-                        {transcriptFile ? 'Custom Upload' : `Baseline (${selectedRef || '—'})`}
+                        {transcriptFile ? 'Custom Upload' : `Baseline (${SPEAKER_CATALOG[selectedRef]?.name || selectedRef || '—'})`}
                       </span>
                     </div>
                     <span className="text-xs font-mono text-slate-400">{wordCount} words</span>
@@ -1087,7 +1177,7 @@ export default function App() {
             {/* Compared against footer */}
             {selectedRef && (
               <div className={`mt-4 pt-3 border-t ${darkMode ? 'border-white/5' : 'border-slate-100'} flex items-center justify-end text-xs text-slate-500`}>
-                Compared against: <span className={`ml-1.5 font-semibold ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>{selectedRef}</span>
+                Compared against: <span className={`ml-1.5 font-semibold ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>{SPEAKER_CATALOG[selectedRef]?.name ? `${SPEAKER_CATALOG[selectedRef].name} (${selectedRef})` : selectedRef}</span>
               </div>
             )}
           </div>
